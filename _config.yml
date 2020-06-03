@@ -5,6 +5,7 @@ show_downloads: true
 google_analytics: UA-168573615-1
 github:
   server_release_url: https://github.com/BlueBubblesApp/BlueBubbles-Server/releases
-  server_source_url: https://github.com/BlueBubblesApp/BlueBubbles-Server
-  android_source_url: https://github.com/BlueBubblesApp/BlueBubbles-Android-App
+  source_code_url: https://github.com/BlueBubblesApp
   android_release_url: https://github.com/BlueBubblesApp/BlueBubbles-Android-App/releases
+pages:
+  guide_url: /guide
