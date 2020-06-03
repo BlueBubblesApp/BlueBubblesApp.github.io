@@ -6,7 +6,7 @@ BlueBubbles is an open-source, community-driven ecosystem of applications used t
 
 Over the past 5 years, there have been a few iterations of applications that allowed you to interact with iMessage via an Android phone. These applications either have been abandoned or closed-sourced. While these other solutions were/are great, we wanted to take it a step further. We want to go above and beyond to create **the best experience on whatever device you are using**.
 
-Our goal is to create a **community-driven** codebase that can be contributed to by anyone willing have their code be public :). Of course, all code contributions will be reviewed and approved before merging into a release. Instead of relying on one person to maintain and provide updates, we are opening it up to the users so the users can determine what features that want to add to the applications, and bring those features to fruition.
+Our goal is to create a **community-driven** codebase that can be contributed to by anyone willing have their code be public. Of course, all code contributions will be reviewed and approved before merging into a release. Instead of relying on one person to maintain and provide updates, we are opening it up to the users so the users can determine what features that want to add to the applications, and bring those features to fruition.
 
 ### BlueBubbles' Pillars of Success
 
@@ -34,6 +34,6 @@ Contributing is simple! All of our repositories are public, and you can contribu
 * SQLite
 * Google FCM
 
-#### Windows App Stack
+#### Desktop App Stack
 
 TBD
