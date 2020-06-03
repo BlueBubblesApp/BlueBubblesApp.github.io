@@ -1,3 +1,10 @@
+---
+layout: page
+permalink: /
+next_page: /guide/
+next_page_title: Installation Guide
+---
+
 ## Welcome to BlueBubbles
 
 BlueBubbles is an open-source, community-driven ecosystem of applications used to interact with iMessage on platforms such as Android, Windows, and Linux.
