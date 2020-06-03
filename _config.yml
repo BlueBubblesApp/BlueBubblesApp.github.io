@@ -2,3 +2,8 @@ theme: jekyll-theme-cayman
 title: BlueBubbles
 description: Use iMessage seemlessly on your Android device!
 show_downloads: true
+github:
+  server_release_url: https://github.com/BlueBubblesApp/BlueBubbles-Server/releases
+  server_source_url: https://github.com/BlueBubblesApp/BlueBubbles-Server
+  android_source_url: https://github.com/BlueBubblesApp/BlueBubbles-Android-App
+  android_release_url: https://github.com/BlueBubblesApp/BlueBubbles-Android-App/releases
