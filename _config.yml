@@ -8,4 +8,5 @@ github:
   source_code_url: https://github.com/BlueBubblesApp
   android_release_url: https://github.com/BlueBubblesApp/BlueBubbles-Android-App/releases
 pages:
-  guide_url: /guide
+  next_page: /guide
+  next_page_title: Installation Guide
