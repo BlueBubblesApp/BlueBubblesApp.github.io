@@ -1,8 +1,6 @@
 ---
 layout: default
 permalink: /
-next_page: /guide/
-next_page_title: Installation Guide
 ---
 
 ## Welcome to BlueBubbles

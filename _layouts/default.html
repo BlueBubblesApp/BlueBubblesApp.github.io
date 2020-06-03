@@ -30,11 +30,9 @@
       {% if site.github.is_project_page %}
         <a href="{{ site.github.repository_url }}" class="btn">View on GitHub</a>
       {% endif %}
-      {% if site.show_downloads %}
-        <a href="{{ site.github.server_release_url }}" class="btn">Download MacOS Server</a>
-        <a href="{{ site.github.android_release_url }}" class="btn">Download APK</a>
-        <a href="{{ site.github.source_code_url }}" class="btn">Source Codes</a>
-      {% endif %}
+    <a href="/" class="btn">Home</a>
+    <a href="/downloads" class="btn">Downloads</a>
+    <a href="/guide" class="btn">Installation Guide</a>
 
       <a href="{{ page.next_page }}" class="btn">{{ page.next_page_title }}</a>
     </header>
