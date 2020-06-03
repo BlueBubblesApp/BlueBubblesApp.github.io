@@ -30,3 +30,9 @@ The server logs page allows you to view how the server interacts with iMessage i
 The config page allows you to view your current server address, as well as apply your Google FCM configurations
 
 ![Dashboard](/assets/img/server-config.png "Server Config")
+
+### Android App
+
+The Android app allows you to use iMessage from any Android device
+
+Download: [Official Releases](https://github.com/BlueBubblesApp/BlueBubbles-Android-App/releases)
