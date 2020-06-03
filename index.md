@@ -1,37 +1,39 @@
-## Welcome to GitHub Pages
+## Welcome to BlueBubbles
 
-You can use the [editor on GitHub](https://github.com/BlueBubblesApp/BlueBubblesApp.github.io/edit/master/index.md) to maintain and preview the content for your website in Markdown files.
+BlueBubbles is an open-source, community-driven ecosystem of applications used to interact with iMessage on platforms such as Android, Windows, and Linux.
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+### History & About Us
 
-### Markdown
+Over the past 5 years, there have been a few iterations of applications that allowed you to interact with iMessage via an Android phone. These applications either have been abandoned or closed-sourced. While these other solutions were/are great, we wanted to take it a step further. We want to go above and beyond to create **the best experience on whatever device you are using**.
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+Our goal is to create a **community-driven** codebase that can be contributed to by anyone willing have their code be public :). Of course, all code contributions will be reviewed and approved before merging into a release. Instead of relying on one person to maintain and provide updates, we are opening it up to the users so the users can determine what features that want to add to the applications, and bring those features to fruition.
 
-```markdown
-Syntax highlighted code block
+### BlueBubbles' Pillars of Success
 
-# Header 1
-## Header 2
-### Header 3
+One issue we've seen countless times with other solutions is the difficulty of the setup process and maintenance. We wanted to change that and make the setup process as seemless and easy as possible. That is why we've **gotten rid of port forwarding!** Instead, we've opted to create an ecosystem around ngrok and Google FCM (Firebase Cloud Messaging). While this means you'll need to create a Google account, it also means that you will no longer need to portforward. It also means that we can utilize Google's messaging service to send notifications so **the app will not require an open socket connection at all times.** This means very little background app usage, and thus, less battery usage! It also means you will not have to open up your MacOS server to the whole world. This is all done through a quick setup process and a transfer of knowledge from the MacOS server to your phone via a QRCode.
 
-- Bulleted
-- List
+* Seemless & easy setup process
+* Low battery usage
+* No more port-forwarding
 
-1. Numbered
-2. List
+### Contributing & Development Stack
 
-**Bold** and _Italic_ and `Code` text
+Contributing is simple! All of our repositories are public, and you can contribute to them via forking, then creating pull requests.
 
-[Link](url) and ![Image](src)
-```
+#### Android App Stack
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+* Dart / Flutter
+* SQLite
+* Google FCM
 
-### Jekyll Themes
+#### MacOS Server Stack
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/BlueBubblesApp/BlueBubblesApp.github.io/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+* NodeJS / Electron
+* Typescript & TypeORM
+* Ngrok
+* SQLite
+* Google FCM
 
-### Support or Contact
+#### Windows App Stack
 
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+TBD
