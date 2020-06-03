@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Installation Guide
+title: BlueBubbles Installation Guide
 description: How to setup BlueBubbles
 permalink: /guide/
 ---

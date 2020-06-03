@@ -1,7 +1,7 @@
 ---
 layout: default
-title: Downloads
-description: Download the BlueBubbles Apps
+title: Download BlueBubbles
+description: Links and Previews for the BlueBubbles Apps
 permalink: /downloads/
 ---
 
