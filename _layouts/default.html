@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="{{ site.lang | default: "en-US" }}">
   <head>
-
     {% if site.google_analytics %}
       <script async src="https://www.googletagmanager.com/gtag/js?id={{ site.google_analytics }}"></script>
       <script>
@@ -11,16 +10,22 @@
         gtag('config', '{{ site.google_analytics }}');
       </script>
     {% endif %}
-    <meta charset="UTF-8">
-    <title>{{ page.title | default: site.title }}</title>
-    <link rel="shortcut icon" href="/assets/img/icons/favicon.ico">
-    <link rel="icon" type="image/png" href="/assets/img/icons/icon-32.png" sizes="32x32">
-    <link rel="icon" type="image/png" href="/assets/img/icons/icon-16.png" sizes="16x16">
 
-{% seo %}
+    <title>{{ page.title | default: site.title }}</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta
+      name="description"
+      content="BlueBubbles is an open-source ecosystem for using iMessage from any client, whether it be Android, Linux, or Windows. Seemlessly communicate with all your iPhone friends using iMessage."
+    >
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#157878">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    {% seo %}
+    
+    <link rel="shortcut icon" href="/assets/img/icons/favicon.ico">
+    <link rel="icon" type="image/png" href="/assets/img/icons/icon-32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="/assets/img/icons/icon-16.png" sizes="16x16">
     <link rel="stylesheet" href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}">
   </head>
   <body>
