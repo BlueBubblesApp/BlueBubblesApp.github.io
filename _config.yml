@@ -10,3 +10,5 @@ github:
 pages:
   next_page: /guide
   next_page_title: Installation Guide
+plugins:
+  - jekyll-sitemap
