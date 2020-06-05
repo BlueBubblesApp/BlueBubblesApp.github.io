@@ -1,5 +1,5 @@
 ---
-title: BlueBubbles App
+title: BlueBubbles
 layout: default
 permalink: /
 ---

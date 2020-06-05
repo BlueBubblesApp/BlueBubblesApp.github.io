@@ -1,8 +1,8 @@
 ---
 layout: default
-title: BlueBubbles App | Setup
+title: BlueBubbles | Setup
 description: How to setup BlueBubbles
 permalink: /setup/
 ---
 
-## Setup Guide
+## BlueBubbles Setup Guide

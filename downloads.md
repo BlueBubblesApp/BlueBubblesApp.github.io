@@ -1,11 +1,11 @@
 ---
 layout: default
-title: BlueBubbles App | Downloads
+title: BlueBubbles | Downloads
 description: Links and Previews for the BlueBubbles Apps
 permalink: /downloads/
 ---
 
-## Downloads
+## BlueBubbles Downloads
 
 ### MacOS Server
 
