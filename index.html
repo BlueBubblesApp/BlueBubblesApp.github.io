@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<head>
+    <!-- CSS Links -->
+    <link rel="stylesheet" type="text/css" href="/css/base.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/hamburgers.css">
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>iMessage on PC and Android - BlueBubbles</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script>
+        // // First we get the viewport height and we multiple it by 1% to get a value for a vh unit
+        // let vh = window.innerHeight * 0.01;
+        // // Then we set the value in the --vh custom property to the root of the document
+        // document.documentElement.style.setProperty('--vh', `${vh}px`);
+        // // We listen to the resize event
+        // window.addEventListener('resize', () => {
+        //     // We execute the same script as before
+        //     let vh = window.innerHeight * 0.01;
+        //     document.documentElement.style.setProperty('--vh', `${vh}px`);
+        // });
+
+        function addIsActive() {
+            var hamburger = document.getElementById("hamburger");
+            hamburger.classList.toggle("is-active");
+
+            var bgCircle = document.getElementById("menu-circle");
+            bgCircle.classList.toggle("engulf")
+            
+            var overlay = document.getElementById("overlay");
+            overlay.classList.toggle("overlay-show")
+
+
+            var links = document.getElementsByClassName("mobile-link");
+            for (var i = 0; i < links.length; i++) {
+                links[i].classList.toggle("show-links");
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <img id="bg-circle" src="/assets/bg-circle.png">
+    <div id="overlay"><span id="menu-circle"></span><a id="home" class="mobile-link is-open" href="/index.html">Home</a><a
+            class="mobile-link" href="/downloads.html">Downloads</a><a class="mobile-link" href="/install.html">Install</a></div>
+
+    <header id="navbar">
+        <nav class="leftnav">
+            <a id="logo" href="#">BlueBubbles</a>
+        </nav>
+        <nav>
+            <a href="#" class="rightnav is-open">Home</a>
+            <a href="downloads.html" class="rightnav">Downloads</a>
+            <a href="install.html" class="rightnav">Install</a>
+            <div onclick="addIsActive()" id="hamburger" class="hamburger hamburger--collapse" type="button">
+                <span class="hamburger-box">
+                    <span class="hamburger-inner"></span>
+                </span>
+            </div>
+        </nav>
+    </header>
+    <div id="hero">
+        <div class="col">
+            <h1 id="title">Bringing iMessage<br> to PC and Android.</h1>
+            <h2 id="subTitle">Plus its open source!</h2>
+            <a id="get-started" href="install.html">Get Started</a>
+        </div>
+        <div class="col"><img id="phone" src="/assets/phone.png"></div>
+    </div>
+    <div id="footer">
+        <div class="social-media"><a href="https://www.github.com"><img id="github" src="/assets/github-logo.png"></a></div>
+        <div><p id="copyright">BlueBubbles</p></div>
+    </div>
+</body>
+
+</html>

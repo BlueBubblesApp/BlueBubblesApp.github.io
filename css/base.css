@@ -1,0 +1,275 @@
+@font-face {
+    font-family: "SF UI Display Light";
+    src: url("/fonts/SF-UI-Display-Light.otf");
+}
+
+@font-face {
+    font-family: "SF UI Display Bold";
+    src: url("/fonts/SF-UI-Display-Bold.otf");
+}
+
+@font-face {
+    font-family: "SF UI Display Black";
+    src: url("/fonts/SF-UI-Display-Black.otf");
+}
+
+html {
+    /* height: 100vh; */
+    height: calc(var(--vh, 1vh) * 100);
+}
+
+body {
+    /* height: 97vh; */
+    height: calc(var(--vh, 1vh) * 97);
+    width: 100vw;
+    margin: 0;
+    padding: 0;
+    background-color: white;
+    position: absolute;
+}
+
+#navbar {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: auto;
+    width: 80%;
+    height: calc(var(--vh, 1vh) * 10);
+}
+
+.leftnav {
+    flex-grow: 1;
+}
+
+.rightnav {
+    position: relative;
+    color: white;
+    text-decoration: none;
+    font-family: 'SF UI Display Bold';
+    font-size: 1.5rem;
+    font-style: normal;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-stroke-width: 0px;
+    -moz-osx-font-smoothing: grayscale;
+    margin-right: 30px;
+}
+
+nav>a{
+    padding-bottom: 10px;
+}
+
+nav>a::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: white;
+    visibility: hidden;
+    transform: scaleX(0);
+    transition: all 0.3s ease-in-out 0s;
+}
+
+nav>a:hover::before {
+    visibility: visible;
+    transform: scaleX(1);
+}
+
+
+#logo {
+    color: black;
+    text-decoration: none;
+    font-family: 'SF UI Display Black';
+    font-size: 3.5rem;
+    font-style: normal;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-stroke-width: 0px;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+#bg-circle {
+    position: absolute;
+    top: -10%;
+    right: 0;
+    z-index: -1;
+    max-width: 47%;
+    height: auto;
+}
+
+#hero {
+    height: calc(var(--vh, 1vh) * 75);
+    /* border: 3px solid green; */
+    width: 60%;
+    margin: auto;
+    display: flex;
+    flex-direction: row;
+}
+
+.col {
+    /* border: 3px solid orange; */
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+}
+
+#github:hover{
+    opacity: .7;
+}
+
+#footer {
+    /* border: 3px solid red; */
+    width: 60%;
+    margin: auto;
+    margin-top: 3vh;
+    height: calc(var(--vh, 1vh) * 7);
+    display: flex;
+    flex-flow: column nowrap;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    font-family: 'SF UI Display Bold';
+    color: black;
+    font-style: normal;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-stroke-width: 0px;
+    -moz-osx-font-smoothing: grayscale;
+    margin-bottom: 0;
+}
+
+@media only screen and (max-width: 1130px) {
+    #navbar {
+        width: 95%;
+    }
+
+    #logo {
+        font-size: 3rem;
+    }
+
+    #hero {
+        width: 80%;
+    }
+}
+
+@media only screen and (max-width: 900px) {
+    #navbar {
+        width: 100%;
+    }
+
+    .rightnav {
+        display: none;
+    }
+
+    #hamburger {
+        position: relative;
+        z-index: 2;
+        margin-right: 20px;
+    }
+
+    #hero {
+        width: 90%;
+    }
+}
+
+@media only screen and (max-width: 660px) {
+    #hero {
+        width: 90%;
+        flex-direction: column;
+        height: calc(var(--vh, 1vh) * 120);
+        justify-content: center;
+        align-items: center;
+    }
+
+    .col {
+        margin: 12vh 0vh 0vh 0vh;
+    }
+
+    #logo {
+        font-size: 2.5rem;
+    }
+
+    #github {
+        height: 55px;
+    }
+}
+
+@media only screen and (min-width: 900px) {
+    #hamburger {
+        display: none;
+    }
+}
+
+@media only screen and (max-height: 650px) {
+    .col:nth-child(1) {
+        margin-top: calc(var(--vh, 1vh) * 20);
+    }
+
+    #hero {
+        height: calc(var(--vh, 1vh) * 160);
+    }
+}
+
+#menu-circle {
+    overflow: hidden;
+    position: absolute;
+    top: -5%;
+    right: -5%;
+    background-color: #147efb;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    transform: scale(1);
+    transition: all 1s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.show-links {
+    display: block !important;
+}
+
+#overlay {
+    z-index: -1;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: calc(var(--vh, 1vh) * 100);
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+    transition: all 1s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+#overlay a {
+    display: block;
+    z-index: 99;
+    color: white;
+    text-decoration: none;
+    font-family: 'SF UI Display Bold';
+    font-size: 2rem;
+    font-style: normal;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-stroke-width: 0px;
+    -moz-osx-font-smoothing: grayscale;
+    margin-bottom: calc(var(--vh, 1vh) * 10);
+    display: none;
+    transition: all 1s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.engulf {
+    transform: scale(150) !important;
+    display: block !important;
+}
+
+.overlay-show {
+    z-index: 1 !important;
+}
+
+.is-open::before {
+    transform: scale(1);
+    visibility: visible;
+}
