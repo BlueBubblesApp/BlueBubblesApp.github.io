@@ -1,0 +1,108 @@
+#downloadsContainer{
+    height: calc(var(--vh, 1vh) * 75);
+    /* border: 3px solid green; */
+    width: 60%;
+    margin: auto;
+    display: flex;
+    flex-direction: row;
+}
+
+.downloadTypeTitle{
+    font-family: 'SF UI Display Black';
+    font-size: 2.2rem;
+    font-style: normal;
+    -webkit-font-smoothing: antialiased;
+}
+
+.halfCol{
+    height: 100%;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.downloadButtonContainer{
+    width: 100%;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.downloadButton{
+    height: 120px;
+    min-height: 120px;
+    width: 120px;
+    min-width: 120px;
+    background-color: #147efb;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid #147efb;
+    transition: ease-in-out .1s;
+}
+
+.downloadButton:hover{
+    background-color: white;
+}
+
+.downloadButton:hover .downloadButtonImage{
+    fill: #147efb;
+}
+
+.middle{
+    margin: 0 20px 0 20px;
+}
+
+.downloadButtonImage{
+    fill: white;
+    height: 75px;
+    width: 75px;
+}
+
+.downloadButtonCol{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.downloadPlatformTitle{
+    font-family: 'SF UI Display Black';
+    font-size: 1.7rem;
+    font-style: normal;
+    -webkit-font-smoothing: antialiased;
+    margin-top: 5px;
+}
+
+@media only screen and (max-width: 900px) {
+    #downloadsContainer{
+        flex-direction: column;
+    }
+
+    .halfCol{
+        width: 100%;
+    }
+}
+
+@media only screen and (max-width: 700px) {
+    .downloadButton{
+        height: 100px;
+        min-height: 100px;
+        width: 100px;
+        min-width: 100px;
+    }
+
+    .downloadButtonImage{
+        height: 65px;
+        width: 65px;
+    }
+
+    .halfCol{
+        width: 100%;
+    }
+}
