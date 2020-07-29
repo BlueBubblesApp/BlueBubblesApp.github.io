@@ -93,7 +93,7 @@ nav>a:hover::before {
 
 #bg-circle {
     position: absolute;
-    top: -10%;
+    top: -40%;
     right: 0;
     z-index: -1;
     max-width: 47%;
@@ -143,6 +143,12 @@ nav>a:hover::before {
     margin-bottom: 0;
 }
 
+@media only screen and (max-width: 1300px) {
+    #bg-circle{
+        top: -20%;
+    }
+}
+
 @media only screen and (max-width: 1130px) {
     #navbar {
         width: 95%;
@@ -154,6 +160,9 @@ nav>a:hover::before {
 
     #hero {
         width: 80%;
+    }
+    #bg-circle{
+        top: -10%;
     }
 }
 
@@ -174,6 +183,9 @@ nav>a:hover::before {
 
     #hero {
         width: 90%;
+    }
+    #bg-circle{
+        top: -10%;
     }
 }
 
