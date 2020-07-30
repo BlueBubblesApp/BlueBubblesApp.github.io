@@ -49,6 +49,10 @@
     transition: ease-in-out .15s;
 }
 
+.codeContainer:active {
+    background-color: white !important;
+}
+
 .codeContainer:hover {
     background-color: #9b9b9b;
     cursor: pointer;
