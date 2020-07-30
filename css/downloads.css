@@ -79,6 +79,12 @@
     margin-top: 5px;
 }
 
+@media only screen and (max-width: 1200px) {
+  #downloadsContainer {
+    width: 80%;
+  }
+}
+
 @media only screen and (max-width: 900px) {
     #downloadsContainer{
         flex-direction: column;
