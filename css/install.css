@@ -1,0 +1,180 @@
+#titleContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    width: 100%;
+    margin-top: 35px;
+}
+
+#serverInstallContainer {
+    height: calc(var(--vh, 1vh) * 75);
+    /* border: 3px solid green; */
+    width: 65%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+#serverInstallTitle {
+    font-family: 'SF UI Display Bold';
+    font-size: 2.5rem;
+    font-style: normal;
+    margin: 0;
+}
+
+#stepTitle {
+    font-family: 'SF UI Display Bold';
+    font-size: 2rem;
+    font-style: normal;
+    margin: 0;
+    margin-left: 60px;
+}
+
+.stepInformationText {
+    font-family: 'SF UI Display Light';
+    font-size: 1.5rem;
+    font-style: normal;
+    display: inline-block;
+}
+
+.stepInformationText>a {
+    color: #147efb;
+    text-decoration: none;
+}
+
+.stepInformationText>a:hover {
+    opacity: .75;
+}
+
+.inTextIcon {
+    height: 20px;
+    width: 20px;
+    border-radius: 4px;
+    margin-right: 3px;
+    margin-bottom: 4px;
+    vertical-align: middle;
+}
+
+.carousel-wrapper {
+    overflow: hidden;
+    width: 90%;
+    margin: auto;
+    height: 100%;
+}
+
+.carousel-wrapper * {
+    box-sizing: border-box;
+}
+
+.carousel {
+    -webkit-transform-style: preserve-3d;
+    -moz-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.carouselStep {
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    margin: auto;
+    padding: 1rem 4rem;
+    z-index: 100;
+    transition: transform .5s, opacity .5s, z-index .5s;
+}
+
+.carouselStep.initial,
+.carouselStep.active {
+    opacity: 1;
+    position: relative;
+    z-index: 900;
+}
+
+.carouselStep.prev,
+.carouselStep.next {
+    z-index: 800;
+}
+
+.carouselStep.prev {
+    transform: translateX(-100%);
+}
+
+.carouselStep.next {
+    transform: translateX(100%);
+}
+
+.carouselButtonDiv {
+    display: flex;
+    justify-content: space-between;
+}
+
+.carouselButton--prev,
+.carouselButton--next {
+    cursor: pointer;
+    z-index: 1001;
+}
+
+.carouselButton--prev>p:hover,
+.carouselButton--next>p:hover {
+    color: #9b9b9b;
+}
+
+.carouselButton--prev {
+    margin-right: auto;
+    transition: ease-in-out .15s;
+}
+
+.carouselButton--next {
+    margin-left: auto;
+}
+
+.carouselButton--prev>p {
+    font-family: 'SF UI Display Bold';
+    font-size: 1.5rem;
+    font-style: normal;
+}
+
+.carouselButton--next>p {
+    font-family: 'SF UI Display Bold';
+    font-size: 1.5rem;
+    font-style: normal;
+}
+
+#confetti-canvas {
+    width: 100vw;
+    height: 85vh;
+}
+
+
+@media only screen and (max-width: 1200px) {
+    #serverInstallContainer {
+        width: 80%;
+    }
+}
+
+@media only screen and (max-width: 900px) {
+    #titleContainer {
+        margin-top: 0;
+    }
+
+    #serverInstallTitle {
+        font-size: 2rem;
+    }
+
+    #stepTitle {
+        font-size: 1.8rem;
+        margin-left: 15px;
+    }
+}
+
+@media only screen and (max-width: 650px) {
+    #serverInstallContainer {
+        width: 90%;
+    }
+}
