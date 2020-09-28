@@ -189,6 +189,18 @@ nav>a:hover::before {
     }
 }
 
+#social-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.social-logo {
+    height: 55px;
+}
+
 @media only screen and (max-width: 660px) {
     #hero {
         width: 90%;
@@ -204,18 +216,6 @@ nav>a:hover::before {
 
     #logo {
         font-size: 2.5rem;
-    }
-
-    #social-row {
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
-        flex-wrap: wrap;
-    }
-
-    .social-logo {
-        height: 55px;
     }
 }
 
