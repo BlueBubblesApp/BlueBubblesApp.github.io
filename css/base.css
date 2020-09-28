@@ -199,6 +199,8 @@ nav>a:hover::before {
 
 .social-logo {
     height: 55px;
+    margin-right: 5px;
+    margin-left: 5px;
 }
 
 @media only screen and (max-width: 660px) {
