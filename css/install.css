@@ -8,7 +8,7 @@
 }
 
 #serverInstallContainer {
-    height: calc(var(--vh, 1vh) * 75);
+    height: calc(var(--vh, 1vh) * 90);
     /* border: 3px solid green; */
     width: 65%;
     margin: auto;
