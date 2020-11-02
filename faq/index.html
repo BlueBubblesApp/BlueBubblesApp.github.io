@@ -190,8 +190,8 @@
                 var activePanel = actives[0].nextElementSibling;
                 console.log(activePanel);
 
-                if (activePanel.style.maxHeight) {
-                    activePanel.style.maxHeight = null;
+                if (activePanel.style.minHeight) {
+                    activePanel.style.minHeight = null;
                     actives[0].style.borderRadius = "7px";
                 }
 
@@ -208,11 +208,11 @@
 
                 this.classList.toggle("active");
                 var panel = this.nextElementSibling;
-                if (panel.style.maxHeight) {
-                    panel.style.maxHeight = null;
+                if (panel.style.minHeight) {
+                    panel.style.minHeight = null;
                     this.style.borderRadius = "7px";
                 } else {
-                    panel.style.maxHeight = panel.scrollHeight + "px";
+                    panel.style.minHeight = panel.scrollHeight + "px";
                     this.style.borderRadius = "7px 7px 0 0";
                 }
             });
