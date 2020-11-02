@@ -1,94 +1,70 @@
-#titleContainer {
+#serverInstallContainer {
+    flex-grow: 1;
+    width: 80%;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: flex-start;
-    width: 100%;
-    margin-top: 35px;
+    align-items: center;
 }
 
-#serverInstallContainer {
-    height: calc(var(--vh, 1vh) * 90);
-    /* border: 3px solid green; */
-    width: 65%;
-    margin: auto;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
+#confetti-canvas {
+    width: 100vw;
+    height: 100vh;
 }
 
 #serverInstallTitle {
     font-family: 'SF UI Display Bold';
-    font-size: 2.5rem;
+    font-size: 2.2rem;
     font-style: normal;
     margin: 0;
+    align-self: flex-start;
 }
 
 #stepTitle {
     font-family: 'SF UI Display Bold';
-    font-size: 2rem;
+    font-size: 1.8rem;
     font-style: normal;
     margin: 0;
-    margin-left: 60px;
+    margin-left: 40px;
+    margin-bottom: 10px;
+    align-self: flex-start;
 }
 
-.stepInformationText {
-    font-family: 'SF UI Display Light';
-    font-size: 1.5rem;
-    font-style: normal;
-    display: inline-block;
-}
-
-.stepInformationText>a {
-    color: #147efb;
-    text-decoration: none;
-}
-
-.stepInformationText>a:hover {
-    opacity: .75;
-}
-
-.inTextIcon {
-    height: 20px;
-    width: 20px;
-    border-radius: 4px;
-    margin-right: 3px;
-    margin-bottom: 4px;
-    vertical-align: middle;
-}
-
-.carousel-wrapper {
+#carouselContainer {
+    flex-grow: 1;
+    width: 100%;
     overflow: hidden;
-    width: 90%;
     margin: auto;
-    height: 100%;
 }
 
-.carousel-wrapper * {
+#carouselContainer * {
     box-sizing: border-box;
 }
 
 .carousel {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     -webkit-transform-style: preserve-3d;
     -moz-transform-style: preserve-3d;
     transform-style: preserve-3d;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
 }
 
 .carouselStep {
     opacity: 0;
     position: absolute;
     top: 0;
-    width: 100%;
-    height: 100%;
-    max-height: 55vh;
     margin: auto;
-    padding: 1rem 4rem;
-    z-index: 100;
-    transition: transform .5s, opacity .5s, z-index .5s;
+    flex-grow: 1;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: transform .35s, opacity .35s, z-index .35s;
 }
 
 .carouselStep.initial,
@@ -111,76 +87,144 @@
     transform: translateX(100%);
 }
 
+.stepMediaContainer {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    white-space: normal;
+    width: 60%;
+    max-width: 60%;
+}
+
+.stepMediaContainer video {
+    border-radius: 10px;
+}
+
+.stepTextContainer {
+    height: auto;
+    max-height: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    white-space: normal;
+    margin-top: 15px;
+}
+
+.stepText {
+    font-family: 'SF UI Display Light';
+    font-size: 1.4rem;
+    font-style: normal;
+    margin: 0;
+}
+
+.stepText a {
+    color: #147efb;
+    text-decoration: none;
+}
+
+.inTextIcon {
+    height: 20px;
+    width: 20px;
+    border-radius: 4px;
+    margin-right: 3px;
+    margin-bottom: 4px;
+    vertical-align: middle;
+}
+
 .carouselButtonDiv {
+    width: 100%;
+    height: 45px;
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    margin: 25px 0 15px 0;
 }
 
 .carouselButton--prev,
 .carouselButton--next {
-    cursor: pointer;
+    z-index: 1001;
+}
+
+.carouselButton--prev>p,
+.carouselButton--next>p {
+    font-family: 'SF UI Display Bold';
+    font-size: 1.3rem;
+    font-style: normal;
+    margin: 0;
     z-index: 1001;
 }
 
 .carouselButton--prev>p:hover,
 .carouselButton--next>p:hover {
     color: #9b9b9b;
+    cursor: pointer;
 }
 
-.carouselButton--prev {
-    margin-right: auto;
-    transition: ease-in-out .15s;
+.carouselStep.prev,
+.carouselStep.next {
+    z-index: 800;
 }
 
-.carouselButton--next {
-    margin-left: auto;
-}
-
-.carouselButton--prev>p {
-    font-family: 'SF UI Display Bold';
-    font-size: 1.5rem;
-    font-style: normal;
-}
-
-.carouselButton--next>p {
-    font-family: 'SF UI Display Bold';
-    font-size: 1.5rem;
-    font-style: normal;
-}
-
-#confetti-canvas {
-    width: 100vw;
-    height: 85vh;
-}
-
-
-@media only screen and (max-width: 1200px) {
-    #serverInstallContainer {
-        width: 80%;
-    }
-}
-
-@media only screen and (max-width: 900px) {
-    #titleContainer {
-        margin-top: 0;
-    }
-
+@media (max-width: 1000px) {
     #serverInstallTitle {
-        font-size: 2rem;
+        font-size: 1.8rem;
     }
 
     #stepTitle {
-        font-size: 1.8rem;
-        margin-left: 15px;
+        font-size: 1.5rem;
     }
 
-    .carouselStep{
-        padding: 0;
+    .stepText {
+        font-size: 1.2rem;
+    }
+
+    .stepMediaContainer {
+        width: 75%;
+        max-width: 75%;
     }
 }
 
-@media only screen and (max-width: 650px) {
+@media (max-width: 700px) {
     #serverInstallContainer {
         width: 90%;
+    }
+
+    #serverInstallTitle {
+        font-size: 1.6rem;
+    }
+
+    #stepTitle {
+        font-size: 1.35rem;
+    }
+
+    .stepText {
+        font-size: 1.1rem;
+    }
+
+    .stepMediaContainer {
+        width: 95%;
+        max-width: 95%;
+    }
+
+    .carouselButton--prev>p,
+    .carouselButton--next>p {
+        font-size: 1.1rem;
+    }
+}
+
+@media (max-width: 400px) {
+    #serverInstallTitle {
+        font-size: 1.4rem;
+    }
+
+    #stepTitle {
+        font-size: 1.15rem;
+    }
+}
+
+@media (max-height: 650px) {
+    #serverInstallContainer {
+        margin-bottom: 20px;
     }
 }

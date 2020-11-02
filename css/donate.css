@@ -1,0 +1,202 @@
+#makeItRain {
+    height: 100vh;
+    min-height: 100vh;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 9999;
+}
+
+#thankYouContainer {
+    flex-grow: 1;
+    width: 100%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    display: none;
+    z-index: 999;
+}
+
+#thankYouContainer h2 {
+    color: black;
+    font-family: "SF UI Display Bold";
+    font-size: 2rem;
+    font-style: normal;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-stroke-width: 0px;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+#thankYouContainer p {
+    color: black;
+    font-family: "SF UI Display Light";
+    font-size: 1.5rem;
+    font-style: normal;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-stroke-width: 0px;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+#loadingContainer {
+    flex-grow: 1;
+    width: 100%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    display: none;
+    z-index: 999;
+}
+
+.loader {
+    border: 5px solid #f3f3f3;
+    /* Light grey */
+    border-top: 5px solid #147efb;
+    /* Blue */
+    border-radius: 50%;
+    width: 45px;
+    height: 45px;
+    animation: spin 1.5s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+#donationContainer {
+    flex-grow: 1;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#paypalButtonsContainer {
+    min-height: 20vh;
+    width: 30vw;
+    margin-right: 10px;
+    z-index: 0;
+}
+
+#donationAmountContainer {
+    min-height: 20vh;
+    min-width: 30%;
+    margin-left: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 8vh;
+}
+
+#donationAmountContainer>div:first-of-type {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+#donationAmountContainer>div:first-of-type p {
+    color: black;
+    font-family: "SF UI Display Bold";
+    font-size: 21px;
+}
+
+#donationAmountContainer>div:first-of-type p:first-of-type {
+    margin-right: 5px;
+}
+
+#donationAmountContainer>div:last-of-type {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#donationAmountContainer>div:last-of-type button {
+    padding: 8px;
+    color: white;
+    background-color: #147efb;
+    margin-right: 3px;
+    outline: none;
+    border-radius: 5px;
+    border: 2px solid #147efb;
+    font-family: "SF UI Display Bold";
+    font-size: 16px;
+    transition: ease-in-out .15s;
+    height: 45px;
+}
+
+#donationAmountContainer>div:last-of-type button:hover {
+    color: #147efb;
+    background-color: white;
+    border-radius: 12px;
+    border: 2px solid #147efb;
+    cursor: pointer;
+}
+
+#customDollarDono {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#customDollarDono input {
+    margin-left: 5px;
+    padding: 4px 4px;
+    width: 25px;
+    background-color: white;
+    border: none;
+    outline: none;
+    border-radius: 8px;
+    font-family: "SF UI Display Bold";
+    font-size: 15px;
+}
+
+#customDollarDono:hover input {
+    background-color: #147efb;
+    color: white;
+}
+
+.activeDonoButton {
+    color: #147efb !important;
+    background-color: white !important;
+    border-radius: 12px !important;
+    border: 2px solid #147efb !important;
+}
+
+/* Remove arrows from input */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+    -moz-appearance: textfield;
+}
+
+@media (max-width: 600px) {
+    #donationContainer {
+        flex-direction: column-reverse;
+    }
+
+    #paypalButtonsContainer {
+        width: 75%;
+    }
+
+    #thankYouContainer h2 {
+        font-size: 1.6rem;
+        max-width: 80%;
+    }
+
+    #thankYouContainer p {
+        font-size: 1.15rem;
+    }
+}

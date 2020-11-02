@@ -1,135 +1,124 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <!-- Required -->
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <!-- CSS Links -->
-    <link rel="stylesheet" type="text/css" href="/css/base.css" />
-    <link rel="stylesheet" type="text/css" href="/css/main.css" />
-    <link rel="stylesheet" type="text/css" href="/css/hamburgers.css" />
+<head>
+  <!-- Required -->
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <!-- Favicon Link -->
-    <link
-      rel="icon"
-      href="/assets/icons/favicon.ico"
-      type="image/gif"
-      sizes="48x48"
-    />
-    <link rel="apple-touch-icon" href="/assets/icons/apple-touch-icon.png" />
-    <!-- Google Description -->
-    <title>iMessage on PC and Android - BlueBubbles</title>
-    <meta
-      name="description"
-      content="BlueBubbles is an open-source, community-driven ecosystem of
+  <!-- CSS Links -->
+  <!-- <link rel="stylesheet" type="text/css" href="/css/base.css" /> -->
+  <!-- <link rel="stylesheet" type="text/css" href="/css/main.css" /> -->
+  <link rel="stylesheet" type="text/css" href="/css/main.css" />
+  <link rel="stylesheet" type="text/css" href="/css/base.css" />
+  <link rel="stylesheet" type="text/css" href="/css/hamburgers.css" />
+
+  <!-- Favicon Link -->
+  <link rel="icon" href="/assets/icons/favicon.ico" type="image/gif" sizes="48x48" />
+  <link rel="apple-touch-icon" href="/assets/icons/apple-touch-icon.png" />
+  <!-- Google Description -->
+  <title>iMessage on PC and Android - BlueBubbles</title>
+  <meta name="description" content="BlueBubbles is an open-source, community-driven ecosystem of
       applications used to interact with iMessage on platforms such as Android,
-      Windows, and Linux."
-      name="description"
-    />
+      Windows, and Linux." name="description" />
 
-    <!-- Open Graph Protocall -->
-    <meta
-      content="iMessage on PC and Android - BlueBubbles"
-      property="og:title"
-    />
-    <meta
-      content="BlueBubbles is an open-source, community-driven ecosystem of
+  <!-- Open Graph Protocall -->
+  <meta content="iMessage on PC and Android - BlueBubbles" property="og:title" />
+  <meta content="BlueBubbles is an open-source, community-driven ecosystem of
       applications used to interact with iMessage on platforms such as Android,
-      Windows, and Linux."
-      property="og:description"
-    />
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://bluebubbles.app/" />
+      Windows, and Linux." property="og:description" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://bluebubbles.app/" />
 
-    <!-- Mobile Overlay Toggle Script -->
-    <script>
-      function addIsActive() {
-        //Toggle menu button
-        var hamburger = document.getElementById("hamburger");
-        hamburger.classList.toggle("is-active");
-        //Toggle engulfing blue circle
-        var bgCircle = document.getElementById("menu-circle");
-        bgCircle.classList.toggle("engulf");
-        //Toggle clear overlay
-        var overlay = document.getElementById("overlay");
-        overlay.classList.toggle("overlay-show");
-        //Toggle links
-        var links = document.getElementsByClassName("mobile-link");
-        for (var i = 0; i < links.length; i++) {
-          links[i].classList.toggle("show-links");
-        }
+  <!-- Mobile Overlay Toggle Script -->
+  <script>
+    function addIsActive() {
+      //Toggle menu button
+      var hamburger = document.getElementById("hamburger");
+      hamburger.classList.toggle("is-active");
+      //Toggle engulfing blue circle
+      var bgCircle = document.getElementById("menu-circle");
+      bgCircle.classList.toggle("engulf");
+      //Toggle clear overlay
+      var overlay = document.getElementById("overlay");
+      overlay.classList.toggle("overlay-show");
+      //Toggle links
+      var links = document.getElementsByClassName("mobile-link");
+      for (var i = 0; i < links.length; i++) {
+        links[i].classList.toggle("show-links");
       }
-    </script>
-  </head>
+    }
+  </script>
+</head>
 
-  <body>
-    <img id="bg-circle" alt="background-circle" src="/assets/bg-circle.png" />
-    <div id="overlay">
-      <span id="menu-circle"></span
-      ><a id="home" class="mobile-link is-open" href="/">Home</a
-      ><a class="mobile-link" href="/downloads">Downloads</a
-      ><a class="mobile-link" href="/install">Install</a>
-    </div>
 
-    <header id="navbar">
-      <nav class="leftnav">
-        <a id="logo" alt="logo" href="#">BlueBubbles</a>
-      </nav>
-      <nav>
-        <a href="#" class="rightnav is-open">Home</a>
-        <a href="/downloads" class="rightnav">Downloads</a>
-        <a href="/install" class="rightnav">Install</a>
-        <div
-          onclick="addIsActive()"
-          id="hamburger"
-          class="hamburger hamburger--collapse"
-          type="button"
-        >
-          <span class="hamburger-box">
-            <span class="hamburger-inner"></span>
-          </span>
-        </div>
-      </nav>
-    </header>
-    <div id="hero">
-      <div class="col">
-        <h1 id="title">
-          Bringing iMessage<br />
-          to PC and Android.
-        </h1>
-        <h2 id="subTitle">Plus, it's open source!</h2>
-        <a id="get-started" href="https://discord.gg/6nrGRHT"
-          >Join the Alpha Program!</a
-        >
+<body>
+  <div id="bg-circle"></div>
+  <div id="overlay">
+    <span id="menu-circle"></span>
+    <a id="home" class="mobile-link is-open" href="/">Home</a>
+    <a class="mobile-link" href="/downloads">Downloads</a>
+    <a class="mobile-link" href="/install">Install</a>
+    <a class="mobile-link" href="/faq">FAQ</a>
+  </div>
+
+  <header class="navbar">
+    <nav class="leftnav">
+      <a id="logo" alt="BlueBubbles Logo" href="/">BlueBubbles</a>
+    </nav>
+    <nav class="rightnav">
+      <a href="/" class="is-open">Home</a>
+      <a href="/downloads">Downloads</a>
+      <a href="/install">Install</a>
+      <a href="/faq">FAQ</a>
+      <div onclick="addIsActive()" id="hamburger" class="hamburger hamburger--collapse" type="button">
+        <span class="hamburger-box">
+          <span class="hamburger-inner"></span>
+        </span>
       </div>
-      <div class="col">
-        <img id="phone" alt="phone" src="/assets/phone.png" />
+    </nav>
+  </header>
+
+  <div id="hero">
+    <div id="leftCol">
+      <h1 id="title">
+        Bringing iMessage<br />
+        to PC and Android.
+      </h1>
+      <h2 id="subTitle">Plus, it's open source!</h2>
+      <a id="get-started" href="https://discord.gg/6nrGRHT">Join our Discord!</a>
+    </div>
+    <div id="rightCol">
+      <img id="devices" alt="devices" src="/assets/devices.png" />
+    </div>
+  </div>
+
+  <div class="footer">
+    <div class="social-row">
+      <div class="social-media">
+        <a href="https://github.com/BlueBubblesApp"><img class="social-logo" alt="github-link"
+            src="/assets/github-logo.png" /></a>
+      </div>
+      <div class="social-media">
+        <a href="https://discord.gg/6nrGRHT"><img class="social-logo" alt="discord-link"
+            src="/assets/discord-logo.jpg" /></a>
+      </div>
+      <div class="social-media">
+        <a href="https://www.reddit.com/r/BlueBubbles/"><img class="social-logo" alt="reddit-link"
+            src="/assets/reddit-logo.png" /></a>
       </div>
     </div>
-    <div id="footer">
-      <div id="social-row">
-        <div class="social-media">
-          <a href="https://github.com/BlueBubblesApp"
-            ><img
-              class="social-logo"
-              alt="github-link"
-              src="/assets/github-logo.png"
-          /></a>
-        </div>
-        <div class="social-media">
-          <a href="https://discord.gg/6nrGRHT"
-            ><img
-              class="social-logo"
-              alt="discord-link"
-              src="/assets/discord-logo.jpg"
-          /></a>
-        </div>
-      </div>
-      <div>
-        <p id="copyright">BlueBubbles</p>
-      </div>
+    <div class="links-row">
+      <a href="/">Home</a> <span>|</span>
+      <a href="/downloads">Downloads</a> <span>|</span>
+      <a href="/install">Install</a> <span>|</span>
+      <a href="/faq">FAQ</a> <span>|</span>
+      <a href="/donate">Donate</a>
     </div>
-  </body>
+    <p id="copyright">BlueBubbles</p>
+  </div>
+
+</body>
+
 </html>

@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required -->
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- CSS Links -->
+    <!-- <link rel="stylesheet" type="text/css" href="/css/base.css" /> -->
+    <!-- <link rel="stylesheet" type="text/css" href="/css/main.css" /> -->
+    <link rel="stylesheet" type="text/css" href="/css/faq.css" />
+    <link rel="stylesheet" type="text/css" href="/css/base.css" />
+    <link rel="stylesheet" type="text/css" href="/css/hamburgers.css" />
+
+    <!-- Favicon Link -->
+    <link rel="icon" href="/assets/icons/favicon.ico" type="image/gif" sizes="48x48" />
+    <link rel="apple-touch-icon" href="/assets/icons/apple-touch-icon.png" />
+    <!-- Google Description -->
+    <title>iMessage on PC and Android - BlueBubbles</title>
+    <meta name="description" content="BlueBubbles is an open-source, community-driven ecosystem of
+      applications used to interact with iMessage on platforms such as Android,
+      Windows, and Linux." name="description" />
+
+    <!-- Open Graph Protocall -->
+    <meta content="iMessage on PC and Android - BlueBubbles" property="og:title" />
+    <meta content="BlueBubbles is an open-source, community-driven ecosystem of
+      applications used to interact with iMessage on platforms such as Android,
+      Windows, and Linux." property="og:description" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://bluebubbles.app/" />
+
+    <!-- Mobile Overlay Toggle Script -->
+    <script>
+        function addIsActive() {
+            //Toggle menu button
+            var hamburger = document.getElementById("hamburger");
+            hamburger.classList.toggle("is-active");
+            //Toggle engulfing blue circle
+            var bgCircle = document.getElementById("menu-circle");
+            bgCircle.classList.toggle("engulf");
+            //Toggle clear overlay
+            var overlay = document.getElementById("overlay");
+            overlay.classList.toggle("overlay-show");
+            //Toggle links
+            var links = document.getElementsByClassName("mobile-link");
+            for (var i = 0; i < links.length; i++) {
+                links[i].classList.toggle("show-links");
+            }
+        }
+    </script>
+</head>
+
+
+<body>
+    <div id="bg-circle"></div>
+    <div id="overlay">
+        <span id="menu-circle"></span>
+        <a id="home" class="mobile-link" href="/">Home</a>
+        <a class="mobile-link" href="/downloads">Downloads</a>
+        <a class="mobile-link" href="/install">Install</a>
+        <a class="mobile-link is-open" href="/faq">FAQ</a>
+    </div>
+
+    <header class="navbar">
+        <nav class="leftnav">
+            <a id="logo" alt="BlueBubbles Logo" href="/">BlueBubbles</a>
+        </nav>
+        <nav class="rightnav">
+            <a href="/">Home</a>
+            <a href="/downloads">Downloads</a>
+            <a href="/install">Install</a>
+            <a href="/faq" class="is-open">FAQ</a>
+            <div onclick="addIsActive()" id="hamburger" class="hamburger hamburger--collapse" type="button">
+                <span class="hamburger-box">
+                    <span class="hamburger-inner"></span>
+                </span>
+            </div>
+        </nav>
+    </header>
+
+    <div id="mainContainer">
+        <h1>FAQ</h1>
+        <div id="accordionContainer">
+            <button class="accordion">Q: Will I need port-forwarding for this to work?</button>
+            <div class="panel">
+                <p>No, we utilize Ngrok to create a secure tunnel between your server and your client. You can
+                    optionally disable this to use your own local IP or dynamic dns.</p>
+            </div>
+
+            <button class="accordion">Q: Is my data encrypted?</button>
+            <div class="panel">
+                <p>Yes, all connections are done over HTTPS/WSS and utilizes TLS encryption by default (see: Ngrok)</p>
+            </div>
+
+            <button class="accordion">Q: How can I support the developers?</button>
+            <div class="panel">
+                <p>We don't charge anything for the use of our applications or code, however you can support us by
+                    donating on our
+                    <a href="/donate" style="color: #147efb; text-decoration: none;">donations page</a>.</p>
+            </div>
+
+            <button class="accordion">Q: How is BlueBubbles different than AirMessage?</button>
+            <div class="panel">
+                <p>iOS inspired UI/UX, Custom themeing, Port-forwarding not required, Entire ecosystem is open-source,
+                    Community-driven with open issues and feature requests, Dedicated cross platform apps (Desktop &
+                    Android), Decreased battery usage on Android due to no background service, and All self-hosted (no
+                    need to rely on owner's servers/maintenance).</p>
+            </div>
+
+            <button class="accordion">Q: Why do I need to sign up for Google's Firebase Service? </button>
+            <div class="panel">
+                <p>BlueBubbles does not require an open socket connection at all times (to reduce battery usage). We use
+                    Google FCM to still be able to send/receive alerts even when the socket is closed</p>
+            </div>
+
+            <button class="accordion">Q: Why does the MacOS server require Full Disk Access?</button>
+            <div class="panel">
+                <p>MacOS does not allow app's to read from iMessage's chat database unless they have Full Disk Access.
+                </p>
+            </div>
+
+            <button class="accordion">Q: Why does the MacOS server require Accessibility Access?</button>
+            <div class="panel">
+                <p>In order to execute actions such as renaming a group chat or adding/removing a participant from a
+                    group. Apple does not expose APIs to do this natively, so accessibility is used.</p>
+            </div>
+
+            <button class="accordion">Q: Can I share my QR Code?</button>
+            <div class="panel">
+                <p>No, your QR code should be private. If it gets leaked, you will need to generate new client secret
+                    credentials via Google's Firebase Console.</p>
+            </div>
+
+            <button class="accordion">Q Can we react to messages?</button>
+            <div class="panel">
+                <p>We currently support sending reactions on the desktop app, however the reliability is not great. We
+                    are working on increasing the reliability, so stay tuned!</p>
+            </div>
+
+            <button class="accordion"> Q: Can we see typing indicators? </button>
+            <div class="panel">
+                <p>No not yet, however just like reactions we are trying our best to implement them in a future release.
+                </p>
+            </div>
+
+            <button class="accordion">Q: Does BlueBubbles support SMS?</button>
+            <div class="panel">
+                <p>Not at the moment, however we plan to implement it in a future release.</p>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="footer">
+        <div class="social-row">
+            <div class="social-media">
+                <a href="https://github.com/BlueBubblesApp"><img class="social-logo" alt="github-link"
+                        src="/assets/github-logo.png" /></a>
+            </div>
+            <div class="social-media">
+                <a href="https://discord.gg/6nrGRHT"><img class="social-logo" alt="discord-link"
+                        src="/assets/discord-logo.jpg" /></a>
+            </div>
+            <div class="social-media">
+                <a href="https://www.reddit.com/r/BlueBubbles/"><img class="social-logo" alt="reddit-link"
+                        src="/assets/reddit-logo.png" /></a>
+            </div>
+        </div>
+        <div class="links-row">
+            <a href="/">Home</a> <span>|</span>
+            <a href="/downloads">Downloads</a> <span>|</span>
+            <a href="/install">Install</a> <span>|</span>
+            <a href="/faq">FAQ</a> <span>|</span>
+            <a href="/donate">Donate</a>
+        </div>
+        <p id="copyright">BlueBubbles</p>
+    </div>
+
+    <script>
+        var acc = document.getElementsByClassName("accordion");
+        var i;
+
+        async function closeActives() {
+            var actives = document.getElementsByClassName("active");
+            console.log(actives);
+
+            if (actives.length > 0) {
+                var activePanel = actives[0].nextElementSibling;
+                console.log(activePanel);
+
+                if (activePanel.style.maxHeight) {
+                    activePanel.style.maxHeight = null;
+                    actives[0].style.borderRadius = "7px";
+                }
+
+                actives[0].classList.toggle("active");
+            }
+        }
+
+        for (i = 0; i < acc.length; i++) {
+            acc[i].addEventListener("click", async function () {
+
+                if (this != document.getElementsByClassName("active")[0]) {
+                    await closeActives();
+                }
+
+                this.classList.toggle("active");
+                var panel = this.nextElementSibling;
+                if (panel.style.maxHeight) {
+                    panel.style.maxHeight = null;
+                    this.style.borderRadius = "7px";
+                } else {
+                    panel.style.maxHeight = panel.scrollHeight + "px";
+                    this.style.borderRadius = "7px 7px 0 0";
+                }
+            });
+        }
+    </script>
+</body>
+
+</html>

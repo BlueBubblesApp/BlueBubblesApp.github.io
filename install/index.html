@@ -95,11 +95,18 @@
 
         // Disable interaction by setting 'moving' to true for the same duration as our transition (0.5s = 500ms)
         function disableInteraction() {
+          var next = d.getElementsByClassName('carouselButton--next')[0],
+            prev = d.getElementsByClassName('carouselButton--prev')[0];
+
+          prev.style.pointerEvents = "none";
+          next.style.pointerEvents = "none";
           moving = true;
 
           setTimeout(function () {
             moving = false
-          }, 500);
+            prev.style.pointerEvents = "all";
+            next.style.pointerEvents = "all";
+          }, 350);
         }
 
         function moveCarouselTo(slide) {
@@ -149,6 +156,10 @@
               items[newNext].className = itemClassName + " next";
             }
           }
+
+          const slides = document.getElementsByClassName("stepMediaContainer");
+          slides[slide - 1].firstElementChild.currentTime = 0;
+          console.log(slides[slide - 1].firstElementChild);
         }
 
         // Next navigation handler
@@ -251,20 +262,24 @@
 
 <body>
   <script src="https://cdn.jsdelivr.net/gh/mathusummut/confetti.js/confetti.min.js"></script>
-  <img id="bg-circle" alt="background-circle" src="/assets/bg-circle.png" />
+  <div id="bg-circle"></div>
   <div id="overlay">
-    <span id="menu-circle"></span><a id="home" class="mobile-link" href="/">Home</a><a class="mobile-link"
-      href="/downloads">Downloads</a><a class="mobile-link" href="/install">Install</a>
+    <span id="menu-circle"></span>
+    <a id="home" class="mobile-link" href="/">Home</a>
+    <a class="mobile-link" href="/downloads">Downloads</a>
+    <a class="mobile-link is-open" href="/install">Install</a>
+    <a class="mobile-link" href="/faq">FAQ</a>
   </div>
 
-  <header id="navbar">
+  <header class="navbar">
     <nav class="leftnav">
-      <a id="logo" alt="logo" href="/">BlueBubbles</a>
+      <a id="logo" alt="BlueBubbles Logo" href="/">BlueBubbles</a>
     </nav>
-    <nav>
-      <a href="/" class="rightnav">Home</a>
-      <a href="/downloads" class="rightnav">Downloads</a>
-      <a href="#" class="rightnav is-open">Install</a>
+    <nav class="rightnav">
+      <a href="/">Home</a>
+      <a href="/downloads">Downloads</a>
+      <a href="/install" class="is-open">Install</a>
+      <a href="/faq">FAQ</a>
       <div onclick="addIsActive()" id="hamburger" class="hamburger hamburger--collapse" type="button">
         <span class="hamburger-box">
           <span class="hamburger-inner"></span>
@@ -272,75 +287,188 @@
       </div>
     </nav>
   </header>
+
   <canvas id="confetti-canvas" style="position:absolute;display:block;z-index:999999;pointer-events:none"></canvas>
+
   <div id="serverInstallContainer">
-    <div id="titleContainer">
-      <h1 id="serverInstallTitle">Server Installation</h1>
-      <h1 id="stepTitle">Step <span id="stepNumber">1</span><span style="color:#a4a4a4">/<span
-            id="maxSteps">10</span></span></h1>
-    </div>
-    <div class="carousel-wrapper">
+    <h1 id="serverInstallTitle">Server Installation</h1>
+    <h1 id="stepTitle">Step <span id="stepNumber">1</span><span style="color:#a4a4a4">/<span
+          id="maxSteps">13</span></span></h1>
+
+    <div id="carouselContainer">
       <div class="carousel">
         <div class="carouselStep initial">
-          <video width="90%" height="90%" autoplay loop>
-            <source src="/install/step1.mp4" type="video/mp4">
-          </video>
-          <h2 class="stepInformationText">1.) On the device you wish to use as
-            your server,
-            browse to <a href="/downloads">our downloads page</a>
-            and select the MacOS
-            Server download option.</h2>
+          <div class="stepMediaContainer">
+            <video width="100%" autoplay loop muted>
+              <source src="/install/step1.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="stepTextContainer">
+            <h2 class="stepText">1.) On the device you wish to use as
+              your server,
+              browse to <a href="/downloads">our downloads page</a>
+              and select the MacOS
+              Server download option.</h2>
+          </div>
         </div>
+
         <div class="carouselStep">
-          <video width="90%" height="90%" autoplay loop>
-            <source src="/install/step2.mp4" type="video/mp4">
-          </video>
-          <h2 class="stepInformationText">2.) Open the .dmg file and drag BlueBubbles into your applications folder,
-            then run <img class="inTextIcon" alt="system-preferences-icon"
-              src="/assets/icons/logo192.png"></img>BlueBubbles.
-          </h2>
+          <div class="stepMediaContainer">
+            <video width="100%" autoplay loop muted>
+              <source src="/install/step2.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="stepTextContainer">
+            <h2 class="stepText">2.) Open the .dmg file and drag BlueBubbles into your applications folder,
+              then run <img class="inTextIcon" alt="system-preferences-icon"
+                src="/assets/icons/logo192.png"></img>BlueBubbles.
+            </h2>
+          </div>
         </div>
+
         <div class="carouselStep">
-          <video width="90%" height="90%" autoplay loop>
-            <source src="/install/step3.mp4" type="video/mp4">
-          </video>
-          <h2 class="stepInformationText">3.) Open the <img class="inTextIcon" alt="system-preferences-icon"
-              src="/assets/system-preferences.png"></img>System
-            Preferences app, select <img class="inTextIcon" alt="security-and-privacy-icon"
-              src="/assets/security-and-privacy.png"></img>Security and Privacy, then give BlueBubbles full disk access
-            as well as full accessibility.</h2>
+          <div class="stepMediaContainer">
+            <video width="80%" autoplay loop muted>
+              <source src="/install/step3.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="stepTextContainer">
+            <h2 class="stepText">3.) Open the <img class="inTextIcon" alt="system-preferences-icon"
+                src="/assets/system-preferences.png"></img>System
+              Preferences app, select <img class="inTextIcon" alt="security-and-privacy-icon"
+                src="/assets/security-and-privacy.png"></img>Security and Privacy, then give BlueBubbles full disk
+              access
+              as well as full accessibility.</h2>
+          </div>
         </div>
+
         <div class="carouselStep">
-          <h2 class="stepInformationText">4.) Navigate to <a href="https://console.firebase.google.com/">Google
-              Firebase Console</a> and login with your Google account.</h2>
+          <!-- <div class="stepMediaContainer">
+            <video width="100%"  autoplay loop muted>
+              <source src="/install/step2.mp4" type="video/mp4">
+            </video>
+          </div> -->
+          <div class="stepTextContainer">
+            <h2 class="stepText">4.) Enter a password for your server and keep NGROK enabled unless you plan on
+              forwarding your local IP or dynamic DNS.</h2>
+          </div>
         </div>
+
         <div class="carouselStep">
-          <h2 class="stepInformationText">5.) Create a new project titled "BlueBubblesApp" then click on Project
-            settings > Service accounts > Generate a new private key, and save the file locally.</h2>
+          <!-- <div class="stepMediaContainer">
+            <video width="100%"  autoplay loop muted>
+              <source src="/install/step2.mp4" type="video/mp4">
+            </video>
+          </div> -->
+          <div class="stepTextContainer">
+            <h2 class="stepText">5.) Navigate to <a href="https://console.firebase.google.com/">Google
+                Firebase Console</a> and login with your Google account.</h2>
+          </div>
         </div>
+
         <div class="carouselStep">
-          <h2 class="stepInformationText">6.) Drag the private key we just downloaded into the private key drop zone on
-            the <img class="inTextIcon" alt="system-preferences-icon" src="/assets/icons/logo192.png"></img>BlueBubbles
-            application.</h2>
+          <div class="stepMediaContainer">
+            <video width="100%" autoplay loop muted>
+              <source src="/install/step6.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="stepTextContainer">
+            <h2 class="stepText">6.) Create a new project titled "BlueBubblesApp".</h2>
+          </div>
         </div>
+
         <div class="carouselStep">
-          <h2 class="stepInformationText">7.) Go back to the Project Overview page and click on the Android icon below
-            the words "Get started by adding Firebase to your app".</h2>
+          <div class="stepMediaContainer">
+            <video width="100%" autoplay loop muted>
+              <source src="/install/step7.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="stepTextContainer">
+            <h2 class="stepText">7.) Click on Project
+              settings > Service accounts > Create Service Account > Generate a new private key, and save the file
+              locally.</h2>
+          </div>
         </div>
+
         <div class="carouselStep">
-          <h2 class="stepInformationText">8.) For package name enter <span
-              style="font-family: SF UI Display Bold;">com.&lt;your name&gt;.bluebubbbles</span> then click Register App
-            and download the google-services.json file.
-          </h2>
+          <!-- <div class="stepMediaContainer">
+            <video width="100%"  autoplay loop muted>
+              <source src="/install/step2.mp4" type="video/mp4">
+            </video>
+          </div> -->
+          <div class="stepTextContainer">
+            <h2 class="stepText">8.) Drag the private key we just downloaded into the FCM Server drop zone on
+              the <img class="inTextIcon" alt="system-preferences-icon"
+                src="/assets/icons/logo192.png"></img>BlueBubbles
+              application.</h2>
+          </div>
         </div>
+
         <div class="carouselStep">
-          <h2 class="stepInformationText">9.) Drag the google-services.json file into the Google Services drop zone on
-            the <img class="inTextIcon" alt="system-preferences-icon" src="/assets/icons/logo192.png"></img>BlueBubbles
-            application.</h2>
+          <div class="stepMediaContainer">
+            <video width="100%" autoplay loop muted>
+              <source src="/install/step9.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="stepTextContainer">
+            <h2 class="stepText">9.) From the Settings page click on the General tab, then click on the Android icon
+              towards the
+              bottom of the page.</h2>
+          </div>
         </div>
+
         <div class="carouselStep">
-          <h2 class="stepInformationText">10.) Yay! You're connected!</h2>
+          <div class="stepMediaContainer">
+            <video width="100%" autoplay loop muted>
+              <source src="/install/step10.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="stepTextContainer">
+            <h2 class="stepText">10.) For package name enter <span style="font-family: SF UI Display Bold;">com.&lt;your
+                name&gt;.bluebubbles</span> then click Register App
+              and download the google-services.json file locally.
+            </h2>
+          </div>
         </div>
+
+        <div class="carouselStep">
+          <!-- <div class="stepMediaContainer">
+            <video width="100%"  autoplay loop muted>
+              <source src="/install/step2.mp4" type="video/mp4">
+            </video>
+          </div> -->
+          <div class="stepTextContainer">
+            <h2 class="stepText">11.) Drag the google-services.json file into the FCM Client drop zone on
+              the <img class="inTextIcon" alt="system-preferences-icon"
+                src="/assets/icons/logo192.png"></img>BlueBubbles
+              application.</h2>
+          </div>
+        </div>
+
+        <div class="carouselStep">
+          <!-- <div class="stepMediaContainer">
+            <video width="100%"  autoplay loop muted>
+              <source src="/install/step2.mp4" type="video/mp4">
+            </video>
+          </div> -->
+          <div class="stepTextContainer">
+            <h2 class="stepText">12.) Download any of our <a href="/downloads/">client applications</a>, and scan your
+              server's QR code (screenshot to clipboard on Windows using Win + Shift + S) to start syncing your
+              messages.</h2>
+          </div>
+        </div>
+
+        <div class="carouselStep">
+          <!-- <div class="stepMediaContainer">
+            <video width="100%"  autoplay loop muted>
+              <source src="/install/step2.mp4" type="video/mp4">
+            </video>
+          </div> -->
+          <div class="stepTextContainer">
+            <h2 class="stepText">13.) Yay! You're connected!</h2>
+          </div>
+        </div>
+
         <div class="carouselButtonDiv">
           <div class="carouselButton--prev">
             <p>Previous <span style="font-family: SF UI Display Light;">(<span id="prevStepNumber">1</span>)</span></p>
@@ -352,28 +480,30 @@
       </div>
     </div>
   </div>
-  <div id="footer">
-    <div id="social-row">
+
+  <div class="footer">
+    <div class="social-row">
       <div class="social-media">
-        <a href="https://github.com/BlueBubblesApp"
-          ><img
-            class="social-logo"
-            alt="github-link"
-            src="/assets/github-logo.png"
-        /></a>
+        <a href="https://github.com/BlueBubblesApp"><img class="social-logo" alt="github-link"
+            src="/assets/github-logo.png" /></a>
       </div>
       <div class="social-media">
-        <a href="https://discord.gg/6nrGRHT"
-          ><img
-            class="social-logo"
-            alt="discord-link"
-            src="/assets/discord-logo.jpg"
-        /></a>
+        <a href="https://discord.gg/6nrGRHT"><img class="social-logo" alt="discord-link"
+            src="/assets/discord-logo.jpg" /></a>
+      </div>
+      <div class="social-media">
+        <a href="https://www.reddit.com/r/BlueBubbles/"><img class="social-logo" alt="reddit-link"
+            src="/assets/reddit-logo.png" /></a>
       </div>
     </div>
-    <div>
-      <p id="copyright">BlueBubbles</p>
+    <div class="links-row">
+      <a href="/">Home</a> <span>|</span>
+      <a href="/downloads">Downloads</a> <span>|</span>
+      <a href="/install">Install</a> <span>|</span>
+      <a href="/faq">FAQ</a> <span>|</span>
+      <a href="/donate">Donate</a>
     </div>
+    <p id="copyright">BlueBubbles</p>
   </div>
 </body>
 
