@@ -13,8 +13,26 @@
       <priority>0.8</priority>
    </url>
    <url>
+      <loc>https://www.bluebubbles.app/downloads/linux</loc>
+      <lastmod>2020-06-05</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>0.6</priority>
+   </url>
+   <url>
       <loc>https://www.bluebubbles.app/install/</loc>
       <lastmod>2020-06-05</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>0.8</priority>
+   </url>
+   <url>
+      <loc>https://www.bluebubbles.app/donate/</loc>
+      <lastmod>2020-10-22</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>0.8</priority>
+   </url>
+   <url>
+      <loc>https://www.bluebubbles.app/faq/</loc>
+      <lastmod>2020-10-22</lastmod>
       <changefreq>monthly</changefreq>
       <priority>0.8</priority>
    </url>

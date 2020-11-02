@@ -1,41 +1,55 @@
-#downloadsContainer{
-    height: calc(var(--vh, 1vh) * 75);
-    /* border: 3px solid green; */
-    width: 60%;
-    margin: auto;
+#downloadsContainer {
+    flex-grow: 1;
+    width: 75%;
     display: flex;
-    flex-direction: row;
+    justify-content: center;
+    align-items: center;
 }
 
-.downloadTypeTitle{
-    font-family: 'SF UI Display Black';
+#clientsContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-right: 15px;
+}
+
+#serverContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.downloadTypeTitle {
+    font-family: 'SF UI Display Bold';
     font-size: 2.2rem;
     font-style: normal;
     -webkit-font-smoothing: antialiased;
 }
 
-.halfCol{
-    height: 100%;
-    width: 50%;
+.downloadButtonsContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: auto;
+    width: 100%;
+}
+
+.aDownloadButtonCol {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
-.downloadButtonContainer{
-    width: 100%;
-    height: 200px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.downloadButton{
-    height: 120px;
-    min-height: 120px;
-    width: 120px;
-    min-width: 120px;
+.aDownloadButton {
+    height: 110px;
+    min-height: 110px;
+    width: 110px;
+    min-width: 110px;
     background-color: #147efb;
     border-radius: 10px;
     display: flex;
@@ -45,70 +59,96 @@
     transition: ease-in-out .1s;
 }
 
-.downloadButton:hover{
+.aDownloadButton:hover {
     background-color: white;
+    cursor: pointer;
 }
 
-.downloadButton:hover .downloadButtonImage{
+.aDownloadButtonCol p {
+    font-family: 'SF UI Display Bold';
+    font-size: 1.5rem;
+    font-style: normal;
+    -webkit-font-smoothing: antialiased;
+    margin: 0;
+    margin-top: 10px;
+}
+
+.middleDownloadCol {
+    margin: 0 15px;
+}
+
+.downloadButtonImage {
+    height: 70%;
+    fill: white;
+}
+
+.aDownloadButton:hover .downloadButtonImage {
     fill: #147efb;
 }
 
-.middle{
-    margin: 0 20px 0 20px;
-}
-
-.downloadButtonImage{
-    fill: white;
-    height: 75px;
-    width: 75px;
-}
-
-.downloadButtonCol{
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-.downloadPlatformTitle{
-    font-family: 'SF UI Display Black';
-    font-size: 1.7rem;
-    font-style: normal;
-    -webkit-font-smoothing: antialiased;
-    margin-top: 5px;
-}
-
-@media only screen and (max-width: 1200px) {
-  #downloadsContainer {
-    width: 80%;
-  }
-}
-
-@media only screen and (max-width: 900px) {
-    #downloadsContainer{
+@media (max-width: 800px) {
+    #downloadsContainer {
         flex-direction: column;
     }
 
-    .halfCol{
-        width: 100%;
+    #clientsContainer {
+        margin-right: 0;
+        margin-bottom: 40px;
+    }
+
+    .downloadTypeTitle {
+        font-size: 1.8rem;
+    }
+
+    .aDownloadButton {
+        height: 95px;
+        min-height: 95px;
+        width: 95px;
+        min-width: 95px;
     }
 }
 
-@media only screen and (max-width: 700px) {
-    .downloadButton{
-        height: 100px;
-        min-height: 100px;
-        width: 100px;
-        min-width: 100px;
+@media (max-width: 500px) {
+    .middleDownloadCol {
+        margin: 0 5px;
     }
 
-    .downloadButtonImage{
-        height: 65px;
-        width: 65px;
+    .aDownloadButton {
+        height: 85px;
+        min-height: 85px;
+        width: 85px;
+        min-width: 85px;
     }
 
-    .halfCol{
-        width: 100%;
+    .downloadTypeTitle {
+        font-size: 1.6rem;
+    }
+
+    .aDownloadButtonCol p {
+        font-size: 1.3rem;
+    }
+}
+
+@media (max-width: 400px) {
+
+    .downloadTypeTitle {
+        font-size: 1.5rem;
+    }
+
+    .aDownloadButton {
+        height: 75px;
+        min-height: 75px;
+        width: 75px;
+        min-width: 75px;
+    }
+
+    .aDownloadButtonCol p {
+        font-size: 1.15rem;
+    }
+}
+
+@media (max-height: 650px) and (max-width: 800px) {
+    #serverContainer {
+        margin-bottom: 45px;
     }
 }
