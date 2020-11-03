@@ -52,73 +52,73 @@
   </script>
 </head>
 
-
 <body>
-  <div id="bg-circle"></div>
-  <div id="overlay">
-    <span id="menu-circle"></span>
-    <a id="home" class="mobile-link is-open" href="/">Home</a>
-    <a class="mobile-link" href="/downloads">Downloads</a>
-    <a class="mobile-link" href="/install">Install</a>
-    <a class="mobile-link" href="/faq">FAQ</a>
+  <div id="mainContainer">
+    <div id="bg-circle"></div>
+    <div id="overlay">
+      <span id="menu-circle"></span>
+      <a id="home" class="mobile-link is-open" href="/">Home</a>
+      <a class="mobile-link" href="/downloads">Downloads</a>
+      <a class="mobile-link" href="/install">Install</a>
+      <a class="mobile-link" href="/faq">FAQ</a>
+    </div>
+
+    <header class="navbar">
+      <nav class="leftnav">
+        <a id="logo" alt="BlueBubbles Logo" href="/">BlueBubbles</a>
+      </nav>
+      <nav class="rightnav">
+        <a href="/" class="is-open">Home</a>
+        <a href="/downloads">Downloads</a>
+        <a href="/install">Install</a>
+        <a href="/faq">FAQ</a>
+        <div onclick="addIsActive()" id="hamburger" class="hamburger hamburger--collapse" type="button">
+          <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+          </span>
+        </div>
+      </nav>
+    </header>
+
+    <div id="hero">
+      <div id="leftCol">
+        <h1 id="title">
+          Bringing iMessage<br />
+          to PC and Android.
+        </h1>
+        <h2 id="subTitle">Plus, it's open source!</h2>
+        <a id="get-started" href="https://discord.gg/6nrGRHT">Join our Discord!</a>
+      </div>
+      <div id="rightCol">
+        <img id="devices" alt="devices" src="/assets/devices.png" />
+      </div>
+    </div>
+
+    <div class="footer">
+      <div class="social-row">
+        <div class="social-media">
+          <a href="https://github.com/BlueBubblesApp"><img class="social-logo" alt="github-link"
+              src="/assets/github-logo.png" /></a>
+        </div>
+        <div class="social-media">
+          <a href="https://discord.gg/6nrGRHT"><img class="social-logo" alt="discord-link"
+              src="/assets/discord-logo.jpg" /></a>
+        </div>
+        <div class="social-media">
+          <a href="https://www.reddit.com/r/BlueBubbles/"><img class="social-logo" alt="reddit-link"
+              src="/assets/reddit-logo.png" /></a>
+        </div>
+      </div>
+      <div class="links-row">
+        <a href="/">Home</a> <span>|</span>
+        <a href="/downloads">Downloads</a> <span>|</span>
+        <a href="/install">Install</a> <span>|</span>
+        <a href="/faq">FAQ</a> <span>|</span>
+        <a href="/donate">Donate</a>
+      </div>
+      <p id="copyright">BlueBubbles</p>
+    </div>
   </div>
-
-  <header class="navbar">
-    <nav class="leftnav">
-      <a id="logo" alt="BlueBubbles Logo" href="/">BlueBubbles</a>
-    </nav>
-    <nav class="rightnav">
-      <a href="/" class="is-open">Home</a>
-      <a href="/downloads">Downloads</a>
-      <a href="/install">Install</a>
-      <a href="/faq">FAQ</a>
-      <div onclick="addIsActive()" id="hamburger" class="hamburger hamburger--collapse" type="button">
-        <span class="hamburger-box">
-          <span class="hamburger-inner"></span>
-        </span>
-      </div>
-    </nav>
-  </header>
-
-  <div id="hero">
-    <div id="leftCol">
-      <h1 id="title">
-        Bringing iMessage<br />
-        to PC and Android.
-      </h1>
-      <h2 id="subTitle">Plus, it's open source!</h2>
-      <a id="get-started" href="https://discord.gg/6nrGRHT">Join our Discord!</a>
-    </div>
-    <div id="rightCol">
-      <img id="devices" alt="devices" src="/assets/devices.png" />
-    </div>
-  </div>
-
-  <div class="footer">
-    <div class="social-row">
-      <div class="social-media">
-        <a href="https://github.com/BlueBubblesApp"><img class="social-logo" alt="github-link"
-            src="/assets/github-logo.png" /></a>
-      </div>
-      <div class="social-media">
-        <a href="https://discord.gg/6nrGRHT"><img class="social-logo" alt="discord-link"
-            src="/assets/discord-logo.jpg" /></a>
-      </div>
-      <div class="social-media">
-        <a href="https://www.reddit.com/r/BlueBubbles/"><img class="social-logo" alt="reddit-link"
-            src="/assets/reddit-logo.png" /></a>
-      </div>
-    </div>
-    <div class="links-row">
-      <a href="/">Home</a> <span>|</span>
-      <a href="/downloads">Downloads</a> <span>|</span>
-      <a href="/install">Install</a> <span>|</span>
-      <a href="/faq">FAQ</a> <span>|</span>
-      <a href="/donate">Donate</a>
-    </div>
-    <p id="copyright">BlueBubbles</p>
-  </div>
-
 </body>
 
 </html>

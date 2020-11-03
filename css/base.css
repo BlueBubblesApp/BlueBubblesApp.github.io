@@ -16,13 +16,19 @@
         url('/fonts/SF-UI-Display-Black.woff') format('woff');
 }
 
+::-webkit-scrollbar {
+    width: 0px;
+    background: transparent;
+    /* make scrollbar transparent */
+}
+
 html {
     height: 100vh;
     min-height: 100vh;
     width: 100vw;
     min-width: 100vw;
     overflow-x: hidden;
-    position: fixed;
+    display: block;
 }
 
 body {
@@ -30,13 +36,26 @@ body {
     min-height: 100vh;
     width: 100vw;
     min-width: 100vw;
+    display: block;
+    margin: 0;
+    overflow-x: hidden;
+}
+
+#mainContainer {
+    width: 100vw;
+    min-width: 100vw;
+    height: 100vh;
+    min-height: 100vh;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    margin: 0;
     overflow-x: hidden;
-    position: fixed;
+    overflow-y: scroll;
 }
 
 /* Background and mobile controls */

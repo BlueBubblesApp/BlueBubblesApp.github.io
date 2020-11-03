@@ -55,213 +55,215 @@
 </head>
 
 <body>
-    <video id="makeItRain" autoplay style="display:none;">
-        <source src="money.webm">
-        </source>
-    </video>
-    <div id="bg-circle"></div>
-    <div id="overlay">
-        <span id="menu-circle"></span>
-        <a id="home" class="mobile-link" href="/">Home</a>
-        <a class="mobile-link" href="/downloads">Downloads</a>
-        <a class="mobile-link" href="/install">Install</a>
-        <a class="mobile-link" href="/faq">FAQ</a>
-    </div>
+    <div id="mainContainer">
+        <video id="makeItRain" autoplay style="display:none;">
+            <source src="money.webm">
+            </source>
+        </video>
+        <div id="bg-circle"></div>
+        <div id="overlay">
+            <span id="menu-circle"></span>
+            <a id="home" class="mobile-link" href="/">Home</a>
+            <a class="mobile-link" href="/downloads">Downloads</a>
+            <a class="mobile-link" href="/install">Install</a>
+            <a class="mobile-link" href="/faq">FAQ</a>
+        </div>
 
-    <header class="navbar">
-        <nav class="leftnav">
-            <a id="logo" alt="BlueBubbles Logo" href="/">BlueBubbles</a>
-        </nav>
-        <nav class="rightnav">
-            <a href="/">Home</a>
-            <a href="/downloads">Downloads</a>
-            <a href="/install">Install</a>
-            <a href="/faq">FAQ</a>
-            <div onclick="addIsActive()" id="hamburger" class="hamburger hamburger--collapse" type="button">
-                <span class="hamburger-box">
-                    <span class="hamburger-inner"></span>
-                </span>
-            </div>
-        </nav>
-    </header>
+        <header class="navbar">
+            <nav class="leftnav">
+                <a id="logo" alt="BlueBubbles Logo" href="/">BlueBubbles</a>
+            </nav>
+            <nav class="rightnav">
+                <a href="/">Home</a>
+                <a href="/downloads">Downloads</a>
+                <a href="/install">Install</a>
+                <a href="/faq">FAQ</a>
+                <div onclick="addIsActive()" id="hamburger" class="hamburger hamburger--collapse" type="button">
+                    <span class="hamburger-box">
+                        <span class="hamburger-inner"></span>
+                    </span>
+                </div>
+            </nav>
+        </header>
 
-    <div id="donationContainer">
-        <div id="paypalButtonsContainer"></div>
-        <div id="donationAmountContainer">
-            <div>
-                <p>Donation Amount:</p>
-                <p id="currentDonationAmount">$1</p>
-            </div>
-            <div>
-                <button id="oneDollarDono">$1</button>
-                <button id="fiveDollarDono">$5</button>
-                <button id="tenDollarDono">$10</button>
-                <button id="twentyFiveDollarDono">$25</button>
-                <button id="customDollarDono">Custom $
-                    <input id="customDonoInput" type="number" />
-                </button>
+        <div id="donationContainer">
+            <div id="paypalButtonsContainer"></div>
+            <div id="donationAmountContainer">
+                <div>
+                    <p>Donation Amount:</p>
+                    <p id="currentDonationAmount">$1</p>
+                </div>
+                <div>
+                    <button id="oneDollarDono">$1</button>
+                    <button id="fiveDollarDono">$5</button>
+                    <button id="tenDollarDono">$10</button>
+                    <button id="twentyFiveDollarDono">$25</button>
+                    <button id="customDollarDono">Custom $
+                        <input id="customDonoInput" type="number" />
+                    </button>
+                </div>
             </div>
         </div>
-    </div>
 
-    <div id="loadingContainer">
-        <div class="loader"></div>
-    </div>
-
-    <div id="thankYouContainer">
-        <h2>Thank you for your support!</h2>
-        <p>Redirecting after 5 seconds...</p>
-    </div>
-
-    <div class="footer">
-        <div class="social-row">
-            <div class="social-media">
-                <a href="https://github.com/BlueBubblesApp"><img class="social-logo" alt="github-link"
-                        src="/assets/github-logo.png" /></a>
-            </div>
-            <div class="social-media">
-                <a href="https://discord.gg/6nrGRHT"><img class="social-logo" alt="discord-link"
-                        src="/assets/discord-logo.jpg" /></a>
-            </div>
-            <div class="social-media">
-                <a href="https://www.reddit.com/r/BlueBubbles/"><img class="social-logo" alt="reddit-link"
-                        src="/assets/reddit-logo.png" /></a>
-            </div>
+        <div id="loadingContainer">
+            <div class="loader"></div>
         </div>
-        <div class="links-row">
-            <a href="/">Home</a> <span>|</span>
-            <a href="/downloads">Downloads</a> <span>|</span>
-            <a href="/install">Install</a> <span>|</span>
-            <a href="/faq">FAQ</a> <span>|</span>
-            <a href="/donate">Donate</a>
+
+        <div id="thankYouContainer">
+            <h2>Thank you for your support!</h2>
+            <p>Redirecting after 5 seconds...</p>
         </div>
-        <p id="copyright">BlueBubbles</p>
-    </div>
 
-    <script>
-        var donationAmount = 1;
+        <div class="footer">
+            <div class="social-row">
+                <div class="social-media">
+                    <a href="https://github.com/BlueBubblesApp"><img class="social-logo" alt="github-link"
+                            src="/assets/github-logo.png" /></a>
+                </div>
+                <div class="social-media">
+                    <a href="https://discord.gg/6nrGRHT"><img class="social-logo" alt="discord-link"
+                            src="/assets/discord-logo.jpg" /></a>
+                </div>
+                <div class="social-media">
+                    <a href="https://www.reddit.com/r/BlueBubbles/"><img class="social-logo" alt="reddit-link"
+                            src="/assets/reddit-logo.png" /></a>
+                </div>
+            </div>
+            <div class="links-row">
+                <a href="/">Home</a> <span>|</span>
+                <a href="/downloads">Downloads</a> <span>|</span>
+                <a href="/install">Install</a> <span>|</span>
+                <a href="/faq">FAQ</a> <span>|</span>
+                <a href="/donate">Donate</a>
+            </div>
+            <p id="copyright">BlueBubbles</p>
+        </div>
 
-        var donationAmountDiv = document.getElementById("currentDonationAmount");
+        <script>
+            var donationAmount = 1;
 
-        function removeButtonStyles() {
-            try {
-                document.getElementById("oneDollarDono").classList.remove("activeDonoButton");
-            } catch {}
-            try {
-                document.getElementById("fiveDollarDono").classList.remove("activeDonoButton");
-            } catch {}
-            try {
-                document.getElementById("tenDollarDono").classList.remove("activeDonoButton");
-            } catch {}
-            try {
-                document.getElementById("twentyFiveDollarDono").classList.remove("activeDonoButton");
-            } catch {}
-            try {
-                document.getElementById("customDollarDono").classList.remove("activeDonoButton");
-            } catch {}
-        }
+            var donationAmountDiv = document.getElementById("currentDonationAmount");
 
-        document.getElementById("oneDollarDono").addEventListener("click", function () {
-            removeButtonStyles();
-            document.getElementById("oneDollarDono").classList.add("activeDonoButton");
-            donationAmount = 1;
-            donationAmountDiv.innerText = "$1";
-        });
-
-        document.getElementById("fiveDollarDono").addEventListener("click", function () {
-            removeButtonStyles();
-            document.getElementById("fiveDollarDono").classList.add("activeDonoButton");
-            donationAmount = 5;
-            donationAmountDiv.innerText = "$5";
-        });
-
-        document.getElementById("tenDollarDono").addEventListener("click", function () {
-            removeButtonStyles();
-            document.getElementById("tenDollarDono").classList.add("activeDonoButton");
-            donationAmount = 10;
-            donationAmountDiv.innerText = "$10";
-        });
-
-        document.getElementById("twentyFiveDollarDono").addEventListener("click", function () {
-            removeButtonStyles();
-            document.getElementById("twentyFiveDollarDono").classList.add("activeDonoButton");
-            donationAmount = 25;
-            donationAmountDiv.innerText = "$25";
-        });
-
-        document.getElementById("customDollarDono").addEventListener("click", function () {
-            removeButtonStyles();
-            document.getElementById("customDollarDono").classList.add("activeDonoButton");
-        });
-
-        var customDonoAmountString = "";
-        document.getElementById("customDonoInput").addEventListener("keyup", function (e) {
-            donationAmountDiv.innerText = "$" + document.getElementById("customDonoInput").value;
-            donationAmount = document.getElementById("customDonoInput").value;
-        });
-
-        var loadingContainer = document.getElementById("loadingContainer");
-        var thankYouContainer = document.getElementById("thankYouContainer");
-        var donationContainer = document.getElementById("donationContainer");
-        var makeItRain = document.getElementById("makeItRain");
-
-        paypal.Buttons({
-            createOrder: async function (data, actions) {
-                donationContainer.style.display = "none";
-                loadingContainer.style.display = "flex";
-
-                return actions.order.create({
-                    application_context: {
-                        brand_name: "BlueBubbles",
-                        shipping_preference: "NO_SHIPPING"
-                    },
-                    purchase_units: [{
-                        amount: {
-                            currency_code: "USD",
-                            value: `${donationAmount}`
-                        }
-                    }]
-                });
-            },
-
-            onApprove: function (data, actions) {
-                console.log(data, actions);
-                return actions.order.capture().then(async function (details) {
-                    console.log(data);
-                    console.log(actions);
-                    console.log(details);
-                    makeItRain.style.display = "block";
-                    makeItRain.currentTime = 0;
-                    makeItRain.play();
-
-                    makeItRain.addEventListener("ended", function (e) {
-                        makeItRain.style.display = "none";
-                    })
-
-
-                    loadingContainer.style.display = "none";
-                    donationContainer.style.display = "none";
-                    thankYouContainer.style.display = "flex";
-
-                    setTimeout(function () {
-                        window.location.href = '/';
-                    }, 5000);
-                });
-            },
-
-            onCancel: function (data, actions) {
-                loadingContainer.style.display = "none";
-                donationContainer.style.display = "flex";
-            },
-
-            onError: function (err) {
-                loadingContainer.style.display = "none";
-                donationContainer.style.display = "flex";
-                console.log(err);
+            function removeButtonStyles() {
+                try {
+                    document.getElementById("oneDollarDono").classList.remove("activeDonoButton");
+                } catch {}
+                try {
+                    document.getElementById("fiveDollarDono").classList.remove("activeDonoButton");
+                } catch {}
+                try {
+                    document.getElementById("tenDollarDono").classList.remove("activeDonoButton");
+                } catch {}
+                try {
+                    document.getElementById("twentyFiveDollarDono").classList.remove("activeDonoButton");
+                } catch {}
+                try {
+                    document.getElementById("customDollarDono").classList.remove("activeDonoButton");
+                } catch {}
             }
 
-        }).render('#paypalButtonsContainer');
-    </script>
+            document.getElementById("oneDollarDono").addEventListener("click", function () {
+                removeButtonStyles();
+                document.getElementById("oneDollarDono").classList.add("activeDonoButton");
+                donationAmount = 1;
+                donationAmountDiv.innerText = "$1";
+            });
+
+            document.getElementById("fiveDollarDono").addEventListener("click", function () {
+                removeButtonStyles();
+                document.getElementById("fiveDollarDono").classList.add("activeDonoButton");
+                donationAmount = 5;
+                donationAmountDiv.innerText = "$5";
+            });
+
+            document.getElementById("tenDollarDono").addEventListener("click", function () {
+                removeButtonStyles();
+                document.getElementById("tenDollarDono").classList.add("activeDonoButton");
+                donationAmount = 10;
+                donationAmountDiv.innerText = "$10";
+            });
+
+            document.getElementById("twentyFiveDollarDono").addEventListener("click", function () {
+                removeButtonStyles();
+                document.getElementById("twentyFiveDollarDono").classList.add("activeDonoButton");
+                donationAmount = 25;
+                donationAmountDiv.innerText = "$25";
+            });
+
+            document.getElementById("customDollarDono").addEventListener("click", function () {
+                removeButtonStyles();
+                document.getElementById("customDollarDono").classList.add("activeDonoButton");
+            });
+
+            var customDonoAmountString = "";
+            document.getElementById("customDonoInput").addEventListener("keyup", function (e) {
+                donationAmountDiv.innerText = "$" + document.getElementById("customDonoInput").value;
+                donationAmount = document.getElementById("customDonoInput").value;
+            });
+
+            var loadingContainer = document.getElementById("loadingContainer");
+            var thankYouContainer = document.getElementById("thankYouContainer");
+            var donationContainer = document.getElementById("donationContainer");
+            var makeItRain = document.getElementById("makeItRain");
+
+            paypal.Buttons({
+                createOrder: async function (data, actions) {
+                    donationContainer.style.display = "none";
+                    loadingContainer.style.display = "flex";
+
+                    return actions.order.create({
+                        application_context: {
+                            brand_name: "BlueBubbles",
+                            shipping_preference: "NO_SHIPPING"
+                        },
+                        purchase_units: [{
+                            amount: {
+                                currency_code: "USD",
+                                value: `${donationAmount}`
+                            }
+                        }]
+                    });
+                },
+
+                onApprove: function (data, actions) {
+                    console.log(data, actions);
+                    return actions.order.capture().then(async function (details) {
+                        console.log(data);
+                        console.log(actions);
+                        console.log(details);
+                        makeItRain.style.display = "block";
+                        makeItRain.currentTime = 0;
+                        makeItRain.play();
+
+                        makeItRain.addEventListener("ended", function (e) {
+                            makeItRain.style.display = "none";
+                        })
+
+
+                        loadingContainer.style.display = "none";
+                        donationContainer.style.display = "none";
+                        thankYouContainer.style.display = "flex";
+
+                        setTimeout(function () {
+                            window.location.href = '/';
+                        }, 5000);
+                    });
+                },
+
+                onCancel: function (data, actions) {
+                    loadingContainer.style.display = "none";
+                    donationContainer.style.display = "flex";
+                },
+
+                onError: function (err) {
+                    loadingContainer.style.display = "none";
+                    donationContainer.style.display = "flex";
+                    console.log(err);
+                }
+
+            }).render('#paypalButtonsContainer');
+        </script>
+    </div>
 </body>
 
 </html>

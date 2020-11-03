@@ -62,43 +62,44 @@
 </head>
 
 <body>
-  <div id="bg-circle"></div>
-  <div id="overlay">
-    <span id="menu-circle"></span>
-    <a id="home" class="mobile-link" href="/">Home</a>
-    <a class="mobile-link  is-open" href="/downloads">Downloads</a>
-    <a class="mobile-link" href="/install">Install</a>
-    <a class="mobile-link" href="/faq">FAQ</a>
-  </div>
-
-  <header class="navbar">
-    <nav class="leftnav">
-      <a id="logo" alt="BlueBubbles Logo" href="/">BlueBubbles</a>
-    </nav>
-    <nav class="rightnav">
-      <a href="/">Home</a>
-      <a href="/downloads" class="is-open">Downloads</a>
-      <a href="/install">Install</a>
-      <a href="/faq">FAQ</a>
-      <div onclick="addIsActive()" id="hamburger" class="hamburger hamburger--collapse" type="button">
-        <span class="hamburger-box">
-          <span class="hamburger-inner"></span>
-        </span>
-      </div>
-    </nav>
-  </header>
-
-  <div id="linuxInstallContainer">
-    <h1>Linux Downloads</h1>
-    <div class="installRowContainer">
-      <h2>Pacman</h2>
-      <div class="codeContainer" onclick="textToClipboard('yay -S bluebubbles')">
-        <p class="dollarSign">$</p>
-        <p class="codeExample">yay -S bluebubbles</p>
-        <p class="copyButton">Click to copy</p>
-      </div>
+  <div id="mainContainer">
+    <div id="bg-circle"></div>
+    <div id="overlay">
+      <span id="menu-circle"></span>
+      <a id="home" class="mobile-link" href="/">Home</a>
+      <a class="mobile-link  is-open" href="/downloads">Downloads</a>
+      <a class="mobile-link" href="/install">Install</a>
+      <a class="mobile-link" href="/faq">FAQ</a>
     </div>
-    <!-- <div class="installRowContainer">
+
+    <header class="navbar">
+      <nav class="leftnav">
+        <a id="logo" alt="BlueBubbles Logo" href="/">BlueBubbles</a>
+      </nav>
+      <nav class="rightnav">
+        <a href="/">Home</a>
+        <a href="/downloads" class="is-open">Downloads</a>
+        <a href="/install">Install</a>
+        <a href="/faq">FAQ</a>
+        <div onclick="addIsActive()" id="hamburger" class="hamburger hamburger--collapse" type="button">
+          <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+          </span>
+        </div>
+      </nav>
+    </header>
+
+    <div id="linuxInstallContainer">
+      <h1>Linux Downloads</h1>
+      <div class="installRowContainer">
+        <h2>Pacman</h2>
+        <div class="codeContainer" onclick="textToClipboard('yay -S bluebubbles')">
+          <p class="dollarSign">$</p>
+          <p class="codeExample">yay -S bluebubbles</p>
+          <p class="copyButton">Click to copy</p>
+        </div>
+      </div>
+      <!-- <div class="installRowContainer">
             <h2>Snap</h2>
             <div class="codeContainer" onclick="textToClipboard('sudo snap install bluebubbles')">
                 <p class="dollarSign">$</p>
@@ -106,56 +107,57 @@
                 <p class="copyButton">Click to copy</p>
             </div>
         </div> -->
-    <div id="compileFromSourceContainer">
-      <h2>Compile from source</h2>
-      <h3>1.) Clone the git repository</h3>
-      <div class="codeContainer"
-        onclick="textToClipboard('git clone https://github.com/BlueBubblesApp/BlueBubbles-Desktop-App.git')">
-        <p class="dollarSign">$</p>
-        <p class="codeExample">
-          git clone
-          https://github.com/BlueBubblesApp/BlueBubbles-Desktop-App.git
-        </p>
-        <p class="copyButton">Click to copy</p>
-      </div>
-      <h3>2.) Cd into the directory</h3>
-      <div class="codeContainer" onclick="textToClipboard('cd BlueBubbles-Desktop-App')">
-        <p class="dollarSign">$</p>
-        <p class="codeExample">cd BlueBubbles-Desktop-App</p>
-        <p class="copyButton">Click to copy</p>
-      </div>
-      <h3>3.) Run this command to build the executable</h3>
-      <div class="codeContainer" onclick="textToClipboard('npm run build')">
-        <p class="dollarSign">$</p>
-        <p class="codeExample">npm run dist</p>
-        <p class="copyButton">Click to copy</p>
+      <div id="compileFromSourceContainer">
+        <h2>Compile from source</h2>
+        <h3>1.) Clone the git repository</h3>
+        <div class="codeContainer"
+          onclick="textToClipboard('git clone https://github.com/BlueBubblesApp/BlueBubbles-Desktop-App.git')">
+          <p class="dollarSign">$</p>
+          <p class="codeExample">
+            git clone
+            https://github.com/BlueBubblesApp/BlueBubbles-Desktop-App.git
+          </p>
+          <p class="copyButton">Click to copy</p>
+        </div>
+        <h3>2.) Cd into the directory</h3>
+        <div class="codeContainer" onclick="textToClipboard('cd BlueBubbles-Desktop-App')">
+          <p class="dollarSign">$</p>
+          <p class="codeExample">cd BlueBubbles-Desktop-App</p>
+          <p class="copyButton">Click to copy</p>
+        </div>
+        <h3>3.) Run this command to build the executable</h3>
+        <div class="codeContainer" onclick="textToClipboard('npm run build')">
+          <p class="dollarSign">$</p>
+          <p class="codeExample">npm run dist</p>
+          <p class="copyButton">Click to copy</p>
+        </div>
       </div>
     </div>
-  </div>
 
-  <div class="footer">
-    <div class="social-row">
-      <div class="social-media">
-        <a href="https://github.com/BlueBubblesApp"><img class="social-logo" alt="github-link"
-            src="/assets/github-logo.png" /></a>
+    <div class="footer">
+      <div class="social-row">
+        <div class="social-media">
+          <a href="https://github.com/BlueBubblesApp"><img class="social-logo" alt="github-link"
+              src="/assets/github-logo.png" /></a>
+        </div>
+        <div class="social-media">
+          <a href="https://discord.gg/6nrGRHT"><img class="social-logo" alt="discord-link"
+              src="/assets/discord-logo.jpg" /></a>
+        </div>
+        <div class="social-media">
+          <a href="https://www.reddit.com/r/BlueBubbles/"><img class="social-logo" alt="reddit-link"
+              src="/assets/reddit-logo.png" /></a>
+        </div>
       </div>
-      <div class="social-media">
-        <a href="https://discord.gg/6nrGRHT"><img class="social-logo" alt="discord-link"
-            src="/assets/discord-logo.jpg" /></a>
+      <div class="links-row">
+        <a href="/">Home</a> <span>|</span>
+        <a href="/downloads">Downloads</a> <span>|</span>
+        <a href="/install">Install</a> <span>|</span>
+        <a href="/faq">FAQ</a> <span>|</span>
+        <a href="/donate">Donate</a>
       </div>
-      <div class="social-media">
-        <a href="https://www.reddit.com/r/BlueBubbles/"><img class="social-logo" alt="reddit-link"
-            src="/assets/reddit-logo.png" /></a>
-      </div>
+      <p id="copyright">BlueBubbles</p>
     </div>
-    <div class="links-row">
-      <a href="/">Home</a> <span>|</span>
-      <a href="/downloads">Downloads</a> <span>|</span>
-      <a href="/install">Install</a> <span>|</span>
-      <a href="/faq">FAQ</a> <span>|</span>
-      <a href="/donate">Donate</a>
-    </div>
-    <p id="copyright">BlueBubbles</p>
   </div>
 </body>
 
