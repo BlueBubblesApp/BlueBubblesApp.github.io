@@ -91,11 +91,17 @@
 
     <div id="linuxInstallContainer">
       <h1>Linux Downloads</h1>
+      
       <div class="installRowContainer">
-        <h2>Pacman</h2>
-        <div class="codeContainer" onclick="textToClipboard('yay -S bluebubbles')">
+        <h2>Pre-compiled Binaries</h2>
+        <a href="https://github.com/BlueBubblesApp/BlueBubbles-Desktop-App/releases">Our Github Releases</a>
+      </div>
+
+      <div class="installRowContainer">
+        <h2>AUR</h2>
+        <div class="codeContainer" onclick="textToClipboard('yay -S bluebubbles-desktop-app')">
           <p class="dollarSign">$</p>
-          <p class="codeExample">yay -S bluebubbles</p>
+          <p class="codeExample">yay -S bluebubbles-desktop-app</p>
           <p class="copyButton">Click to copy</p>
         </div>
       </div>
@@ -108,10 +114,12 @@
             </div>
         </div> -->
       <div id="compileFromSourceContainer">
+
         <h2>Compile from source</h2>
         <h3>1.) Clone the git repository</h3>
         <div class="codeContainer"
-          onclick="textToClipboard('git clone https://github.com/BlueBubblesApp/BlueBubbles-Desktop-App.git')">
+          onclick="textToClipboard('git clone https:\/\/github.com/BlueBubblesApp/BlueBubbles-Desktop-App.git')"
+        >
           <p class="dollarSign">$</p>
           <p class="codeExample">
             git clone
@@ -119,18 +127,36 @@
           </p>
           <p class="copyButton">Click to copy</p>
         </div>
-        <h3>2.) Cd into the directory</h3>
+
+        <h3>2.) Cd into the directory</h3>        
         <div class="codeContainer" onclick="textToClipboard('cd BlueBubbles-Desktop-App')">
           <p class="dollarSign">$</p>
           <p class="codeExample">cd BlueBubbles-Desktop-App</p>
           <p class="copyButton">Click to copy</p>
         </div>
-        <h3>3.) Run this command to build the executable</h3>
+
+        <h3>3.) Install the dependencies</h3>
+        <div class="codeContainer" onclick="textToClipboard('npm install')">
+          <p class="dollarSign">$</p>
+          <p class="codeExample">npm install</p>
+          <p class="copyButton">Click to copy</p>
+        </div>
+
+        <h3>Optional: In-App GIF keyboard (pre-completed using our API key in our releases)</h3>
+        <h3 class="subIndented">1.) Create a developer acount on <a href="https://developers.giphy.com/docs/sdk/" target="_blank">GIPHY</a></h3>  
+        <h3 class="subIndented">2.) Create a new SDK app and copy the API key</h3>
+        <h3 class="subIndented">3.) Using a text editor open the <code>package.json</code> file</h3>
+        <h3 class="subIndented">4.) Under the <code>scripts</code> section edit the <code>build-renderer</code> line to: <code>cross-env GIPHY_API_KEY=&lt;Paste GIPHY API Key Here&gt; NODE_ENV=production webpack --config webpack.renderer.prod.config.js</code></h3>
+        <h3 class="subIndented">5.) Continue to the compile binary step below</h3>
+
+        <h3>4.) Run this command to build the executable</h3>
         <div class="codeContainer" onclick="textToClipboard('npm run build')">
           <p class="dollarSign">$</p>
           <p class="codeExample">npm run dist</p>
           <p class="copyButton">Click to copy</p>
         </div>
+
+        <h3>5.) The compiled binary will be located in the <code>release</code>folder</h3>
       </div>
     </div>
 
