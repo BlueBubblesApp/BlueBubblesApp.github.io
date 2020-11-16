@@ -1,5 +1,5 @@
 #linuxInstallContainer {
-    height: calc(var(--vh, 1vh) * 75);
+    flex-grow: 1;
     /* border: 3px solid green; */
     width: 50%;
     margin: auto;
@@ -26,6 +26,24 @@
     justify-content: center;
     align-items: center;
     margin-bottom: 20px;
+}
+
+.installRowContainer > a {
+    /* width: 100%; */
+    align-self: flex-start;
+    margin: 0;
+    margin-left: 20px;
+    font-family: 'SF UI Display Bold';
+    font-size: 1rem;
+    font-style: normal;
+    margin-bottom: 5px;
+    color: #147efb;
+    text-decoration: none;
+}
+
+.installRowContainer a:hover {
+    cursor: pointer;
+    opacity: .75;
 }
 
 .installRowContainer>h2 {
@@ -120,6 +138,19 @@
 #compileFromSourceContainer .codeContainer {
     width: calc(100% - 30px);
     margin-left: auto;
+}
+
+.subIndented {
+    margin-left: 35px !important;
+}
+
+.subIndented a {
+    color: #147efb;
+    text-decoration: none;
+}
+
+.subIndented a:hover {
+    cursor: pointer;
 }
 
 @media only screen and (max-width: 1200px) {
