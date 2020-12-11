@@ -105,10 +105,12 @@
     height: auto;
     max-height: 20%;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     white-space: normal;
     margin-top: 15px;
+    text-align: center;
 }
 
 .stepText {
@@ -118,7 +120,104 @@
     margin: 0;
 }
 
-.stepText a {
+.stepTextSub {
+    margin: 25px 0;
+}
+
+#privateInstallButton {
+    padding: 10px;
+    background-color: #147efb;
+    border-radius: 10px;
+}
+
+#privateInstallButton p {
+    color: white;
+}
+
+#privateInstallButton:hover {
+    animation-name: bounceRight;
+    animation-duration: 1.2s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+    cursor: pointer;
+}
+
+@keyframes bounceRight {
+	0%, 100%, 20%, 50%, 80% {
+		transform: translateX(0);
+	}
+	40% {
+		transform: translateX(50px);
+	}
+	60% {
+		transform: translateX(25px);
+	}
+}
+
+
+.codeContainer {
+    height: 22px;
+    min-height: 22px;
+    /* width: 85%; */
+    max-width: 80vw;
+    background-color: #c4c4c4;
+    border-radius: 5px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 2px 0;
+    transition: ease-in-out .15s;
+    margin-top: 10px;
+}
+
+.codeContainer:active {
+    background-color: white !important;
+}
+
+.codeContainer:hover {
+    background-color: #9b9b9b;
+    cursor: pointer;
+}
+
+.codeContainer:hover .copyButton {
+    color: black;
+    border-color: black;
+}
+
+.dollarSign {
+    font-family: 'SF UI Display Bold';
+    font-size: 1rem;
+    font-style: normal;
+    margin: 0;
+    margin: 0 12px;
+}
+
+.codeExample {
+    font-family: 'SF UI Display Light';
+    font-size: .96rem;
+    font-style: normal;
+    margin: 0;
+    height: 100%;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.copyButton {
+    max-height: 100%;
+    margin: 0 5px 0 auto;
+    font-family: 'SF UI Display Light';
+    padding: 2px 4px;
+    font-size: 12px;
+    font-style: normal;
+    color: #c4c4c4;
+    border: 1px solid #c4c4c4;
+    border-radius: 7px;
+    transition: ease-in-out .15s;
+    min-width: 75px;
+}
+
+.stepText a, .stepText span {
     color: #147efb;
     text-decoration: none;
 }

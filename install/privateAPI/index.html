@@ -262,6 +262,16 @@
       }(document));
     });
   </script>
+  <script>
+    function textToClipboard(text) {
+      var dummy = document.createElement("textarea");
+      document.body.appendChild(dummy);
+      dummy.value = text;
+      dummy.select();
+      document.execCommand("copy");
+      document.body.removeChild(dummy);
+    }
+  </script>
 </head>
 
 <body>
@@ -296,24 +306,20 @@
     <canvas id="confetti-canvas" style="position:absolute;display:block;z-index:999999;pointer-events:none"></canvas>
 
     <div id="serverInstallContainer">
-      <h1 id="serverInstallTitle">Server Installation</h1>
+      <h1 id="serverInstallTitle">Private API Installation</h1>
       <h1 id="stepTitle">Step <span id="stepNumber">1</span><span style="color:#a4a4a4">/<span
-            id="maxSteps">14</span></span></h1>
+            id="maxSteps">9</span></span></h1>
 
       <div id="carouselContainer">
         <div class="carousel">
           <div class="carouselStep initial">
             <div class="stepMediaContainer">
               <video width="100%" autoplay loop muted>
-                <source src="/install/step1.mp4" type="video/mp4">
+                <source src="/install/installMacforge.mp4" type="video/mp4">
               </video>
             </div>
             <div class="stepTextContainer">
-              <h2 class="stepText">1.) On the device you wish to use as
-                your server,
-                browse to <a href="/downloads" target="_blank">our downloads page</a>
-                and select the MacOS
-                Server download option.</h2>
+              <h2 class="stepText">1.) Browse to the <a target="_blank" href="https://www.macenhance.com/macforge">MacForge</a> website, download the latest release and install the program.</h2>
             </div>
           </div>
 
@@ -324,10 +330,16 @@
               </video>
             </div>
             <div class="stepTextContainer">
-              <h2 class="stepText">2.) Open the .dmg file and drag BlueBubbles into your applications folder,
-                then run <img class="inTextIcon" alt="system-preferences-icon"
-                  src="/assets/icons/logo192.png"></img>BlueBubbles.
+              <h2 class="stepText">2.) Open the <img class="inTextIcon" alt="system-preferences-icon"
+                src="/assets/terminal-app-icon.png"></img>terminal app and run the following command to disable library validation.
               </h2>
+              <div class="codeContainer"
+                onclick="textToClipboard('sudo defaults write /Library/Preferences/com.apple.security.libraryvalidation.plist DisableLibraryValidation -bool true')"
+              >
+                <p class="dollarSign">$</p>
+                <p class="codeExample">sudo defaults write /Library/Preferences/com.apple.security.libraryvalidation.plist DisableLibraryValidation -bool true</p>
+                <p class="copyButton">Click to copy</p>
+              </div>
             </div>
           </div>
 
@@ -338,12 +350,7 @@
               </video>
             </div>
             <div class="stepTextContainer">
-              <h2 class="stepText">3.) Open the <img class="inTextIcon" alt="system-preferences-icon"
-                  src="/assets/system-preferences.png"></img>System
-                Preferences app, select <img class="inTextIcon" alt="security-and-privacy-icon"
-                  src="/assets/security-and-privacy.png"></img>Security and Privacy, then give BlueBubbles full disk
-                access
-                as well as full accessibility.</h2>
+              <h2 class="stepText">3.) </h2>
             </div>
           </div>
 
@@ -417,76 +424,6 @@
                 the <img class="inTextIcon" alt="system-preferences-icon"
                   src="/assets/icons/logo192.png"></img>BlueBubbles
                 application.</h2>
-            </div>
-          </div>
-
-          <div class="carouselStep">
-            <div class="stepMediaContainer">
-              <video width="100%" autoplay loop muted>
-                <source src="/install/step9.mp4" type="video/mp4">
-              </video>
-            </div>
-            <div class="stepTextContainer">
-              <h2 class="stepText">10.) From the Settings page click on the General tab, then click on the Android icon
-                towards the
-                bottom of the page.</h2>
-            </div>
-          </div>
-
-          <div class="carouselStep">
-            <div class="stepMediaContainer">
-              <video width="100%" autoplay loop muted>
-                <source src="/install/step10.mp4" type="video/mp4">
-              </video>
-            </div>
-            <div class="stepTextContainer">
-              <h2 class="stepText">11.) For package name enter <span
-                  style="font-family: SF UI Display Bold;">com.&lt;your
-                  name&gt;.bluebubbles</span> then click Register App
-                and download the google-services.json file locally.
-              </h2>
-            </div>
-          </div>
-
-          <div class="carouselStep">
-            <!-- <div class="stepMediaContainer">
-            <video width="100%"  autoplay loop muted>
-              <source src="/install/step2.mp4" type="video/mp4">
-            </video>
-          </div> -->
-            <div class="stepTextContainer">
-              <h2 class="stepText">12.) Drag the google-services.json file into the FCM Client drop zone on
-                the <img class="inTextIcon" alt="system-preferences-icon"
-                  src="/assets/icons/logo192.png"></img>BlueBubbles
-                application.</h2>
-            </div>
-          </div>
-
-          <div class="carouselStep">
-            <!-- <div class="stepMediaContainer">
-            <video width="100%"  autoplay loop muted>
-              <source src="/install/step2.mp4" type="video/mp4">
-            </video>
-          </div> -->
-            <div class="stepTextContainer">
-              <h2 class="stepText">13.) Download any of our <a href="/downloads/" target="_blank">client applications</a>, and scan your
-                server's QR code (screenshot to clipboard on Windows using Win + Shift + S) to start syncing your
-                messages.</h2>
-            </div>
-          </div>
-
-          <div class="carouselStep">
-            <!-- <div class="stepMediaContainer">
-            <video width="100%"  autoplay loop muted>
-              <source src="/install/step2.mp4" type="video/mp4">
-            </video>
-          </div> -->
-            <div class="stepTextContainer">
-              <h2 class="stepText">14.) Yay! You're connected!</h2>
-              <h2 class="stepText stepTextSub">But... If you want more features such as sending reactions, typing indicators, expressive style messages, and much improved speed, we are going to have to do some more setup.</h2>
-              <a href="/install/privateAPI" id="privateInstallButton">
-                <p class="stepText">Continue to Private API Installation</p>
-              </a>
             </div>
           </div>
 
