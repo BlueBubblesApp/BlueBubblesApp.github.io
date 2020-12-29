@@ -20,6 +20,19 @@
     align-self: flex-start;
 }
 
+#youtubeInstallationTitle {
+    font-family: 'SF UI Display Bold';
+    font-size: 2.2rem;
+    font-style: normal;
+    margin: 0;
+    align-self: flex-start;
+}
+
+#youtubeInstallationDesc {
+    font-family: 'SF UI Display Bold';
+    text-align: left;   
+}
+
 #stepTitle {
     font-family: 'SF UI Display Bold';
     font-size: 1.8rem;
