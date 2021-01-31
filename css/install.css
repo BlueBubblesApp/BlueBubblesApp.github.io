@@ -28,7 +28,7 @@
     align-self: flex-start;
 }
 
-#youtubeInstallationDesc {
+.installationDesc {
     font-family: 'SF UI Display Bold';
     text-align: left;   
 }
