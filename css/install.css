@@ -241,3 +241,10 @@
         margin-bottom: 20px;
     }
 }
+
+.referenceContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
