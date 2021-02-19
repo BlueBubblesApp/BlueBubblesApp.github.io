@@ -175,6 +175,26 @@
                 <div class="panel">
                     <p>Yes, the Desktop App currently supports SMS, and we are working to implement a similar solution for Android</p>
                 </div>
+                
+                <div class="accordion">
+                    <p>Q: Every image I send or receive shows up as `Unknown group event` on my Android device, am I doing something wrong?</p>
+                </div>
+                <div class="panel">
+                    <p>No, you are not doing anything wrong! This is actually a bug/issue with macOS itself. More specifically, a known bug with macOS Mojave 10.14 that still has not
+                        been patched by Apple. In order to fix the issue, please follow these steps:</p>
+                    <p><strong>WARNING: </strong>This process will erase all your Mac's Messages history! Also, I have no idea how long this fix will stay effective.</p>
+                    <p>
+                        1. Sign out from iMessage from your Mac.<br />
+                        2. Finder -> Go (top bar) -> Library (Hold "Option" key for this to appear)<br />
+                        3. Locate and open "Messages" folder <br />
+                        4. Delete every file that *ends with* .db in the name - if the has an additional extension, you should try this process first WITHOUT deleting those files.<br />
+                        5. Restart your computer<br />
+                        6. Open Messages and sign into iMessage again<br />
+                        7. Delete the AirMessage app from your phone.<br />
+                        8. Reboot your phone.<br />
+                        9. Re-install the BlueBubbles macOS Server and sign back into your server.<br />
+                    </p>
+                </div>
 
             </div>
         </div>
