@@ -122,6 +122,7 @@
     align-items: center;
     white-space: normal;
     margin-top: 15px;
+    flex-direction: column;
 }
 
 .stepText {
