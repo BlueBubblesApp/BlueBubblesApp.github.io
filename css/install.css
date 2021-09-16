@@ -1,3 +1,7 @@
+:root {
+    --videoWidth: 80vw;
+}
+
 #serverInstallContainer {
     flex-grow: 1;
     width: 80%;
@@ -30,7 +34,8 @@
 
 .installationDesc {
     font-family: 'SF UI Display Bold';
-    text-align: left;   
+    text-align: left;
+    max-width: 650px;
 }
 
 #stepTitle {
@@ -180,6 +185,30 @@
     z-index: 800;
 }
 
+.referenceContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 90%;
+    margin: 50px;
+}
+
+iframe {
+    width: var(--videoWidth);
+    height: calc(var(--videoWidth) * .5625);
+    max-width: 650px;
+    max-height: 365px;
+}
+
+@media (max-width: 1300px) {
+    .referenceContainer {
+        flex-direction: column;
+        margin-bottom: 50px;
+        width: 90%;
+    }
+}
+
 @media (max-width: 1000px) {
     #serverInstallTitle {
         font-size: 1.8rem;
@@ -241,11 +270,4 @@
     #serverInstallContainer {
         margin-bottom: 20px;
     }
-}
-
-.referenceContainer {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    align-items: flex-start;
 }
