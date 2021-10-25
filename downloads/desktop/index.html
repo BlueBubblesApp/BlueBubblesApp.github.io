@@ -29,7 +29,7 @@
     content="Learn how to install BlueBubbles onto your Linux device using Snap."
     property="og:description" />
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://bluebubbles.app/downloads/linux" />
+  <meta property="og:url" content="https://bluebubbles.app/downloads/desktop" />
 
   <!-- Mobile Overlay Toggle Script -->
   <script>
@@ -68,9 +68,11 @@
     <div id="overlay">
       <span id="menu-circle"></span>
       <a id="home" class="mobile-link" href="/">Home</a>
-      <a class="mobile-link  is-open" href="/downloads">Downloads</a>
+      <a class="mobile-link is-open" href="/downloads">Downloads</a>
       <a class="mobile-link" href="/install">Install</a>
       <a class="mobile-link" href="/faq">FAQ</a>
+      <a class="mobile-link" href="https://bluebubbles.app/web">Web App</a>
+      <a class="mobile-link" href="/donate">Donate</a>
     </div>
 
     <header class="navbar">
@@ -82,6 +84,7 @@
         <a href="/downloads" class="is-open">Downloads</a>
         <a href="/install">Install</a>
         <a href="/faq">FAQ</a>
+        <a href="https://bluebubbles.app/web">Web App</a>
         <div onclick="addIsActive()" id="hamburger" class="hamburger hamburger--collapse" type="button">
           <span class="hamburger-box">
             <span class="hamburger-inner"></span>
@@ -91,20 +94,22 @@
     </header>
 
     <div id="linuxInstallContainer">
-      <h1>Linux Downloads</h1>
+      <h1>Windows / Linux Downloads</h1>
       
       <div class="installRowContainer">
         <h2>Pre-compiled Binaries</h2>
-        <a href="https://github.com/BlueBubblesApp/BlueBubbles-Desktop-App/releases">Our Github Releases</a>
+        <a href="https://github.com/BlueBubblesApp/BlueBubbles-App/releases">Github Releases (coming soon!)</a>
+        <a href="https://discord.gg/6nrGRHT">Discord (alpha builds)</a>
       </div>
 
       <div class="installRowContainer">
         <h2>AUR</h2>
-        <div class="codeContainer" onclick="textToClipboard('yay -S bluebubbles-desktop-app')">
+        <h3>Coming soon!</h3>
+        <!-- <div class="codeContainer" onclick="textToClipboard('yay -S bluebubbles-desktop-app')">
           <p class="dollarSign">$</p>
           <p class="codeExample">yay -S bluebubbles-desktop-app</p>
           <p class="copyButton">Click to copy</p>
-        </div>
+        </div> -->
       </div>
       <!-- <div class="installRowContainer">
             <h2>Snap</h2>
@@ -117,7 +122,8 @@
       <div id="compileFromSourceContainer">
 
         <h2>Compile from source</h2>
-        <h3>1.) Clone the git repository</h3>
+        <h3>Coming soon!</h3>
+        <!-- <h3>1.) Clone the git repository</h3>
         <div class="codeContainer"
           onclick="textToClipboard('git clone https:\/\/github.com/BlueBubblesApp/BlueBubbles-Desktop-App.git')"
         >
@@ -157,7 +163,7 @@
           <p class="copyButton">Click to copy</p>
         </div>
 
-        <h3>5.) The compiled binary will be located in the <code>release</code>folder</h3>
+        <h3>5.) The compiled binary will be located in the <code>release</code>folder</h3> -->
       </div>
     </div>
 
@@ -181,6 +187,7 @@
         <a href="/downloads">Downloads</a> <span>|</span>
         <a href="/install">Install</a> <span>|</span>
         <a href="/faq">FAQ</a> <span>|</span>
+        <a href="https://bluebubbles.app/web">Web App</a> <span>|</span>
         <a href="/donate">Donate</a>
       </div>
       <p id="copyright">BlueBubbles</p>

@@ -59,24 +59,27 @@
             <a class="mobile-link" href="/downloads">Downloads</a>
             <a class="mobile-link" href="/install">Install</a>
             <a class="mobile-link is-open" href="/faq">FAQ</a>
-        </div>
-
-        <header class="navbar">
+            <a class="mobile-link" href="https://bluebubbles.app/web">Web App</a>
+            <a class="mobile-link" href="/donate">Donate</a>
+          </div>
+      
+          <header class="navbar">
             <nav class="leftnav">
-                <a id="logo" alt="BlueBubbles Logo" href="/">BlueBubbles</a>
+              <a id="logo" alt="BlueBubbles Logo" href="/">BlueBubbles</a>
             </nav>
             <nav class="rightnav">
-                <a href="/">Home</a>
-                <a href="/downloads">Downloads</a>
-                <a href="/install">Install</a>
-                <a href="/faq" class="is-open">FAQ</a>
-                <div onclick="addIsActive()" id="hamburger" class="hamburger hamburger--collapse" type="button">
-                    <span class="hamburger-box">
-                        <span class="hamburger-inner"></span>
-                    </span>
-                </div>
+              <a href="/">Home</a>
+              <a href="/downloads">Downloads</a>
+              <a href="/install">Install</a>
+              <a href="/faq" class="is-open">FAQ</a>
+              <a href="https://bluebubbles.app/web">Web App</a>
+              <div onclick="addIsActive()" id="hamburger" class="hamburger hamburger--collapse" type="button">
+                <span class="hamburger-box">
+                  <span class="hamburger-inner"></span>
+                </span>
+              </div>
             </nav>
-        </header>
+          </header>
 
         <div id="mainFAQContainer">
             <h1>FAQ</h1>
@@ -87,7 +90,7 @@
                 </div>
                 <div class="panel">
                     <p>Yes! You will need to set up a macOS VM on either Windows or Linux. We have a Windows guide
-                        pinned on our [subreddit](https://www.reddit.com/r/BlueBubbles/), and we can give you additional
+                        pinned on our <a href="https://www.reddit.com/r/BlueBubbles/" style="color: #147efb; text-decoration: none;">subreddit</a>, and we can give you additional
                             assistance with Linux and iMessage activation in our Discord.</p>
                     <p>Disclaimer: This is meant to be done on Apple Hardware</p>
                 </div>
@@ -97,14 +100,14 @@
                 </div>
                 <div class="panel">
                     <p>No, we utilize Ngrok to create a secure tunnel between your server and your client. You can
-                        optionally disable this to use your own local IP or dynamic DNS.</p>
+                        optionally switch to LocalTunnel, which is another tunneling service, or disable this entirely to use your own local IP or dynamic DNS.</p>
                 </div>
 
                 <div class="accordion">
                     <p>Q: Is my data encrypted?</p>
                 </div>
                 <div class="panel">
-                    <p>Yes, all connections are done over HTTPS/WSS and utilizes TLS encryption by default (see: Ngrok)
+                    <p>Yes, all connections are done over HTTPS/WSS and utilizes TLS encryption by default
                     </p>
                 </div>
 
@@ -121,21 +124,24 @@
                     <p>Q: How is BlueBubbles different than AirMessage?</p>
                 </div>
                 <div class="panel">
-                    <p>iOS inspired UI/UX, Custom themeing, Port-forwarding not required, Entire ecosystem is
-                        open-source,
-                        Community-driven with open issues and feature requests, Dedicated cross platform apps (Desktop &
-                        Android), Decreased battery usage on Android due to no background service, and All self-hosted
-                        (no
-                        need to rely on owner's servers/maintenance).</p>
+                    <ul>
+                        <li><p>Dedicated iOS and Android style themes so you can choose your look</p></li>
+                        <li><p>Highly community driven, with contributions and suggestions welcomed!</p></li>
+                        <li><p>Dedicated Desktop apps for Windows and Linux</p></li>
+                        <li><p>Totally self-hosted, so you don't have to rely on developer servers</p></li>
+                        <li><p>Tons of customization & settings to personalize your experience</p></li>
+                        <li><p>Private API features for that extra bit of functionality</p></li>
+
+                    </ul>
                 </div>
 
                 <div class="accordion">
                     <p>Q: Why do I need to sign up for Google's Firebase Service? </p>
                 </div>
                 <div class="panel">
-                    <p>BlueBubbles does not require an open socket connection at all times (to reduce battery usage). We
+                    <p>BlueBubbles does not require an open socket connection at all times, to reduce battery usage. We
                         use
-                        Google FCM to still be able to send/receive alerts even when the socket is closed</p>
+                        Google FCM to still be able to send notifications even when the app is closed.</p>
                 </div>
 
                 <div class="accordion">
@@ -146,23 +152,13 @@
                         Access.
                     </p>
                 </div>
-
-                <div class="accordion">
-                    <p>Q: Why does the MacOS server require Accessibility Access?</p>
-                </div>
-                <div class="panel">
-                    <p>In order to execute actions such as renaming a group chat or adding/removing a participant from a
-                        group. Apple does not expose APIs to do this natively, so accessibility is used.</p>
-                </div>
                 
                 <div class="accordion">
                     <p>Q: How do I keep my Mac awake, even when I close my laptop lid?</p>
                 </div>
                 <div class="panel">
                     <p>If you are using a Mac Mini or Mac Desktop, where there is no lid, you should be able to use the built-in settings option to "Keep macOS Awake".
-                        If you are running macOS on a laptop, you can use an App called Amphetamine to keep your Mac awake. A link is below:</p>
-                    <p>
-                        <a href="https://apps.apple.com/us/app/amphetamine/id937984704" target="_blank">https://apps.apple.com/us/app/amphetamine/id937984704</a> 
+                        If you are running macOS on a laptop, you can use an app called <a href="https://apps.apple.com/us/app/amphetamine/id937984704" style="color: #147efb; text-decoration: none;">Amphetamine</a> to keep your Mac awake.</p>
                     <p>
                 </div>
 
@@ -170,41 +166,30 @@
                     <p>Q: Can I share my QR Code?</p>
                 </div>
                 <div class="panel">
-                    <p>No, your QR code should be private. If it gets leaked, you will need to generate new client
-                        secret
-                        credentials via Google's Firebase Console.</p>
+                    <p>No, your QR code should be private because it contains your server password and Firebase credentials. If it gets leaked, you should redo your Firebase setup and change your server password to avoid compromising your messages.</p>
                 </div>
 
                 <div class="accordion">
-                    <p>Q Can we react to messages?</p>
+                    <p>Q: Can we react to messages, send effects, send replies, etc?</p>
                 </div>
                 <div class="panel">
-                    <p>Yes, we create "nightly" builds which contain Private API features such as reacting to messages, sending read receipts, showing typing indicators and more!
-                        Though, by default, the stable/official releases do not contain the Private API features.</p>
-                </div>
-
-                <div class="accordion">
-                    <p>Q: Can we see typing indicators?</p>
-                </div>
-                <div class="panel">
-                    <p>Yes, we create "nightly" builds which contain Private API features such as reacting to messages, sending read receipts, showing typing indicators and more!
-                        Though, by default, the stable/official releases do not contain the Private API features.</p>
+                    <p>Yes, we have extra functionality in the form of our Private API bundle. This does require some extra configurations; instructions can be found <a href="https://github.com/BlueBubblesApp/bluebubbles-server/wiki/Using-Private-API-Features" style="color: #147efb; text-decoration: none;">here</a>.</p>
                 </div>
 
                 <div class="accordion">
                     <p>Q: Does BlueBubbles support SMS?</p>
                 </div>
                 <div class="panel">
-                    <p>Yes, the Desktop App currently supports SMS, and we are working to implement a similar solution for Android</p>
+                    <p>Not at this time, though we hope to add this feature in the near future!</p>
                 </div>
                 
                 <div class="accordion">
-                    <p>Q: Every image I send or receive shows up as `Unknown group event` on my Android device, am I doing something wrong?</p>
+                    <p>Q: Every image I send or receive shows up as 'Unknown group event' on my device, am I doing something wrong?</p>
                 </div>
                 <div class="panel">
-                    <p>No, you are not doing anything wrong! This is actually a bug/issue with macOS itself. More specifically, a known bug with macOS Mojave 10.14 that still has not
-                        been patched by Apple. In order to fix the issue, please follow these steps:</p>
-                    <p><strong>WARNING: </strong>This process will erase all your Mac's Messages history! Also, I have no idea how long this fix will stay effective.</p>
+                    <p>No, you are not doing anything wrong! This is actually a bug with macOS Mojave 10.14 that has not
+                        been patched by Apple (this bug may be present on other macOS versions as well). Follow these steps to potentially fix the issue:</p>
+                    <p><strong>WARNING: </strong>This process will erase all your Mac's Messages history!</p>
                     <p>
                         1. Sign out from iMessage from your Mac.<br />
                         2. Finder -> Go (top bar) -> Library (Hold "Option" key for this to appear)<br />
@@ -222,15 +207,15 @@
                     <p>Q: I'm not getting notifications on my lock screen, but they appear when I unlock my phone. What am I doing wrong?</p>
                 </div>
                 <div class="panel">
-                    <p>The issue is with the Android option, "Skip lock screen" after face unlock. This needs to be turned off for the notifications to show</p>
+                    <p>The issue is with the Android option, "Skip lock screen" after face unlock. This needs to be turned off for the notifications to show.</p>
                 </div>
                 
                 <div class="accordion">
-                    <p>Q: How can I make sure my mac starts up after a power failure?</p>
+                    <p>Q: How can I make sure my Mac starts up after a power failure?</p>
                 </div>
                 <div class="panel">
-                    <p>In System Preferences, you must turn on the Automatically turn back on after a power failure option in order for your mac to reboot after a power failure.
-                        In addition, turn on the "Startup with macOS" option in the BlueBubbles settings to make sure it runs when you login</p>
+                    <p>In System Preferences, you must turn on the "Automatically turn back on after a power failure" option in order for your Mac to reboot after a power failure.
+                        In addition, turn on the "Startup with macOS" option in the BlueBubbles settings to make sure it runs when you login.</p>
                 </div>
 
             </div>
@@ -260,8 +245,9 @@
                 <a href="/downloads">Downloads</a> <span>|</span>
                 <a href="/install">Install</a> <span>|</span>
                 <a href="/faq">FAQ</a> <span>|</span>
+                <a href="https://bluebubbles.app/web">Web App</a> <span>|</span>
                 <a href="/donate">Donate</a>
-            </div>
+              </div>
             <p id="copyright">BlueBubbles</p>
         </div>
 

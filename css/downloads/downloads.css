@@ -6,6 +6,14 @@
     align-items: center;
 }
 
+#downloadsContainer2 {
+    flex-grow: 1;
+    width: 75%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 #clientsContainer {
     display: flex;
     flex-direction: column;

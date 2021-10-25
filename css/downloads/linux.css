@@ -55,6 +55,15 @@
     margin-bottom: 5px;
 }
 
+.installRowContainer>h3 {
+    width: 100%;
+    margin: 0;
+    font-family: 'SF UI Display Light';
+    font-size: 1rem;
+    font-style: normal;
+    margin: 3px 0 5px 15px;
+}
+
 .codeContainer {
     height: 22px;
     width: 100%;
