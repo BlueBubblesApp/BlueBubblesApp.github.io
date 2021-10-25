@@ -272,6 +272,8 @@
       <a class="mobile-link" href="/downloads">Downloads</a>
       <a class="mobile-link is-open" href="/install">Install</a>
       <a class="mobile-link" href="/faq">FAQ</a>
+      <a class="mobile-link" href="https://bluebubbles.app/web">Web App</a>
+      <a class="mobile-link" href="/donate">Donate</a>
     </div>
 
     <header class="navbar">
@@ -283,6 +285,7 @@
         <a href="/downloads">Downloads</a>
         <a href="/install" class="is-open">Install</a>
         <a href="/faq">FAQ</a>
+        <a href="https://bluebubbles.app/web">Web App</a>
         <div onclick="addIsActive()" id="hamburger" class="hamburger hamburger--collapse" type="button">
           <span class="hamburger-box">
             <span class="hamburger-inner"></span>
@@ -294,36 +297,30 @@
     <canvas id="confetti-canvas" style="position:absolute;display:block;z-index:999999;pointer-events:none"></canvas>
 
     <div id="serverInstallContainer">
-      <br />
-      <div class="referenceContainer">
-        <div>
-          <h1 id="youtubeInstallationTitle">Video Guide</h1>
-          <p class="installationDesc">If you would like to follow a video demonstration, the Youtuber, HowToMen, has
-            made a fantastic video detailing the installation process</p>
-          <iframe src="https://www.youtube-nocookie.com/embed/LDRuWXGOu0U?start=190" frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen>
-          </iframe>
-        </div>
-        <div>
-          <h1 id="youtubeInstallationTitle">References</h1>
-          <ul>
-            <li class="installationDesc"><b>Server Wiki: </b><a
-                href="https://github.com/BlueBubblesApp/BlueBubbles-Server/wiki">GitHub - BlueBubbles Server Wiki</a>
-            </li>
-            <li class="installationDesc"><b>Android Wiki: </b><a
-                href="https://github.com/BlueBubblesApp/BlueBubbles-Android-App/wiki">GitHub - BlueBubbles Android
-                Wiki</a></li>
-            <li class="installationDesc"><b>Desktop Wiki: </b><a
-                href="https://github.com/BlueBubblesApp/BlueBubbles-Desktop-App/wiki">GitHub - BlueBubbles Desktop
-                Wiki</a></li>
-            <li class="installationDesc"><b>Private API Features: </b><a
-                href="https://github.com/BlueBubblesApp/BlueBubbles-Server/wiki/Using-Private-API-Features">How to get
-                Reactions & Typing Indicators</a></li>
-          </ul>
-        </div>
+      <br/>
+      <div>
+        <h1 id="youtubeInstallationTitle">Video Guide</h1>
+        <p class="installationDesc">If you would like to follow a video demonstration, the Youtuber, HowToMen, has
+          made a fantastic video detailing the installation process. It is slightly outdated, so if you have any issues with your install join our Discord and we can offer personalized help!</p>
+        <iframe src="https://www.youtube-nocookie.com/embed/LDRuWXGOu0U?start=190" frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen>
+        </iframe>
+        <br/>
+        <br/>
+        <h1 id="youtubeInstallationTitle">References</h1>
       </div>
-      <br />
+      <div>
+        <ul>
+          <li class="installationDesc"><a
+              href="https://github.com/BlueBubblesApp/BlueBubbles-Server/wiki" style="color: #147efb; text-decoration: none;">BlueBubbles Server Wiki</a>
+          </li>
+          <li class="installationDesc"><a
+              href="https://github.com/BlueBubblesApp/BlueBubbles-App/wiki" style="color: #147efb; text-decoration: none;">BlueBubbles Android / Desktop / Web Wiki</a></li>
+          <li class="installationDesc"><a
+              href="https://github.com/BlueBubblesApp/BlueBubbles-Server/wiki/Using-Private-API-Features" style="color: #147efb; text-decoration: none;">Private API setup instructions</a> (for sending reactions / replies / effects, viewing typing indicators, etc)</li>
+        </ul>
+      </div>
       <h1 id="serverInstallTitle">Server Installation</h1>
       <h1 id="stepTitle">Step <span id="stepNumber">1</span><span style="color:#a4a4a4">/<span
             id="maxSteps">14</span></span></h1>
@@ -339,9 +336,10 @@
             <div class="stepTextContainer">
               <h2 class="stepText">1.) On the device you wish to use as
                 your server,
-                browse to <a href="/downloads" target="_blank">our downloads page</a>
-                and select the MacOS
-                Server download option.</h2>
+                go to our server GitHub <a href="https://github.com/BlueBubblesApp/BlueBubbles-Server/releases" target="_blank">downloads page. </a></h2>
+            </div>
+            <div class="stepTextContainer">
+              <h2 class="stepText">Click the "BlueBubbles-x.x.x.dmg" file to download it.</h2>
             </div>
           </div>
 
@@ -370,8 +368,10 @@
                   src="/assets/system-preferences.png"></img>System
                 Preferences app, select <img class="inTextIcon" alt="security-and-privacy-icon"
                   src="/assets/security-and-privacy.png"></img>Security and Privacy, then give BlueBubbles full disk
-                access
-                as well as full accessibility.</h2>
+                access.</h2>
+            </div>
+            <div class="stepTextContainer">
+              <h2 class="stepText">Accessibility access is not required but might be needed for certain functions.</h2>
             </div>
           </div>
 
@@ -382,14 +382,18 @@
             </video>
           </div> -->
             <div class="stepTextContainer">
-              <h2 class="stepText">4.) Enter a password for your server and keep NGROK enabled unless you plan on
-                forwarding your local IP or dynamic DNS.</h2>
-              <p>
-                <strong>NOTE: If you plan on using Ngrok, please register for a <i>free</i> account on their website: <a
-                    href="https://ngrok.io">ngrok.io</a>.
-                  You will then need to use your Auth Token with the Token input in the BlueBubbles server
-                  settings</strong>
-              </p>
+              <h2 class="stepText">4.) Enter a strong password for your server. If you plan on port forwarding, you can change the proxy service dropdown to Dynamic DNS.</h2>
+            </div>
+            <div class="stepTextContainer">
+              <h2 class="stepText">NOTE: If you plan on using Ngrok, please register for a <i>free</i> account on their <a
+                    href="https://ngrok.com">website</a>.</h2>
+            </div>
+            <div class="stepTextContainer">
+              <h2 class="stepText">Once you have registered, go to <a
+                    href="https://dashboard.ngrok.com/get-started/your-authtoken">"Your Authtoken"</a>.</h2>
+            </div>
+            <div class="stepTextContainer">
+              <h2 class="stepText">Paste this string into the auth token field found in the BlueBubbles server settings. This helps prevent connection issues.</h2>
             </div>
           </div>
 
@@ -504,9 +508,7 @@
           </div> -->
             <div class="stepTextContainer">
               <h2 class="stepText">13.) Download any of our <a href="/downloads/" target="_blank">client
-                  applications</a>, and scan your
-                server's QR code (screenshot to clipboard on Windows using Win + Shift + S) to start syncing your
-                messages.</h2>
+                  applications</a>, and scan the QR code or enter the URL and password to start syncing!</h2>
             </div>
           </div>
 
@@ -558,6 +560,7 @@
         <a href="/downloads">Downloads</a> <span>|</span>
         <a href="/install">Install</a> <span>|</span>
         <a href="/faq">FAQ</a> <span>|</span>
+        <a href="https://bluebubbles.app/web">Web App</a> <span>|</span>
         <a href="/donate">Donate</a>
       </div>
       <p id="copyright">BlueBubbles</p>
