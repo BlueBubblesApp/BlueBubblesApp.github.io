@@ -183,10 +183,6 @@ input[type=number] {
 }
 
 @media (max-width: 600px) {
-    #donationContainer {
-        flex-direction: column-reverse;
-    }
-
     #paypalButtonsContainer {
         width: 75%;
     }
