@@ -213,20 +213,6 @@
     var makeItRain = document.getElementById("makeItRain");
 
     function initPayPalButton() {
-        var description = document.querySelector('#smart-button-container #description');
-        var amount = document.querySelector('#smart-button-container #amount');
-        var descriptionError = document.querySelector('#smart-button-container #descriptionError');
-        var priceError = document.querySelector('#smart-button-container #priceLabelError');
-        var invoiceid = document.querySelector('#smart-button-container #invoiceid');
-        var invoiceidError = document.querySelector('#smart-button-container #invoiceidError');
-        var invoiceidDiv = document.querySelector('#smart-button-container #invoiceidDiv');
-
-        var elArr = [description, amount];
-
-        if (invoiceidDiv.firstChild.innerHTML.length > 1) {
-          invoiceidDiv.style.display = "block";
-        }
-
         function validate(event) {
           return event.value.length > 0;
         }
