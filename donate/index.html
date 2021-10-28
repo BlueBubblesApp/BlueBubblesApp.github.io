@@ -278,10 +278,17 @@
               thankYouContainer.style.display = "flex";
             });
           },
+            
+          onCancel: function (data, actions) {
+            loadingContainer.style.display = "none";
+            donationContainer.style.display = "flex";
+            console.log("Canceled!");
+          },
 
           onError: function (err) {
             loadingContainer.style.display = "none";
             donationContainer.style.display = "flex";
+            console.log("Error: " + err);
           }
         }).render('#paypalButtonsContainer');
   }
