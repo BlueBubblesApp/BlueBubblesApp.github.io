@@ -79,8 +79,7 @@
 
 #paypalButtonsContainer {
     min-height: 20vh;
-    width: 30vw;
-    margin-right: 10px;
+    width: 20vw;
     z-index: 0;
 }
 
