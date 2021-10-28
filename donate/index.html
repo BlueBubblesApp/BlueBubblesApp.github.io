@@ -222,23 +222,29 @@
           },
 
           createOrder: function (data, actions) {
-            console.log("CREATING");
             donationContainer.style.display = "none";
             loadingContainer.style.display = "flex";
  
             return actions.order.create({
               purchase_units: [{
-                description: "BlueBubbles",
+                items: [
+                    {
+                        name: "BlueBubbles Donation",
+                        unit_amount: { currency_code: "USD", value: donationAmount },
+                        quantity: "1",
+                        category: "DONATION"
+                    }
+                ],
                 amount: {
                   currency_code: "USD",
-                  value: donationAmount
+                  value: donationAmount,
+                  breakdown: { item_total: { currency_code: "USD", value: donationAmount } },
                 }
               }]
             });
           },
 
           onApprove: function (data, actions) {
-            console.log("APPROVED");
             return actions.order.capture().then(function (orderData) {
               makeItRain.style.display = "block";
               makeItRain.currentTime = 0;
