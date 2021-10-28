@@ -213,42 +213,37 @@
     var makeItRain = document.getElementById("makeItRain");
 
     function initPayPalButton() {
-        function validate(event) {
-          return event.value.length > 0;
-        }
-
         paypal.Buttons({
           style: {
             color: 'blue',
             shape: 'pill',
             label: 'donate',
-            layout: 'vertical',
-
+            layout: 'vertical'
           },
 
           onInit: function (data, actions) {
+            console.log("INIT");
             actions.disable();
           },
 
           createOrder: function (data, actions) {
+            console.log("CREATING");
             donationContainer.style.display = "none";
             loadingContainer.style.display = "flex";
  
             return actions.order.create({
-              application_context: {
-                brand_name: "BlueBubbles",
-                shipping_preference: "NO_SHIPPING"
-              },
               purchase_units: [{
+                description: "BlueBubbles",
                 amount: {
                   currency_code: "USD",
-                  value: `${donationAmount}`
+                  value: donationAmount
                 }
               }]
             });
           },
 
           onApprove: function (data, actions) {
+            console.log("APPROVED");
             return actions.order.capture().then(function (orderData) {
               makeItRain.style.display = "block";
               makeItRain.currentTime = 0;
