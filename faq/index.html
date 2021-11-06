@@ -13,6 +13,7 @@
     <link rel="stylesheet" type="text/css" href="/css/faq.css" />
     <link rel="stylesheet" type="text/css" href="/css/base.css" />
     <link rel="stylesheet" type="text/css" href="/css/hamburgers.css" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
     <!-- Favicon Link -->
     <link rel="icon" href="/assets/icons/favicon.ico" type="image/gif" sizes="48x48" />
@@ -93,6 +94,132 @@
                         pinned on our <a href="https://www.reddit.com/r/BlueBubbles/" style="color: #147efb; text-decoration: none;">subreddit</a>, and we can give you additional
                             assistance with Linux and iMessage activation in our Discord.</p>
                     <p>Disclaimer: This is meant to be done on Apple Hardware</p>
+                </div>
+
+                <div class="accordion">
+                    <p>Q: What is the best macOS device and version to use?</p>
+                </div>
+                <div class="panel">
+                    <p>See the following compatibility table for what features are and aren't supported on the various macOS devices and versions. We've highighted the biggest issues / downsides with a red flag.</p>
+                    <table class="styled-table">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>El Capitan - Catalina</th>
+                                <th>Big Sur (Intel)</th>
+                                <th>Big Sur (Apple Silicon)</th>
+                                <th>Monterey (Intel)</th>
+                                <th>Monterey (Apple Silicon)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Sending / Receiving Messages</td>
+                                <td>✓</td>
+                                <td>✓</td>
+                                <td>✓</td>
+                                <td>✓</td>
+                                <td>✓</td>
+                            </tr>
+                            <tr>
+                                <td>Sending Attachments</td>
+                                <td>✓</td>
+                                <td>✓</td>
+                                <td>✓</td>
+                                <td><i class="material-icons" style="font-size:24px;color:red">flag</i></td>
+                                <td><i class="material-icons" style="font-size:24px;color:red">flag</i></td>
+                            </tr>
+                            <tr>
+                                <td>Receiving Attachments</td>
+                                <td>✓</td>
+                                <td>✓</td>
+                                <td>✓</td>
+                                <td>✓</td>
+                                <td>✓</td>
+                            </tr>
+                            <tr>
+                                <td>Receiving Tapbacks & Stickers</td>
+                                <td>✓</td>
+                                <td>✓</td>
+                                <td>✓</td>
+                                <td>✓</td>
+                                <td>✓</td>
+                            </tr>
+                            <tr>
+                                <td>Receiving Delivered / Read Receipts</td>
+                                <td>✓</td>
+                                <td>✓</td>
+                                <td>✓</td>
+                                <td>✓</td>
+                                <td>✓</td>
+                            </tr>
+                            <tr>
+                                <td>Creating DMs</td>
+                                <td>✓</td>
+                                <td>✓</td>
+                                <td>✓</td>
+                                <td>✓</td>
+                                <td>✓</td>
+                            </tr>
+                            <tr>
+                                <td>Creating Group Chats</td>
+                                <td>✓</td>
+                                <td><i class="material-icons" style="font-size:24px;color:red">flag</i></td>
+                                <td><i class="material-icons" style="font-size:24px;color:red">flag</i></td>
+                                <td><i class="material-icons" style="font-size:24px;color:red">flag</i></td>
+                                <td><i class="material-icons" style="font-size:24px;color:red">flag</i></td>
+                            </tr>
+                            <tr>
+                                <td>Sending / Receiving Typing Indicators *</td>
+                                <td>✓</td>
+                                <td>✓</td>
+                                <td></td>
+                                <td>✓</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>Sending Tapbacks, Effects, and Subjects *</td>
+                                <td>✓</td>
+                                <td>✓</td>
+                                <td></td>
+                                <td>✓</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>Sending / Receiving Replies *</td>
+                                <td></td>
+                                <td>✓</td>
+                                <td></td>
+                                <td>✓</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>Marking Chats Read on the Server Mac *</td>
+                                <td>✓</td>
+                                <td>✓</td>
+                                <td></td>
+                                <td>✓</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>Renaming & Adding / Removing Participants from Group Chats *</td>
+                                <td>✓</td>
+                                <td>✓</td>
+                                <td></td>
+                                <td>✓</td>
+                                <td></td>
+                            </tr>
+                            <!-- and so on... -->
+                        </tbody>
+                    </table>
+                    <p>* These require the Private API, which involves disabling System Integrity Protection on your server Mac. You can find more details <a href="https://github.com/BlueBubblesApp/bluebubbles-server/wiki/Using-Private-API-Features" style="color: #147efb; text-decoration: none;">here</a>.</p>
+                    <p>Still unsure which version is right for you? Here's a short summary:</p>
+                    <ul>
+                        <li><p><b>Stay away from Monterey! No attachment sending is a large drawback.</b></p></li>
+                        <li><p>Want Private API features? Don't go for Apple Silicon right now. We hope to support these machines in the near future though!</p></li>
+                        <li><p>Don't care about creating group chats? Go for Big Sur (Intel), since it supports every other feature.</p></li>
+                        <li><p>Need to save some cash? Go for any OS X machine. You'll only miss out on seeing & sending replies.</p></li>
+                    </ul>
                 </div>
                 
                 <div class="accordion">
