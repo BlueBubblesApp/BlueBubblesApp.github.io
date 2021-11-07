@@ -156,6 +156,18 @@ tr:last-of-type td:last-of-type {
   border-bottom-right-radius: 10px;
 }
 
+h2 {
+    font-family: 'SF UI Display Bold';
+    font-size: 1.4rem;
+    font-style: normal;
+    margin: 0;
+}
+
+ol, li {
+    font-family: 'SF UI Display Light';
+    font-size: 15px;
+}
+
 @media (max-width: 800px) {
     #accordionContainer {
         width: 85%;
