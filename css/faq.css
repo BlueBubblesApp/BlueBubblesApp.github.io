@@ -59,8 +59,30 @@
     margin: 13px 0;
 }
 
+.accordion:hover p {
+    color: white;
+    text-decoration: none;
+    font-family: 'SF UI Display Bold';
+    font-style: normal;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-stroke-width: 0px;
+    -moz-osx-font-smoothing: grayscale;
+    margin: 13px 0;
+}
+
 .active {
     background-color: #147efb;
+}
+
+.active p {
+    color: white;
+    text-decoration: none;
+    font-family: 'SF UI Display Bold';
+    font-style: normal;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-stroke-width: 0px;
+    -moz-osx-font-smoothing: grayscale;
+    margin: 13px 0;
 }
 
 .panel {
@@ -84,6 +106,66 @@
     -webkit-font-smoothing: antialiased;
     -webkit-text-stroke-width: 0px;
     -moz-osx-font-smoothing: grayscale;
+}
+
+.styled-table {
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    min-width: 400px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    border-radius: 10px;
+    border-style: hidden;
+}
+
+.styled-table thead tr {
+    background-color: #147efb;
+    color: #ffffff;
+    text-align: left;
+}
+
+.styled-table th,
+.styled-table td {
+    padding: 12px 15px;
+    text-align: center;
+}
+
+.styled-table tbody tr {
+    border-bottom: 1px solid #dddddd;
+}
+
+.styled-table tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+}
+
+.styled-table tbody tr:last-of-type {
+    border-bottom: 2px solid #147efb;
+}
+
+th:first-of-type {
+  border-top-left-radius: 10px;
+}
+th:last-of-type {
+  border-top-right-radius: 10px;
+}
+tr:last-of-type td:first-of-type {
+  border-bottom-left-radius: 10px;
+}
+tr:last-of-type td:last-of-type {
+  border-bottom-right-radius: 10px;
+}
+
+h2 {
+    font-family: 'SF UI Display Bold';
+    font-size: 1.4rem;
+    font-style: normal;
+    margin: 0;
+}
+
+ol, li {
+    font-family: 'SF UI Display Light';
+    font-size: 15px;
 }
 
 @media (max-width: 800px) {

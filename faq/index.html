@@ -84,6 +84,8 @@
         <div id="mainFAQContainer">
             <h1>FAQ</h1>
             <div id="accordionContainer">
+
+                <h2 style="width: 100%; padding-bottom: 5px; padding-top: 15px;">Setup</h2>
                 
                 <div class="accordion">
                     <p>Q: Can I do this without a Mac?</p>
@@ -94,45 +96,13 @@
                             assistance with Linux and iMessage activation in our Discord.</p>
                     <p>Disclaimer: This is meant to be done on Apple Hardware</p>
                 </div>
-                
+
                 <div class="accordion">
                     <p>Q: Will I need port-forwarding for this to work?</p>
                 </div>
                 <div class="panel">
                     <p>No, we utilize Ngrok to create a secure tunnel between your server and your client. You can
                         optionally switch to LocalTunnel, which is another tunneling service, or disable this entirely to use your own local IP or dynamic DNS.</p>
-                </div>
-
-                <div class="accordion">
-                    <p>Q: Is my data encrypted?</p>
-                </div>
-                <div class="panel">
-                    <p>Yes, all connections are done over HTTPS/WSS and utilizes TLS encryption by default
-                    </p>
-                </div>
-
-                <div class="accordion">
-                    <p>Q: How can I support the developers?</p>
-                </div>
-                <div class="panel">
-                    <p>We don't charge anything for the use of our applications or code, however you can support us by
-                        donating on our
-                        <a href="/donate" style="color: #147efb; text-decoration: none;">donations page</a>.</p>
-                </div>
-
-                <div class="accordion">
-                    <p>Q: How is BlueBubbles different than AirMessage?</p>
-                </div>
-                <div class="panel">
-                    <ul>
-                        <li><p>Dedicated iOS and Android style themes so you can choose your look</p></li>
-                        <li><p>Highly community driven, with contributions and suggestions welcomed!</p></li>
-                        <li><p>Dedicated Desktop apps for Windows and Linux</p></li>
-                        <li><p>Totally self-hosted, so you don't have to rely on developer servers</p></li>
-                        <li><p>Tons of customization & settings to personalize your experience</p></li>
-                        <li><p>Private API features for that extra bit of functionality</p></li>
-
-                    </ul>
                 </div>
 
                 <div class="accordion">
@@ -152,21 +122,161 @@
                         Access.
                     </p>
                 </div>
-                
+
+                <h2 style="width: 100%; padding-bottom: 5px; padding-top: 15px;">Features</h2>
+
                 <div class="accordion">
-                    <p>Q: How do I keep my Mac awake, even when I close my laptop lid?</p>
+                    <p>Q: What is the best macOS device and version to use?</p>
                 </div>
                 <div class="panel">
-                    <p>If you are using a Mac Mini or Mac Desktop, where there is no lid, you should be able to use the built-in settings option to "Keep macOS Awake".
-                        If you are running macOS on a laptop, you can use an app called <a href="https://apps.apple.com/us/app/amphetamine/id937984704" style="color: #147efb; text-decoration: none;">Amphetamine</a> to keep your Mac awake.</p>
-                    <p>
+                    <p>See the following compatibility table for what features are and aren't supported on the various macOS devices and versions:</p>
+                    <table class="styled-table">
+                        <thead>
+                            <tr>
+                                <th>BlueBubbles Features</th>
+                                <th>El Capitan - Catalina</th>
+                                <th>Big Sur (Intel)</th>
+                                <th>Big Sur (Apple Silicon)</th>
+                                <th>Monterey (Intel)</th>
+                                <th>Monterey (Apple Silicon)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Sending / Receiving Messages</td>
+                                <td>✓</td>
+                                <td>✓</td>
+                                <td>✓</td>
+                                <td>✓</td>
+                                <td>✓</td>
+                            </tr>
+                            <tr>
+                                <td>Sending Attachments</td>
+                                <td>✓</td>
+                                <td>✓</td>
+                                <td>✓</td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>Receiving Attachments</td>
+                                <td>✓</td>
+                                <td>✓</td>
+                                <td>✓</td>
+                                <td>✓</td>
+                                <td>✓</td>
+                            </tr>
+                            <tr>
+                                <td>Receiving Tapbacks & Stickers</td>
+                                <td>✓</td>
+                                <td>✓</td>
+                                <td>✓</td>
+                                <td>✓</td>
+                                <td>✓</td>
+                            </tr>
+                            <tr>
+                                <td>Receiving Delivered / Read Receipts</td>
+                                <td>✓</td>
+                                <td>✓</td>
+                                <td>✓</td>
+                                <td>✓</td>
+                                <td>✓</td>
+                            </tr>
+                            <tr>
+                                <td>Creating DMs</td>
+                                <td>✓</td>
+                                <td>✓</td>
+                                <td>✓</td>
+                                <td>✓</td>
+                                <td>✓</td>
+                            </tr>
+                            <tr>
+                                <td>Creating Group Chats</td>
+                                <td>✓</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p>The following table details compatibility for the Private API features. You can find more details about how to use the Private API <a href="https://github.com/BlueBubblesApp/bluebubbles-server/wiki/Using-Private-API-Features" style="color: #147efb; text-decoration: none;">here</a>.</p>
+                    <table class="styled-table">
+                        <thead>
+                            <tr>
+                                <th>Private API Features</th>
+                                <th>El Capitan - Catalina</th>
+                                <th>Big Sur (Intel)</th>
+                                <th>Big Sur (Apple Silicon)</th>
+                                <th>Monterey (Intel)</th>
+                                <th>Monterey (Apple Silicon)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Sending / Receiving Typing Indicators</td>
+                                <td>✓</td>
+                                <td>✓</td>
+                                <td></td>
+                                <td>✓</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>Sending Tapbacks, Effects, and Subjects</td>
+                                <td>✓</td>
+                                <td>✓</td>
+                                <td></td>
+                                <td>✓</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>Sending / Receiving Replies</td>
+                                <td></td>
+                                <td>✓</td>
+                                <td></td>
+                                <td>✓</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>Marking Chats Read on the Server Mac</td>
+                                <td>✓</td>
+                                <td>✓</td>
+                                <td></td>
+                                <td>✓</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>Renaming & Adding / Removing Participants from Group Chats</td>
+                                <td>✓</td>
+                                <td>✓</td>
+                                <td></td>
+                                <td>✓</td>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p>Still unsure which version is right for you? Here's a short summary:</p>
+                    <ul>
+                        <li><p><b>Stay away from Monterey! No attachment sending is a large drawback.</b></p></li>
+                        <li><p>Want Private API features? Don't go for Apple Silicon right now. We hope to support these machines in the near future though!</p></li>
+                        <li><p>Don't care about creating group chats? Go for Big Sur (Intel), since it supports every other feature. A 2014 or newer Mac Mini is probably best for Big Sur, however Mac Minis as old as 2009 can also be patched to run Big Sur (without graphics acceleration).</p></li>
+                        <li><p>Need to save some cash? Go for any OS X machine. You'll only miss out on seeing & sending replies. There's usually 2009 Mac Minis on Ebay for $50-$100 that can be patched to run High Sierra, which works just fine for BlueBubbles.</p></li>
+                    </ul>
                 </div>
 
                 <div class="accordion">
-                    <p>Q: Can I share my QR Code?</p>
+                    <p>Q: How is BlueBubbles different than AirMessage?</p>
                 </div>
                 <div class="panel">
-                    <p>No, your QR code should be private because it contains your server password and Firebase credentials. If it gets leaked, you should redo your Firebase setup and change your server password to avoid compromising your messages.</p>
+                    <ul>
+                        <li><p>Dedicated iOS and Android style themes so you can choose your look</p></li>
+                        <li><p>Highly community driven, with contributions and suggestions welcomed!</p></li>
+                        <li><p>Dedicated Desktop apps for Windows and Linux</p></li>
+                        <li><p>Totally self-hosted, so you don't have to rely on developer servers</p></li>
+                        <li><p>Tons of customization & settings to personalize your experience</p></li>
+                        <li><p>Private API features for that extra bit of functionality</p></li>
+
+                    </ul>
                 </div>
 
                 <div class="accordion">
@@ -181,6 +291,72 @@
                 </div>
                 <div class="panel">
                     <p>Not at this time, though we hope to add this feature in the near future!</p>
+                </div>
+
+                <h2 style="width: 100%; padding-bottom: 5px; padding-top: 15px;">Security</h2>
+
+                <div class="accordion">
+                    <p>Q: Is my data encrypted?</p>
+                </div>
+                <div class="panel">
+                    <p>Yes, all connections are done over HTTPS/WSS and utilizes TLS encryption by default
+                    </p>
+                </div>
+
+                <div class="accordion">
+                    <p>Q: Can I share my QR Code?</p>
+                </div>
+                <div class="panel">
+                    <p>No, your QR code should be private because it contains your server password and Firebase credentials. If it gets leaked, you should redo your Firebase setup and change your server password to avoid compromising your messages.</p>
+                </div>
+
+                <h2 style="width: 100%; padding-bottom: 5px; padding-top: 15px;">Issues</h2>
+
+                <div class="accordion">
+                    <p>Q:  When I send a message, it sends twice and the first one fails. What is the issue?</p>
+                </div>
+                <div class="panel">
+                    <p>We aren't 100% sure why this issue happens, however, a simple reboot of the Mac usually fixes the issue. Also, signing up on ngrok's website may help the issue. Do the following:</p>
+                    <p>Register for a free account at <a href="https://ngrok.com" style="color: #147efb; text-decoration: none;">ngrok</a>. After registering, you can find your account's Auth Token in their portal. Copy and paste that auth token into the token field within the BlueBubbles macOS Server settings. Copy and paste using CMD + V. Finally restart the server app and/or the Mac itself.</p>
+                </div>
+
+                <div class="accordion">
+                    <p>Q:  I'm only getting notifications sometimes, what's going on?</p>
+                </div>
+                <div class="panel">
+                    <p>Often times, this is due to your phone manufacturer's OS-specific memory management strategies. You can view the full list of phone manufacturers and their respective "Don't Kill My App" Benchmarks, <a href="https://dontkillmyapp.com/" style="color: #147efb; text-decoration: none;">here</a>.</p>
+                    <p>More specifically, the OS employs algorithms to detect which apps are using background memory, and killing them, or just preventing them from starting. As a result, the BlueBubble's background process has a chance of being killed, and you will not receive notifications. On most devices, the manufacturer will provide a way to disable battery optimization (memory management) on certain apps.</p>
+                    <p>This is what you will need to do for BlueBubbles. Find the BlueBubble's App, then tap and hold on it to bring up the menu. Select the (i) Icon, which will take you to the App's Android Settings. Find the list item that pertains to Battery Optimization or Memory Management. You should see a few options to either disable or enable battery optimization. For best results, select the least restrictive setting. In most cases, this will be something like, Do not optimize.</p>                    
+                    <p> You can find a more in-depth guide on the Don't Kill My App website, by selecting your phone manufacturer.</p>                   
+                    <p>Note: If you use a Samsung phone, <a href="https://www.youtube.com/watch?v=-CxZUu1Mzmo" style="color: #147efb; text-decoration: none;">this guide</a> may help you.</p>
+                </div>
+
+                <div class="accordion">
+                    <p>Q:  Ngrok keeps disconnecting and/or my URL is not updating, what's going on?</p>
+                </div>
+                <div class="panel">
+                    <p>There are a couple of different things you can try:</p>
+                    <ol>
+                        <li><p>Register for a free account at <a href="https://ngrok.com" style="color: #147efb; text-decoration: none;">ngrok</a>. After registering, you can find your account's Auth Token in their portal. Copy and paste that auth token into the token field within the BlueBubbles macOS Server settings. Copy and paste using CMD + V. Finally restart the server app and/or the Mac itself.</p></li>
+                        <li><p>Verify you do not have a VPN, Proxy, or Custom DNS blocking Ngrok (this is common on school or work networks)</p></li>
+                        <li><p>Try to connect to your server using the manual server URL/password entry</p></li>
+                        <li><p>Please make sure your phone time is set automatically rather than manually. We've noticed this can cause connection issues sometimes.</p></li>
+                    </ol>
+                    <p>If all else fails, we highly recommend looking into port forwarding as that will have the greatest reliability.</p>
+                </div>
+
+                <div class="accordion">
+                    <p>Q:  I am not getting any new messages until I open the app, what am I doing wrong?</p>
+                </div>
+                <div class="panel">
+                    <p>This may be caused by the time on your Mac device being off from the actual time.</p>
+                    <ol>
+                        <li><p>Make sure your Mac devices date and time and timezone is set automatically.</p></li>
+                        <p>If the time is set automatically then try:</p>
+                        <li><p>Go to <a href="https://time.is" style="color: #147efb; text-decoration: none;">time.is</a> link on your Mac server and it will tell you if your time is not synchronized with the global clock.</p></li>
+                        <p>If the time is not synchronized then try:</p>
+                        <li><p>Open up terminal and run "ntpdate -u time.apple.com" (remove the quotes), then restart your Mac.</p></li>
+                    </ol>
                 </div>
                 
                 <div class="accordion">
@@ -209,6 +385,27 @@
                 <div class="panel">
                     <p>The issue is with the Android option, "Skip lock screen" after face unlock. This needs to be turned off for the notifications to show.</p>
                 </div>
+
+                <h2 style="width: 100%; padding-bottom: 5px; padding-top: 15px;">Other</h2>
+
+                <div class="accordion">
+                    <p>Q: How can I support the developers?</p>
+                </div>
+                <div class="panel">
+                    <p>We don't charge anything for the use of our applications or code, however you can support us by
+                        donating on our
+                        <a href="/donate" style="color: #147efb; text-decoration: none;">donations page</a>.</p>
+                </div>
+                
+                <div class="accordion">
+                    <p>Q: How do I keep my Mac awake, even when I close my laptop lid?</p>
+                </div>
+                <div class="panel">
+                    <p>If you are using a Mac Mini or Mac Desktop, where there is no lid, you should be able to use the built-in settings option to "Keep macOS Awake".
+                        If you are running macOS on a laptop, you can use an app called <a href="https://apps.apple.com/us/app/amphetamine/id937984704" style="color: #147efb; text-decoration: none;">Amphetamine</a> to keep your Mac awake.</p>
+                    <p>
+                </div>
+
                 
                 <div class="accordion">
                     <p>Q: How can I make sure my Mac starts up after a power failure?</p>
