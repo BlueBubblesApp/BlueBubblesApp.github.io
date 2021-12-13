@@ -135,10 +135,8 @@
                             <tr>
                                 <th>BlueBubbles Features</th>
                                 <th>El Capitan - Catalina</th>
-                                <th>Big Sur (Intel)</th>
-                                <th>Big Sur (Apple Silicon)</th>
-                                <th>Monterey (Intel)</th>
-                                <th>Monterey (Apple Silicon)</th>
+                                <th>Big Sur</th>
+                                <th>Monterey</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -147,29 +145,21 @@
                                 <td>✓</td>
                                 <td>✓</td>
                                 <td>✓</td>
-                                <td>✓</td>
-                                <td>✓</td>
                             </tr>
                             <tr>
                                 <td>Sending Attachments</td>
                                 <td>✓</td>
                                 <td>✓</td>
-                                <td>✓</td>
-                                <td></td>
-                                <td></td>
+                                <td><span style="color: red;">✓**</span></td>
                             </tr>
                             <tr>
                                 <td>Receiving Attachments</td>
                                 <td>✓</td>
                                 <td>✓</td>
                                 <td>✓</td>
-                                <td>✓</td>
-                                <td>✓</td>
                             </tr>
                             <tr>
-                                <td>Receiving Tapbacks & Stickers</td>
-                                <td>✓</td>
-                                <td>✓</td>
+                                <td>Receiving Tapbacks, Stickers, and Mentions</td>
                                 <td>✓</td>
                                 <td>✓</td>
                                 <td>✓</td>
@@ -179,13 +169,15 @@
                                 <td>✓</td>
                                 <td>✓</td>
                                 <td>✓</td>
+                            </tr>
+                            <tr>
+                                <td>Receiving Replies</td>
+                                <td><span style="color: green;">†</span></td>
                                 <td>✓</td>
                                 <td>✓</td>
                             </tr>
                             <tr>
                                 <td>Creating DMs</td>
-                                <td>✓</td>
-                                <td>✓</td>
                                 <td>✓</td>
                                 <td>✓</td>
                                 <td>✓</td>
@@ -195,21 +187,18 @@
                                 <td>✓</td>
                                 <td></td>
                                 <td></td>
-                                <td></td>
-                                <td></td>
                             </tr>
                         </tbody>
                     </table>
+                    <p><span style="color: red;">✓**</span> - Monterey attachment sending may not be as reliable as previous macOS versions, since it relies on UI Automation (simulating keystrokes) rather than actual code.</p>
+                    <p><span style="color: green;">†</span> - Replies will show as a regular message on macOS 10.x devices, instead of showing with the replies UI.</p>
                     <p>The following table details compatibility for the Private API features. You can find more details about how to use the Private API <a href="https://github.com/BlueBubblesApp/bluebubbles-server/wiki/Using-Private-API-Features" style="color: #147efb; text-decoration: none;">here</a>.</p>
                     <table class="styled-table">
                         <thead>
                             <tr>
                                 <th>Private API Features</th>
                                 <th>El Capitan - Catalina</th>
-                                <th>Big Sur (Intel)</th>
-                                <th>Big Sur (Apple Silicon)</th>
-                                <th>Monterey (Intel)</th>
-                                <th>Monterey (Apple Silicon)</th>
+                                <th>Big Sur and up</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -217,49 +206,33 @@
                                 <td>Sending / Receiving Typing Indicators</td>
                                 <td>✓</td>
                                 <td>✓</td>
-                                <td></td>
-                                <td>✓</td>
-                                <td></td>
                             </tr>
                             <tr>
-                                <td>Sending Tapbacks, Effects, and Subjects</td>
+                                <td>Sending Tapbacks, Effects, Subjects, and Mentions</td>
                                 <td>✓</td>
                                 <td>✓</td>
-                                <td></td>
-                                <td>✓</td>
-                                <td></td>
                             </tr>
                             <tr>
-                                <td>Sending / Receiving Replies</td>
+                                <td>Sending Replies</td>
                                 <td></td>
                                 <td>✓</td>
-                                <td></td>
-                                <td>✓</td>
-                                <td></td>
                             </tr>
                             <tr>
                                 <td>Marking Chats Read on the Server Mac</td>
                                 <td>✓</td>
                                 <td>✓</td>
-                                <td></td>
-                                <td>✓</td>
-                                <td></td>
                             </tr>
                             <tr>
                                 <td>Renaming & Adding / Removing Participants from Group Chats</td>
                                 <td>✓</td>
                                 <td>✓</td>
-                                <td></td>
-                                <td>✓</td>
-                                <td></td>
                             </tr>
                         </tbody>
                     </table>
                     <p>Still unsure which version is right for you? Here's a short summary:</p>
                     <ul>
-                        <li><p><b>Stay away from Monterey! No attachment sending is a large drawback.</b></p></li>
-                        <li><p>Want Private API features? Don't go for Apple Silicon right now. We hope to support these machines in the near future though!</p></li>
-                        <li><p>Don't care about creating group chats? Go for Big Sur (Intel), since it supports every other feature. A 2014 or newer Mac Mini is probably best for Big Sur, however Mac Minis as old as 2009 can also be patched to run Big Sur (without graphics acceleration).</p></li>
+                        <li><p>If possible, avoid Monterey to have the most reliable experience with sending attachments.</p></li>
+                        <li><p>Don't care about creating group chats? Go for Big Sur, since it supports every other feature. A 2014 or newer Mac Mini is probably best for Big Sur, however Mac Minis as old as 2009 can also be patched to run Big Sur (without graphics acceleration).</p></li>
                         <li><p>Need to save some cash? Go for any OS X machine. You'll only miss out on seeing & sending replies. There's usually 2009 Mac Minis on Ebay for $50-$100 that can be patched to run High Sierra, which works just fine for BlueBubbles.</p></li>
                     </ul>
                 </div>
