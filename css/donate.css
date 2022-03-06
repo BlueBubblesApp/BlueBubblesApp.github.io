@@ -70,7 +70,10 @@
 
 #donationContainer {
     flex-grow: 1;
-    width: 100%;
+    width: 400px;
+    max-height: 450px;
+    border-radius: 20px;
+    background-color: #C0C0C0;
     display: flex;
     justify-content: center;
     align-items: center;
