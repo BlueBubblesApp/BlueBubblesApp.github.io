@@ -64,8 +64,8 @@ body {
     top: -50vw;
     right: -28vw;
     z-index: -1;
-    width: 75vw;
-    height: 75vw;
+    width: 90vw;
+    height: 90vw;
     border-radius: 50%;
     background-color: #147efb;
 }
@@ -143,7 +143,7 @@ body {
     align-items: center;
     justify-content: space-between;
     margin: 0;
-    width: 90%;
+    width: 95%;
     margin-top: 10px;
 }
 
