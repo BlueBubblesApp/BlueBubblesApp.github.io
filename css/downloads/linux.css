@@ -41,6 +41,25 @@
     text-decoration: none;
 }
 
+.ghreleases > a {
+    /* width: 100%; */
+    align-self: flex-start;
+    margin: 0;
+    font-family: 'SF UI Display Bold';
+    font-size: 1rem;
+    font-style: normal;
+    margin-bottom: 5px;
+    color: #147efb;
+    text-decoration: none;
+}
+
+.installRowContainer>span {
+    width: 100%;
+    align-self: flex-start;
+    margin: 0;
+    margin-left: 20px;
+}
+
 .installRowContainer a:hover {
     cursor: pointer;
     opacity: .75;
