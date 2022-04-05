@@ -257,6 +257,10 @@ nav>a:hover::before {
         height: 45px !important;
     }
 
+    .social-logo-2 {
+        height: 50px !important;
+    }
+
     .links-row a {
         font-size: 14px;
     }
@@ -281,6 +285,12 @@ nav>a:hover::before {
 
 .social-logo {
     height: 50px;
+    margin-right: 5px;
+    margin-left: 5px;
+}
+
+.social-logo-2 {
+    height: 58px;
     margin-right: 5px;
     margin-left: 5px;
 }
