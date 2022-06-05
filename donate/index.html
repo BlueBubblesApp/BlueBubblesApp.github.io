@@ -50,9 +50,6 @@
             }
         }
     </script>
-    <script
-        src="https://www.paypal.com/sdk/js?client-id=AVXYTkSbmUCItFychNQFeGB-XqwoEdlADkrfzvINLE3UFHzsX1ZwqhE4kq2FuI_pqpAp8Hi6KKeJi_Mx">
-    </script>
 </head>
 
 <body>
@@ -91,11 +88,10 @@
           </header>
 
         <div id="donationContainer">
-            <div id="paypalButtonsContainer"></div>
             <div id="donationAmountContainer">
                 <div>
                     <p>Donation Amount:</p>
-                    <p id="currentDonationAmount">$1</p>
+                    <p id="currentDonationAmount">$5</p>
                 </div>
                 <div>
                     <button id="oneDollarDono">$1</button>
@@ -107,6 +103,7 @@
                     </button>
                 </div>
             </div>
+            <div id="paypalButtonsContainer"></div>
         </div>
 
         <div id="loadingContainer">
@@ -152,130 +149,141 @@
             <p id="copyright">BlueBubbles</p>
         </div>
 
-        <script>
-            var donationAmount = 1;
+    <script src="https://www.paypal.com/sdk/js?client-id=Ad0ZQ_9WlFAQQ7KEYqX4IxuvLcp51X6MdINA7crdCGRYgesVQrefxQv0HdIZpXb_fwIzYYQPerRuELWq&enable-funding=venmo&currency=USD" data-sdk-integration-source="button-factory"></script>
+    <script>
+    var donationAmount = 5;
+    var donationAmountDiv = document.getElementById("currentDonationAmount");
 
-            var donationAmountDiv = document.getElementById("currentDonationAmount");
+    function removeButtonStyles() {
+        try {
+            document.getElementById("oneDollarDono").classList.remove("activeDonoButton");
+        } catch {}
+        try {
+            document.getElementById("fiveDollarDono").classList.remove("activeDonoButton");
+        } catch {}
+        try {
+            document.getElementById("tenDollarDono").classList.remove("activeDonoButton");
+        } catch {}
+        try {
+            document.getElementById("twentyFiveDollarDono").classList.remove("activeDonoButton");
+        } catch {}
+        try {
+            document.getElementById("customDollarDono").classList.remove("activeDonoButton");
+        } catch {}
+    }
+        
+    document.getElementById("oneDollarDono").addEventListener("click", function () {
+        removeButtonStyles();
+        document.getElementById("oneDollarDono").classList.add("activeDonoButton");
+        donationAmount = 1;
+        donationAmountDiv.innerText = "$1";
+    });
 
-            function removeButtonStyles() {
-                try {
-                    document.getElementById("oneDollarDono").classList.remove("activeDonoButton");
-                } catch {}
-                try {
-                    document.getElementById("fiveDollarDono").classList.remove("activeDonoButton");
-                } catch {}
-                try {
-                    document.getElementById("tenDollarDono").classList.remove("activeDonoButton");
-                } catch {}
-                try {
-                    document.getElementById("twentyFiveDollarDono").classList.remove("activeDonoButton");
-                } catch {}
-                try {
-                    document.getElementById("customDollarDono").classList.remove("activeDonoButton");
-                } catch {}
-            }
+    document.getElementById("fiveDollarDono").addEventListener("click", function () {
+        removeButtonStyles();
+        document.getElementById("fiveDollarDono").classList.add("activeDonoButton");
+        donationAmount = 5;
+        donationAmountDiv.innerText = "$5";
+    });
 
-            document.getElementById("oneDollarDono").addEventListener("click", function () {
-                removeButtonStyles();
-                document.getElementById("oneDollarDono").classList.add("activeDonoButton");
-                donationAmount = 1;
-                donationAmountDiv.innerText = "$1";
-            });
+    document.getElementById("tenDollarDono").addEventListener("click", function () {
+        removeButtonStyles();
+        document.getElementById("tenDollarDono").classList.add("activeDonoButton");
+        donationAmount = 10;
+        donationAmountDiv.innerText = "$10";
+    });
 
-            document.getElementById("fiveDollarDono").addEventListener("click", function () {
-                removeButtonStyles();
-                document.getElementById("fiveDollarDono").classList.add("activeDonoButton");
-                donationAmount = 5;
-                donationAmountDiv.innerText = "$5";
-            });
+    document.getElementById("twentyFiveDollarDono").addEventListener("click", function () {
+        removeButtonStyles();
+        document.getElementById("twentyFiveDollarDono").classList.add("activeDonoButton");
+        donationAmount = 25;
+        donationAmountDiv.innerText = "$25";
+    });
 
-            document.getElementById("tenDollarDono").addEventListener("click", function () {
-                removeButtonStyles();
-                document.getElementById("tenDollarDono").classList.add("activeDonoButton");
-                donationAmount = 10;
-                donationAmountDiv.innerText = "$10";
-            });
+    document.getElementById("customDollarDono").addEventListener("click", function () {
+        removeButtonStyles();
+        document.getElementById("customDollarDono").classList.add("activeDonoButton");
+    });
 
-            document.getElementById("twentyFiveDollarDono").addEventListener("click", function () {
-                removeButtonStyles();
-                document.getElementById("twentyFiveDollarDono").classList.add("activeDonoButton");
-                donationAmount = 25;
-                donationAmountDiv.innerText = "$25";
-            });
+    var customDonoAmountString = "";
+    document.getElementById("customDonoInput").addEventListener("keyup", function (e) {
+        donationAmountDiv.innerText = "$" + document.getElementById("customDonoInput").value;
+        donationAmount = document.getElementById("customDonoInput").value;
+    });
+        
+    var loadingContainer = document.getElementById("loadingContainer");
+    var thankYouContainer = document.getElementById("thankYouContainer");
+    var donationContainer = document.getElementById("donationContainer");
+    var makeItRain = document.getElementById("makeItRain");
 
-            document.getElementById("customDollarDono").addEventListener("click", function () {
-                removeButtonStyles();
-                document.getElementById("customDollarDono").classList.add("activeDonoButton");
-            });
+    function initPayPalButton() {
+        paypal.Buttons({
+          style: {
+            color: 'blue',
+            shape: 'pill',
+            label: 'donate',
+            layout: 'vertical'
+          },
 
-            var customDonoAmountString = "";
-            document.getElementById("customDonoInput").addEventListener("keyup", function (e) {
-                donationAmountDiv.innerText = "$" + document.getElementById("customDonoInput").value;
-                donationAmount = document.getElementById("customDonoInput").value;
-            });
-
-            var loadingContainer = document.getElementById("loadingContainer");
-            var thankYouContainer = document.getElementById("thankYouContainer");
-            var donationContainer = document.getElementById("donationContainer");
-            var makeItRain = document.getElementById("makeItRain");
-
-            paypal.Buttons({
-                createOrder: async function (data, actions) {
-                    donationContainer.style.display = "none";
-                    loadingContainer.style.display = "flex";
-
-                    return actions.order.create({
-                        application_context: {
-                            brand_name: "BlueBubbles",
-                            shipping_preference: "NO_SHIPPING"
-                        },
-                        purchase_units: [{
-                            amount: {
-                                currency_code: "USD",
-                                value: `${donationAmount}`
-                            }
-                        }]
-                    });
-                },
-
-                onApprove: function (data, actions) {
-                    console.log(data, actions);
-                    return actions.order.capture().then(async function (details) {
-                        console.log(data);
-                        console.log(actions);
-                        console.log(details);
-                        makeItRain.style.display = "block";
-                        makeItRain.currentTime = 0;
-                        makeItRain.play();
-
-                        makeItRain.addEventListener("ended", function (e) {
-                            makeItRain.style.display = "none";
-                        })
-
-
-                        loadingContainer.style.display = "none";
-                        donationContainer.style.display = "none";
-                        thankYouContainer.style.display = "flex";
-
-                        setTimeout(function () {
-                            window.location.href = '/';
-                        }, 5000);
-                    });
-                },
-
-                onCancel: function (data, actions) {
-                    loadingContainer.style.display = "none";
-                    donationContainer.style.display = "flex";
-                },
-
-                onError: function (err) {
-                    loadingContainer.style.display = "none";
-                    donationContainer.style.display = "flex";
-                    console.log(err);
+          createOrder: function (data, actions) {
+            donationContainer.style.display = "none";
+            loadingContainer.style.display = "flex";
+ 
+            return actions.order.create({
+              purchase_units: [{
+                items: [
+                    {
+                        name: "BlueBubbles Donation",
+                        unit_amount: { currency_code: "USD", value: donationAmount },
+                        quantity: "1",
+                        category: "DONATION"
+                    }
+                ],
+                amount: {
+                  currency_code: "USD",
+                  value: donationAmount,
+                  breakdown: { item_total: { currency_code: "USD", value: donationAmount } },
                 }
+              }]
+            });
+          },
 
-            }).render('#paypalButtonsContainer');
-        </script>
+          onApprove: function (data, actions) {
+            return actions.order.capture().then(function (orderData) {
+              makeItRain.style.display = "block";
+              makeItRain.currentTime = 0;
+              makeItRain.play();
+
+              makeItRain.addEventListener("ended", function (e) {
+                makeItRain.style.display = "none";
+              });
+
+              loadingContainer.style.display = "none";
+              donationContainer.style.display = "none";
+              thankYouContainer.style.display = "flex";
+                
+              setTimeout(function () {
+                window.location.href = '/';
+              }, 5000);
+            });
+          },
+            
+          onCancel: function (data, actions) {
+            loadingContainer.style.display = "none";
+            donationContainer.style.display = "flex";
+            console.log("Canceled!");
+          },
+
+          onError: function (err) {
+            loadingContainer.style.display = "none";
+            donationContainer.style.display = "flex";
+            console.log("Error: " + err);
+          }
+        }).render('#paypalButtonsContainer');
+  }
+
+  initPayPalButton();
+  </script>
     </div>
 </body>
 

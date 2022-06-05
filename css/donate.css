@@ -70,16 +70,19 @@
 
 #donationContainer {
     flex-grow: 1;
-    width: 100%;
+    width: 400px;
+    max-height: 450px;
+    border-radius: 20px;
+    background-color: #C0C0C0;
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
 }
 
 #paypalButtonsContainer {
     min-height: 20vh;
-    width: 30vw;
-    margin-right: 10px;
+    width: 20vw;
     z-index: 0;
 }
 
@@ -183,10 +186,6 @@ input[type=number] {
 }
 
 @media (max-width: 600px) {
-    #donationContainer {
-        flex-direction: column-reverse;
-    }
-
     #paypalButtonsContainer {
         width: 75%;
     }
