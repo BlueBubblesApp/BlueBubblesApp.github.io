@@ -323,7 +323,7 @@
       </div>
       <h1 id="serverInstallTitle">Server Installation</h1>
       <h1 id="stepTitle">Step <span id="stepNumber">1</span><span style="color:#a4a4a4">/<span
-            id="maxSteps">15</span></span></h1>
+            id="maxSteps">16</span></span></h1>
 
       <div id="carouselContainer">
         <div class="carousel">
@@ -350,10 +350,15 @@
               </video>
             </div>
             <div class="stepTextContainer">
-              <h2 class="stepText">2.) Open the .dmg file and drag BlueBubbles into your applications folder,
-                then run <img class="inTextIcon" alt="system-preferences-icon"
-                  src="/assets/icons/logo192.png"></img>BlueBubbles.
+              <h2 class="stepText">2.) Open the .dmg file and drag the BlueBubbles icon into the applications folder icon.
               </h2>
+            </div>
+            <div class="stepTextContainer">
+              <h2 class="stepText">Right click on the popup window and click "Eject".</h2>
+            </div>
+            <div class="stepTextContainer">
+              <h2 class="stepText">Lastly, run <img class="inTextIcon" alt="system-preferences-icon"
+                src="/assets/icons/logo192.png"></img>BlueBubbles.</h2>
             </div>
           </div>
 
@@ -364,11 +369,10 @@
               </video>
             </div>
             <div class="stepTextContainer">
-              <h2 class="stepText">3.) Open the <img class="inTextIcon" alt="system-preferences-icon"
-                  src="/assets/system-preferences.png"></img>System
-                Preferences app, select <img class="inTextIcon" alt="security-and-privacy-icon"
-                  src="/assets/security-and-privacy.png"></img>Security and Privacy, then give BlueBubbles full disk
-                access.</h2>
+              <h2 class="stepText">3.) Click "Next" on the server app to proceed to the Permissions tab.</h2>
+            </div>
+            <div class="stepTextContainer">
+              <h2 class="stepText">Follow the instructions given to give BlueBubbles full disk access.</h2>
             </div>
             <div class="stepTextContainer">
               <h2 class="stepText">Accessibility access is not required but might be needed for certain functions.</h2>
@@ -382,29 +386,7 @@
             </video>
           </div> -->
             <div class="stepTextContainer">
-              <h2 class="stepText">4.) Enter a strong password for your server. If you plan on port forwarding, you can change the proxy service dropdown to Dynamic DNS.</h2>
-            </div>
-            <div class="stepTextContainer">
-              <h2 class="stepText">NOTE: If you plan on using Ngrok, please register for a <i>free</i> account on their <a
-                    href="https://ngrok.com">website</a>.</h2>
-            </div>
-            <div class="stepTextContainer">
-              <h2 class="stepText">Once you have registered, go to <a
-                    href="https://dashboard.ngrok.com/get-started/your-authtoken">"Your Authtoken"</a>.</h2>
-            </div>
-            <div class="stepTextContainer">
-              <h2 class="stepText">Paste this string into the auth token field found in the BlueBubbles server settings. This helps prevent connection issues.</h2>
-            </div>
-          </div>
-
-          <div class="carouselStep">
-            <!-- <div class="stepMediaContainer">
-            <video width="100%"  autoplay loop muted>
-              <source src="/install/step2.mp4" type="video/mp4">
-            </video>
-          </div> -->
-            <div class="stepTextContainer">
-              <h2 class="stepText">5.) Navigate to <a href="https://console.firebase.google.com/" target="_blank">Google
+              <h2 class="stepText">4.) Navigate to <a href="https://console.firebase.google.com/" target="_blank">Google
                   Firebase Console</a> and login with your Google account.</h2>
             </div>
           </div>
@@ -416,7 +398,7 @@
               </video>
             </div>
             <div class="stepTextContainer">
-              <h2 class="stepText">6.) Create a new project titled "BlueBubblesApp".</h2>
+              <h2 class="stepText">5.) Create a new project titled "BlueBubblesApp".</h2>
             </div>
           </div>
 
@@ -427,7 +409,7 @@
               </video>
             </div>
             <div class="stepTextContainer">
-              <h2 class="stepText">7.) Click on Realtime Database > Create Database > Next > Enable</h2>
+              <h2 class="stepText">6.) Click on Realtime Database > Create Database > Next > Enable</h2>
             </div>
           </div>
 
@@ -438,7 +420,7 @@
               </video>
             </div>
             <div class="stepTextContainer">
-              <h2 class="stepText">8.) Click on Project
+              <h2 class="stepText">7.) Click on Project
                 settings > Service accounts > Create Service Account > Generate a new private key, and save the file
                 locally.</h2>
             </div>
@@ -450,7 +432,7 @@
               </img>
             </div>
             <div class="stepTextContainer">
-              <h2 class="stepText">9.) Click on Cloud Messaging > 3 dot menu underneath "Cloud Messaging Legacy API" > Manage API in Cloud Console > Enable.</h2>
+              <h2 class="stepText">8.) Click on Cloud Messaging > 3 dot menu underneath "Cloud Messaging Legacy API" > Manage API in Cloud Console > Enable.</h2>
             </div>
             <div class="stepTextContainer">
               <h2 class="stepText">Once enabled, go back to the Project Settings menu</h2>
@@ -467,7 +449,7 @@
             </video>
           </div> -->
             <div class="stepTextContainer">
-              <h2 class="stepText">10.) Drag the private key we just downloaded into the FCM Server drop zone on
+              <h2 class="stepText">9.) Drag the private key we just downloaded into the firebase-adminsdk drop zone on
                 the <img class="inTextIcon" alt="system-preferences-icon"
                   src="/assets/icons/logo192.png"></img>BlueBubbles
                 application.</h2>
@@ -481,7 +463,7 @@
               </video>
             </div>
             <div class="stepTextContainer">
-              <h2 class="stepText">11.) From the Settings page click on the General tab, then click on the Android icon
+              <h2 class="stepText">10.) From the Settings page click on the General tab, then click on the Android icon
                 towards the
                 bottom of the page.</h2>
             </div>
@@ -494,7 +476,7 @@
               </video>
             </div>
             <div class="stepTextContainer">
-              <h2 class="stepText">12.) For package name enter <span
+              <h2 class="stepText">11.) For package name enter <span
                   style="font-family: SF UI Display Bold;">com.&lt;your
                   name&gt;.bluebubbles</span> then click Register App
                 and download the google-services.json file locally.
@@ -509,7 +491,7 @@
             </video>
           </div> -->
             <div class="stepTextContainer">
-              <h2 class="stepText">13.) Drag the google-services.json file into the FCM Client drop zone on
+              <h2 class="stepText">12.) Drag the google-services.json file into the google-services.json drop zone on
                 the <img class="inTextIcon" alt="system-preferences-icon"
                   src="/assets/icons/logo192.png"></img>BlueBubbles
                 application.</h2>
@@ -523,7 +505,44 @@
             </video>
           </div> -->
             <div class="stepTextContainer">
-              <h2 class="stepText">14.) Download any of our <a href="/downloads/" target="_blank">client
+              <h2 class="stepText">13.) Enter a strong password for your server. If you plan on port forwarding, you can change the proxy service dropdown to Dynamic DNS.</h2>
+            </div>
+            <div class="stepTextContainer">
+              <h2 class="stepText">NOTE: If you plan on using Ngrok, please register for a <i>free</i> account on their <a
+                    href="https://ngrok.com">website</a>.</h2>
+            </div>
+            <div class="stepTextContainer">
+              <h2 class="stepText">Once you have registered, go to <a
+                    href="https://dashboard.ngrok.com/get-started/your-authtoken">"Your Authtoken"</a>.</h2>
+            </div>
+            <div class="stepTextContainer">
+              <h2 class="stepText">Paste this string into the auth token field. This helps prevent connection issues.</h2>
+            </div>
+          </div>
+
+          <div class="carouselStep">
+            <!-- <div class="stepMediaContainer">
+            <video width="100%"  autoplay loop muted>
+              <source src="/install/step2.mp4" type="video/mp4">
+            </video>
+          </div> -->
+            <div class="stepTextContainer">
+              <h2 class="stepText">14.) If you'd like to setup the Private API Features, then follow the instructions <a
+                href="https://docs.bluebubbles.app/private-api/installation">here</a>, otherwise skip this step and finish the setup tutorial.</h2>
+            </div>
+            <div class="stepTextContainer">
+              <h2 class="stepText">This step is completely optional and can be revisited at any time from the server settings tab.</h2>
+            </div>
+          </div>
+
+          <div class="carouselStep">
+            <!-- <div class="stepMediaContainer">
+            <video width="100%"  autoplay loop muted>
+              <source src="/install/step2.mp4" type="video/mp4">
+            </video>
+          </div> -->
+            <div class="stepTextContainer">
+              <h2 class="stepText">15.) Download any of our <a href="/downloads/" target="_blank">client
                   applications</a>, and scan the QR code or enter the URL and password to start syncing!</h2>
             </div>
           </div>
@@ -535,7 +554,7 @@
             </video>
           </div> -->
             <div class="stepTextContainer">
-              <h2 class="stepText">15.) Yay! You're connected!</h2>
+              <h2 class="stepText">16.) Yay! You're connected!</h2>
             </div>
           </div>
 
