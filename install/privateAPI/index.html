@@ -17,20 +17,18 @@
   <link rel="apple-touch-icon" href="/assets/icons/apple-touch-icon.png" />
 
   <!-- Google Description -->
-  <title>BlueBubbles - Installation</title>
+  <title>iMessage on PC and Android - BlueBubbles</title>
   <meta name="description"
-    content="Learn how to install BlueBubbles on your macOS device to get iMessage on your Windows, Android, or Linux device device"
+    content="BlueBubbles is an open-source, community-driven ecosystem of applications used to interact with iMessage on platforms such as Android, Windows, and Linux."
     name="description" />
-  <meta name="keywords"
-    content="iMessage, Windows, Linux, PC, Android, BlueBubbles, Blue Bubbles, Messages, Install, Installation">
 
   <!-- Open Graph Protocall -->
-  <meta content="BlueBubbles - Installation" property="og:title" />
+  <meta content="iMessage on PC and Android - BlueBubbles" property="og:title" />
   <meta
-    content="Learn how to install BlueBubbles on your macOS device to get iMessage on your Windows, Android, or Linux device device"
+    content="BlueBubbles is an open-source, community-driven ecosystem of applications used to interact with iMessage on platforms such as Android, Windows, and Linux."
     property="og:description" />
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://bluebubbles.app/install" />
+  <meta property="og:url" content="https://bluebubbles.app/" />
 
   <!-- Mobile Overlay Toggle Script -->
   <script>
@@ -264,6 +262,16 @@
       }(document));
     });
   </script>
+  <script>
+    function textToClipboard(text) {
+      var dummy = document.createElement("textarea");
+      document.body.appendChild(dummy);
+      dummy.value = text;
+      dummy.select();
+      document.execCommand("copy");
+      document.body.removeChild(dummy);
+    }
+  </script>
 </head>
 
 <body>
@@ -276,8 +284,6 @@
       <a class="mobile-link" href="/downloads">Downloads</a>
       <a class="mobile-link is-open" href="/install">Install</a>
       <a class="mobile-link" href="/faq">FAQ</a>
-      <a class="mobile-link" href="https://bluebubbles.app/web">Web App</a>
-      <a class="mobile-link" href="/donate">Donate</a>
     </div>
 
     <header class="navbar">
@@ -287,9 +293,8 @@
       <nav class="rightnav">
         <a href="/">Home</a>
         <a href="/downloads">Downloads</a>
+        <a href="/install" class="is-open">Install</a>
         <a href="/faq">FAQ</a>
-        <a href="/donate">Donate</a>
-        <a href="https://bluebubbles.app/web">Web App</a>
         <div onclick="addIsActive()" id="hamburger" class="hamburger hamburger--collapse" type="button">
           <span class="hamburger-box">
             <span class="hamburger-inner"></span>
@@ -301,49 +306,20 @@
     <canvas id="confetti-canvas" style="position:absolute;display:block;z-index:999999;pointer-events:none"></canvas>
 
     <div id="serverInstallContainer">
-      <br/>
-      <div>
-        <h1 id="youtubeInstallationTitle">Video Guide</h1>
-        <p class="installationDesc">If you would like to follow a video demonstration, the Youtuber, HowToMen, has
-          made a fantastic video detailing the installation process. It is slightly outdated, so if you have any issues with your install join our Discord and we can offer personalized help!</p>
-        <iframe src="https://www.youtube-nocookie.com/embed/LDRuWXGOu0U?start=190" frameborder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen>
-        </iframe>
-        <br/>
-        <br/>
-        <h1 id="youtubeInstallationTitle">References</h1>
-      </div>
-      <div>
-        <ul>
-          <li class="installationDesc"><a
-              href="https://docs.bluebubbles.app/server" style="color: #147efb; text-decoration: none;">BlueBubbles Server Docs</a>
-          </li>
-          <li class="installationDesc"><a
-              href="https://docs.bluebubbles.app/client" style="color: #147efb; text-decoration: none;">BlueBubbles Android / Desktop / Web Docs</a></li>
-          <li class="installationDesc"><a
-              href="https://docs.bluebubbles.app/helper-bundle/installation" style="color: #147efb; text-decoration: none;">Private API setup instructions</a> (for sending reactions / replies / effects, viewing typing indicators, etc)</li>
-        </ul>
-      </div>
-      <h1 id="serverInstallTitle">Server Installation</h1>
+      <h1 id="serverInstallTitle">Private API Installation</h1>
       <h1 id="stepTitle">Step <span id="stepNumber">1</span><span style="color:#a4a4a4">/<span
-            id="maxSteps">16</span></span></h1>
+            id="maxSteps">9</span></span></h1>
 
       <div id="carouselContainer">
         <div class="carousel">
           <div class="carouselStep initial">
             <div class="stepMediaContainer">
               <video width="100%" autoplay loop muted>
-                <source src="/install/step1.mp4" type="video/mp4">
+                <source src="/install/installMacforge.mp4" type="video/mp4">
               </video>
             </div>
             <div class="stepTextContainer">
-              <h2 class="stepText">1.) On the device you wish to use as
-                your server,
-                go to our server GitHub <a href="https://github.com/BlueBubblesApp/BlueBubbles-Server/releases" target="_blank">downloads page. </a></h2>
-            </div>
-            <div class="stepTextContainer">
-              <h2 class="stepText">Click the "BlueBubbles-x.x.x.dmg" file to download it.</h2>
+              <h2 class="stepText">1.) Browse to the <a target="_blank" href="https://www.macenhance.com/macforge">MacForge</a> website, download the latest release and install the program.</h2>
             </div>
           </div>
 
@@ -354,15 +330,16 @@
               </video>
             </div>
             <div class="stepTextContainer">
-              <h2 class="stepText">2.) Open the .dmg file and drag the BlueBubbles icon into the applications folder icon.
+              <h2 class="stepText">2.) Open the <img class="inTextIcon" alt="system-preferences-icon"
+                src="/assets/terminal-app-icon.png"></img>terminal app and run the following command to disable library validation.
               </h2>
-            </div>
-            <div class="stepTextContainer">
-              <h2 class="stepText">Right click on the popup window and click "Eject".</h2>
-            </div>
-            <div class="stepTextContainer">
-              <h2 class="stepText">Lastly, run <img class="inTextIcon" alt="system-preferences-icon"
-                src="/assets/icons/logo192.png"></img>BlueBubbles.</h2>
+              <div class="codeContainer"
+                onclick="textToClipboard('sudo defaults write /Library/Preferences/com.apple.security.libraryvalidation.plist DisableLibraryValidation -bool true')"
+              >
+                <p class="dollarSign">$</p>
+                <p class="codeExample">sudo defaults write /Library/Preferences/com.apple.security.libraryvalidation.plist DisableLibraryValidation -bool true</p>
+                <p class="copyButton">Click to copy</p>
+              </div>
             </div>
           </div>
 
@@ -373,13 +350,7 @@
               </video>
             </div>
             <div class="stepTextContainer">
-              <h2 class="stepText">3.) Click "Next" on the server app to proceed to the Permissions tab.</h2>
-            </div>
-            <div class="stepTextContainer">
-              <h2 class="stepText">Follow the instructions given to give BlueBubbles full disk access.</h2>
-            </div>
-            <div class="stepTextContainer">
-              <h2 class="stepText">Accessibility access is not required but might be needed for certain functions.</h2>
+              <h2 class="stepText">3.) </h2>
             </div>
           </div>
 
@@ -390,7 +361,19 @@
             </video>
           </div> -->
             <div class="stepTextContainer">
-              <h2 class="stepText">4.) Navigate to <a href="https://console.firebase.google.com/" target="_blank">Google
+              <h2 class="stepText">4.) Enter a password for your server and keep NGROK enabled unless you plan on
+                forwarding your local IP or dynamic DNS.</h2>
+            </div>
+          </div>
+
+          <div class="carouselStep">
+            <!-- <div class="stepMediaContainer">
+            <video width="100%"  autoplay loop muted>
+              <source src="/install/step2.mp4" type="video/mp4">
+            </video>
+          </div> -->
+            <div class="stepTextContainer">
+              <h2 class="stepText">5.) Navigate to <a href="https://console.firebase.google.com/" target="_blank">Google
                   Firebase Console</a> and login with your Google account.</h2>
             </div>
           </div>
@@ -402,10 +385,10 @@
               </video>
             </div>
             <div class="stepTextContainer">
-              <h2 class="stepText">5.) Create a new project titled "BlueBubblesApp".</h2>
+              <h2 class="stepText">6.) Create a new project titled "BlueBubblesApp".</h2>
             </div>
           </div>
-
+    
           <div class="carouselStep">
             <div class="stepMediaContainer">
               <video width="100%" autoplay loop muted>
@@ -413,7 +396,7 @@
               </video>
             </div>
             <div class="stepTextContainer">
-              <h2 class="stepText">6.) Click on Realtime Database > Create Database > Next > Enable</h2>
+              <h2 class="stepText">7.) Click on Realtime Database > Create Database > Next > Enable</h2>
             </div>
           </div>
 
@@ -424,141 +407,23 @@
               </video>
             </div>
             <div class="stepTextContainer">
-              <h2 class="stepText">7.) Click on Project
+              <h2 class="stepText">8.) Click on Project
                 settings > Service accounts > Create Service Account > Generate a new private key, and save the file
                 locally.</h2>
             </div>
           </div>
 
           <div class="carouselStep">
-            <div class="stepMediaContainer">
-              <img width="100%" src="/install/step9.jpg">
-              </img>
-            </div>
-            <div class="stepTextContainer">
-              <h2 class="stepText">8.) Click on Cloud Messaging > 3 dot menu underneath "Cloud Messaging Legacy API" > Manage API in Cloud Console > Enable.</h2>
-            </div>
-            <div class="stepTextContainer">
-              <h2 class="stepText">Once enabled, go back to the Project Settings menu</h2>
-            </div>
-            <div class="stepTextContainer">
-              <h2 class="stepText">Note: If your Cloud Messaging Legacy API is already enabled, simply skip this step!</h2>
-            </div>
-          </div>
-
-          <div class="carouselStep">
             <!-- <div class="stepMediaContainer">
             <video width="100%"  autoplay loop muted>
               <source src="/install/step2.mp4" type="video/mp4">
             </video>
           </div> -->
             <div class="stepTextContainer">
-              <h2 class="stepText">9.) Drag the private key we just downloaded into the firebase-adminsdk drop zone on
+              <h2 class="stepText">9.) Drag the private key we just downloaded into the FCM Server drop zone on
                 the <img class="inTextIcon" alt="system-preferences-icon"
                   src="/assets/icons/logo192.png"></img>BlueBubbles
                 application.</h2>
-            </div>
-          </div>
-
-          <div class="carouselStep">
-            <div class="stepMediaContainer">
-              <video width="100%" autoplay loop muted>
-                <source src="/install/step9.mp4" type="video/mp4">
-              </video>
-            </div>
-            <div class="stepTextContainer">
-              <h2 class="stepText">10.) From the Settings page click on the General tab, then click on the Android icon
-                towards the
-                bottom of the page.</h2>
-            </div>
-          </div>
-
-          <div class="carouselStep">
-            <div class="stepMediaContainer">
-              <video width="100%" autoplay loop muted>
-                <source src="/install/step10.mp4" type="video/mp4">
-              </video>
-            </div>
-            <div class="stepTextContainer">
-              <h2 class="stepText">11.) For package name enter <span
-                  style="font-family: SF UI Display Bold;">com.&lt;your
-                  name&gt;.bluebubbles</span> then click Register App
-                and download the google-services.json file locally.
-              </h2>
-            </div>
-          </div>
-
-          <div class="carouselStep">
-            <!-- <div class="stepMediaContainer">
-            <video width="100%"  autoplay loop muted>
-              <source src="/install/step2.mp4" type="video/mp4">
-            </video>
-          </div> -->
-            <div class="stepTextContainer">
-              <h2 class="stepText">12.) Drag the google-services.json file into the google-services.json drop zone on
-                the <img class="inTextIcon" alt="system-preferences-icon"
-                  src="/assets/icons/logo192.png"></img>BlueBubbles
-                application.</h2>
-            </div>
-          </div>
-
-          <div class="carouselStep">
-            <!-- <div class="stepMediaContainer">
-            <video width="100%"  autoplay loop muted>
-              <source src="/install/step2.mp4" type="video/mp4">
-            </video>
-          </div> -->
-            <div class="stepTextContainer">
-              <h2 class="stepText">13.) Enter a strong password for your server. If you plan on port forwarding, you can change the proxy service dropdown to Dynamic DNS.</h2>
-            </div>
-            <div class="stepTextContainer">
-              <h2 class="stepText">NOTE: If you plan on using Ngrok, please register for a <i>free</i> account on their <a
-                    href="https://ngrok.com">website</a>.</h2>
-            </div>
-            <div class="stepTextContainer">
-              <h2 class="stepText">Once you have registered, go to <a
-                    href="https://dashboard.ngrok.com/get-started/your-authtoken">"Your Authtoken"</a>.</h2>
-            </div>
-            <div class="stepTextContainer">
-              <h2 class="stepText">Paste this string into the auth token field. This helps prevent connection issues.</h2>
-            </div>
-          </div>
-
-          <div class="carouselStep">
-            <!-- <div class="stepMediaContainer">
-            <video width="100%"  autoplay loop muted>
-              <source src="/install/step2.mp4" type="video/mp4">
-            </video>
-          </div> -->
-            <div class="stepTextContainer">
-              <h2 class="stepText">14.) If you'd like to setup the Private API Features, then follow the instructions <a
-                href="https://docs.bluebubbles.app/private-api/installation">here</a>, otherwise skip this step and finish the setup tutorial.</h2>
-            </div>
-            <div class="stepTextContainer">
-              <h2 class="stepText">This step is completely optional and can be revisited at any time from the server settings tab.</h2>
-            </div>
-          </div>
-
-          <div class="carouselStep">
-            <!-- <div class="stepMediaContainer">
-            <video width="100%"  autoplay loop muted>
-              <source src="/install/step2.mp4" type="video/mp4">
-            </video>
-          </div> -->
-            <div class="stepTextContainer">
-              <h2 class="stepText">15.) Download any of our <a href="/downloads/" target="_blank">client
-                  applications</a>, and scan the QR code or enter the URL and password to start syncing!</h2>
-            </div>
-          </div>
-
-          <div class="carouselStep">
-            <!-- <div class="stepMediaContainer">
-            <video width="100%"  autoplay loop muted>
-              <source src="/install/step2.mp4" type="video/mp4">
-            </video>
-          </div> -->
-            <div class="stepTextContainer">
-              <h2 class="stepText">16.) Yay! You're connected!</h2>
             </div>
           </div>
 
@@ -578,13 +443,9 @@
     <div class="footer">
       <div class="social-row">
         <div class="social-media">
-          <a href="https://play.google.com/store/apps/details?id=com.bluebubbles.messaging"><img class="social-logo"
-              alt="playstore-link" src="/assets/playstore-logo.jpg" /></a>
+          <a href="https://play.google.com/store/apps/details?id=com.bluebubbles.messaging"><img class="social-logo" alt="playstore-link"
+              src="/assets/playstore-logo.jpg" /></a>
         </div>
-        <div class="social-media">
-          <a href="https://www.microsoft.com/store/productId/9P3XF8KJ0LSM"><img class="social-logo" alt="msstore-link"
-                  src="/assets/msstore-logo.png" /></a>
-      </div>
         <div class="social-media">
           <a href="https://github.com/BlueBubblesApp"><img class="social-logo" alt="github-link"
               src="/assets/github-logo.png" /></a>
@@ -603,7 +464,6 @@
         <a href="/downloads">Downloads</a> <span>|</span>
         <a href="/install">Install</a> <span>|</span>
         <a href="/faq">FAQ</a> <span>|</span>
-        <a href="https://bluebubbles.app/web">Web App</a> <span>|</span>
         <a href="/donate">Donate</a>
       </div>
       <p id="copyright">BlueBubbles</p>
