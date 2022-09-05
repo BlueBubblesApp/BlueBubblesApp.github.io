@@ -92,8 +92,8 @@
                 </div>
                 <div class="panel">
                     <p>Yes! You will need to set up a macOS VM (Virtual Machine) on either Windows or Linux. We have a handful of guides in
-                        our <a href="https://www.reddit.com/r/BlueBubbles/" style="color: #147efb; text-decoration: none;">documentation</a>,
-                        as well as on our subreddit. We can also assist with any issues such as iMessage activation, in our Discord.</p>
+                        our <a href="https://docs.bluebubbles.app/server/advanced/running-a-macos-vm" style="color: #147efb; text-decoration: none;">documentation</a>,
+                        as well as on our <a href="https://www.reddit.com/r/BlueBubbles/" style="color: #147efb; text-decoration: none;">subreddit</a>. We can also assist with any issues such as iMessage activation, in our Discord.</p>
                     <p>Disclaimer: This is meant to be done on Apple Hardware</p>
                 </div>
 
@@ -101,8 +101,11 @@
                     <p>Q: Will I need port-forwarding for this to work?</p>
                 </div>
                 <div class="panel">
-                    <p>No, we utilize Ngrok to create a secure tunnel between your server and your client. You can
-                        optionally switch to LocalTunnel, which is another tunneling service, or disable this entirely to use your own local IP or dynamic DNS.</p>
+                    <p>No, port-forwarding is not required. We offer built-in proxy services such as Ngrok or Cloudflare to allow the connection to your server.
+                        However, those proxy services are hosted by third-parties. If you would like a completely self-hosted setup, we recommend port forwarding
+                        with a dynamic DNS. Some router manufacturers such as Asus sometimes include dynamic DNS plugins and/or Let's Encrypt certificate 
+                        management to allow you to create a secure connection between a client and your server.</p>
+                    <p>Disclaimer: By using the third-party proxy services, you are accepting their respective licensing and usage agreements.</p>
                 </div>
 
                 <div class="accordion">
