@@ -103,8 +103,12 @@
                 <div class="panel">
                     <p>No, port-forwarding is not required. We offer built-in proxy services such as Ngrok or Cloudflare to allow the connection to your server.
                         However, those proxy services are hosted by third-parties. If you would like a completely self-hosted setup, we recommend port forwarding
-                        with a dynamic DNS. Some router manufacturers such as Asus sometimes include dynamic DNS plugins and/or Let's Encrypt certificate 
-                        management to allow you to create a secure connection between a client and your server.</p>
+                        with a dynamic DNS.
+                    </p>
+                    <p>
+                        Some router manufacturers such as Asus sometimes include dynamic DNS plugins and/or Let's Encrypt certificate 
+                        management to allow you to create a secure connection between a client and your server.
+                    </p>
                     <p>Disclaimer: By using the third-party proxy services, you are accepting their respective licensing and usage agreements.</p>
                 </div>
 
@@ -112,18 +116,18 @@
                     <p>Q: Why do I need to sign up for Google's Firebase Service? </p>
                 </div>
                 <div class="panel">
-                    <p>BlueBubbles does not require an open socket connection at all times, to reduce battery usage. We
-                        use
-                        Google FCM to still be able to send notifications even when the app is closed.</p>
+                    <p>
+                        To minimize background battery usage, BlueBubbles does not maintain a direct socket connection between your phone and your server
+                        when the app is not in focus. Google's Firebase Service is utilized to send notifications to your device when new messages arrive.
+                        It is also used to allow you to perform a server reset when you cannot directly connect to your server.
+                    </p>
                 </div>
 
                 <div class="accordion">
                     <p>Q: Why does the MacOS server require Full Disk Access?</p>
                 </div>
                 <div class="panel">
-                    <p>MacOS does not allow app's to read from iMessage's chat database unless they have Full Disk
-                        Access.
-                    </p>
+                    <p>MacOS does not allow app's to read from iMessage's chat database unless they have Full Disk Access.</p>
                 </div>
 
                 <h2 style="width: 100%; padding-bottom: 5px; padding-top: 15px;">Features</h2>
@@ -245,12 +249,11 @@
                 <div class="panel">
                     <ul>
                         <li><p>Dedicated iOS and Android style themes so you can choose your look</p></li>
-                        <li><p>Highly community driven, with contributions and suggestions welcomed!</p></li>
+                        <li><p>Highly community-driven features, with contributions and suggestions welcomed!</p></li>
                         <li><p>Dedicated Desktop apps for Windows and Linux</p></li>
                         <li><p>Totally self-hosted, so you don't have to rely on developer servers</p></li>
                         <li><p>Tons of customization & settings to personalize your experience</p></li>
                         <li><p>Private API features for that extra bit of functionality</p></li>
-
                     </ul>
                 </div>
 
