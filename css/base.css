@@ -295,6 +295,13 @@ nav>a:hover::before {
     margin-left: 5px;
 }
 
+.social-logo-3 {
+    width: 130px;
+    margin-top: 10px;
+    margin-right: 5px;
+    margin-left: 5px;
+}
+
 .links-row {
     color: black;
     text-decoration: none;
