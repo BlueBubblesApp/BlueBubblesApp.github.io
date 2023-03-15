@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Required -->
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- CSS Links -->
+  <link rel="stylesheet" type="text/css" href="/css/base.css" />
+  <link rel="stylesheet" type="text/css" href="/css/downloads/linux.css" />
+  <link rel="stylesheet" type="text/css" href="/css/hamburgers.css" />
+
+  <!-- Favicon Link -->
+  <link rel="icon" href="/assets/icons/favicon.ico" type="image/gif" sizes="48x48" />
+  <link rel="apple-touch-icon" href="/assets/icons/apple-touch-icon.png" />
+
+  <!-- Google Description -->
+  <title>BlueBubbles - iMessage on Android</title>
+  <meta name="description"
+    content="Learn how to install BlueBubbles onto your Android device"
+    name="description" />
+  <meta name="keywords" content="iMessage, Windows, Linux, PC, Android, BlueBubbles, Blue Bubbles, Messages, Install, Installation">
+
+  <!-- Open Graph Protocall -->
+  <meta content="BlueBubbles - iMessage on Android" property="og:title" />
+  <meta
+    content="Learn how to install BlueBubbles onto your Android device."
+    property="og:description" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://bluebubbles.app/downloads/android" />
+
+  <!-- Mobile Overlay Toggle Script -->
+  <script>
+    function addIsActive() {
+      //Toggle menu button
+      var hamburger = document.getElementById("hamburger");
+      hamburger.classList.toggle("is-active");
+      //Toggle engulfing blue circle
+      var bgCircle = document.getElementById("menu-circle");
+      bgCircle.classList.toggle("engulf");
+      //Toggle clear overlay
+      var overlay = document.getElementById("overlay");
+      overlay.classList.toggle("overlay-show");
+      //Toggle links
+      var links = document.getElementsByClassName("mobile-link");
+      for (var i = 0; i < links.length; i++) {
+        links[i].classList.toggle("show-links");
+      }
+    }
+  </script>
+  <script>
+    function textToClipboard(text) {
+      var dummy = document.createElement("textarea");
+      document.body.appendChild(dummy);
+      dummy.value = text;
+      dummy.select();
+      document.execCommand("copy");
+      document.body.removeChild(dummy);
+    }
+  </script>
+</head>
+
+<body>
+  <div id="mainContainer">
+    <div id="bg-circle"></div>
+    <div id="overlay">
+      <span id="menu-circle"></span>
+      <a id="home" class="mobile-link" href="/">Home</a>
+      <a class="mobile-link is-open" href="/downloads">Downloads</a>
+      <a class="mobile-link" href="/install">Install</a>
+      <a class="mobile-link" href="/faq">FAQ</a>
+      <a class="mobile-link" href="https://bluebubbles.app/web">Web App</a>
+      <a class="mobile-link" href="/donate">Donate</a>
+    </div>
+
+    <header class="navbar">
+      <nav class="leftnav">
+        <a id="logo" alt="BlueBubbles Logo" href="/">BlueBubbles</a>
+      </nav>
+      <nav class="rightnav">
+        <a href="/">Home</a>
+        <a href="/downloads" class="is-open">Downloads</a>
+        <a href="/install">Install</a>
+        <a href="/faq">FAQ</a>
+        <a href="https://bluebubbles.app/web">Web App</a>
+        <div onclick="addIsActive()" id="hamburger" class="hamburger hamburger--collapse" type="button">
+          <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+          </span>
+        </div>
+      </nav>
+    </header>
+
+    <div id="linuxInstallContainer">
+      <h1>Server Downloads</h1>
+      
+      <div class="installRowContainer">
+        <h2>DMG - GitHub</h2>
+        <a href="https://github.com/BlueBubblesApp/BlueBubbles-server/releases">Github Releases</a>
+      </div>
+      <div class="installRowContainer">
+        <h2>Homebrew</h2>
+        <div class="codeContainer" onclick="textToClipboard('brew install --cask bluebubbles')">
+            <p class="dollarSign">$</p>
+            <p class="codeExample">brew install --cask bluebubbles</p>
+            <p class="copyButton">Click to copy</p>
+        </div>
+    </div>
+
+    <div class="footer">
+      <div class="social-row">
+        <div class="social-media">
+          <a href="https://github.com/BlueBubblesApp"><img class="social-logo" alt="github-link"
+              src="/assets/github-logo.png" /></a>
+        </div>
+        <div class="social-media">
+          <a href="https://www.microsoft.com/store/productId/9P3XF8KJ0LSM"><img class="social-logo" alt="msstore-link"
+                  src="/assets/msstore-logo.png" /></a>
+      </div>
+        <div class="social-media">
+          <a href="https://discord.gg/6nrGRHT"><img class="social-logo" alt="discord-link"
+              src="/assets/discord-logo.jpg" /></a>
+        </div>
+        <div class="social-media">
+          <a href="https://www.reddit.com/r/BlueBubbles/"><img class="social-logo" alt="reddit-link"
+              src="/assets/reddit-logo.png" /></a>
+        </div>
+      </div>
+      <div class="links-row">
+        <a href="/">Home</a> <span>|</span>
+        <a href="/downloads">Downloads</a> <span>|</span>
+        <a href="/install">Install</a> <span>|</span>
+        <a href="/faq">FAQ</a> <span>|</span>
+        <a href="https://bluebubbles.app/web">Web App</a> <span>|</span>
+        <a href="/donate">Donate</a>
+      </div>
+      <p id="copyright">BlueBubbles</p>
+    </div>
+  </div>
+</body>
+
+</html>
