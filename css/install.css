@@ -20,7 +20,7 @@
     font-family: 'SF UI Display Bold';
     font-size: 2.2rem;
     font-style: normal;
-    margin: 0;
+    margin-bottom: 10px;
     align-self: flex-start;
 }
 
@@ -41,6 +41,16 @@
 #stepTitle {
     font-family: 'SF UI Display Bold';
     font-size: 1.8rem;
+    font-style: normal;
+    margin: 0;
+    margin-left: 40px;
+    margin-bottom: 10px;
+    align-self: flex-start;
+}
+
+#stepTitle {
+    font-family: 'SF UI Display Bold';
+    font-size: 1.6rem;
     font-style: normal;
     margin: 0;
     margin-left: 40px;
@@ -134,9 +144,11 @@
 
 .stepText {
     font-family: 'SF UI Display Light';
-    font-size: 1.4rem;
+    font-size: 1.2rem;
     font-style: normal;
-    margin: 0;
+    margin-left: 40px;
+    margin-bottom: 10px;
+    align-self: flex-start;
 }
 
 .stepTextSub {
@@ -236,7 +248,7 @@
     min-width: 75px;
 }
 
-.stepText a, .stepText span {
+.stepText a {
     color: #147efb;
     text-decoration: none;
 }
