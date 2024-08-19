@@ -94,7 +94,6 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-bottom: 8vh;
 }
 
 #donationAmountContainer>div:first-of-type {
