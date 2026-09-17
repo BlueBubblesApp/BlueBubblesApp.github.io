@@ -1,0 +1,33 @@
+---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+interface Props {
+  href: string;
+  src: ImageMetadata;
+  alt: string;
+  height: number;
+}
+const { href, src, alt, height } = Astro.props;
+
+// Height is applied as CSS, not as the `height` attribute: <Image> passes SVGs
+// straight through without resizing, so the attribute alone leaves the vector
+// badges at their intrinsic size (which is how the row ended up ragged).
+// A CSS height overrides the intrinsic size for raster and vector alike.
+---
+
+<a
+  href={href}
+  rel="noopener"
+  class="inline-flex shrink-0 rounded-lg transition-opacity hover:opacity-80
+         focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-500"
+>
+  <Image
+    {src}
+    {alt}
+    {height}
+    densities={[1, 2]}
+    loading="eager"
+    style={`height:${height}px;width:auto`}
+  />
+</a>

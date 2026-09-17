@@ -1,10 +1,86 @@
 ---
+import { Image } from 'astro:assets';
 import BaseLayout from '@layouts/BaseLayout.astro';
-import { SITE } from '@data/site';
+import StoreBadge from '@components/StoreBadge.astro';
+import { SITE, LINKS } from '@data/site';
+import { STORE_BADGES } from '@data/badges';
+import devices from '@assets/devices.png';
 ---
-<BaseLayout title="iMessage on PC and Android - BlueBubbles" description={SITE.description} keywords={SITE.keywords} path="/">
-  <div class="mx-auto max-w-6xl px-5 py-20">
-    <h1 class="text-5xl font-extrabold tracking-tight text-strong">Shell smoke test</h1>
-    <p class="mt-4 text-muted">If this renders with nav, footer, icons and dark mode, the foundation is good.</p>
-  </div>
+
+<BaseLayout
+  title="iMessage on PC and Android - BlueBubbles"
+  description={SITE.description}
+  keywords={SITE.keywords}
+  path="/"
+>
+  <section class="relative overflow-hidden">
+    {/* Ambient brand wash -- the modern descendant of the old #bg-circle. */}
+    <div
+      aria-hidden="true"
+      class="pointer-events-none absolute -top-40 left-1/2 -z-10 h-[38rem] w-[70rem]
+             -translate-x-1/2 rounded-full bg-brand-500/15 blur-3xl dark:bg-brand-500/20"
+    >
+    </div>
+
+    <div
+      class="mx-auto grid max-w-6xl items-center gap-12 px-5 py-16 md:py-24
+             lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)] lg:gap-8"
+    >
+      <div class="animate-fade-up text-center lg:text-left">
+        <p
+          class="inline-flex items-center gap-2 rounded-full border border-line bg-raised
+                 px-3 py-1 text-sm font-medium text-muted"
+        >
+          <span class="size-2 rounded-full bg-brand-500"></span>
+          Free and open source
+        </p>
+
+        <h1
+          class="mt-5 text-balance text-4xl font-extrabold leading-[1.08] tracking-tight
+                 text-strong sm:text-5xl lg:text-6xl"
+        >
+          Bringing iMessage to Windows, Linux, and Android.
+        </h1>
+
+        <p class="mt-5 text-lg text-muted sm:text-xl">Plus, it's open source!</p>
+
+        <div class="mt-8 flex flex-wrap items-center justify-center gap-3 lg:justify-start">
+          <a
+            href={LINKS.discord}
+            rel="noopener"
+            class="inline-flex items-center gap-2 rounded-full bg-brand-500 px-7 py-3.5
+                   text-base font-semibold text-white shadow-lg shadow-brand-500/25
+                   transition hover:bg-brand-600 hover:shadow-brand-500/35
+                   focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-500"
+          >
+            Join our Discord!
+          </a>
+          <a
+            href="/downloads/"
+            class="inline-flex items-center gap-2 rounded-full border border-line bg-page px-7 py-3.5
+                   text-base font-semibold text-strong transition hover:border-brand-500 hover:text-brand-500
+                   focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-500"
+          >
+            Downloads
+          </a>
+        </div>
+
+        <ul class="mt-10 flex flex-wrap items-center justify-center gap-3 lg:justify-start">
+          {STORE_BADGES.map((badge) => <li><StoreBadge {...badge} /></li>)}
+        </ul>
+      </div>
+
+      <div class="relative">
+        <Image
+          src={devices}
+          alt="BlueBubbles running side by side on an Android phone, a Windows laptop and a Linux desktop"
+          widths={[480, 720, 960, 1184]}
+          sizes="(min-width: 1024px) 600px, (min-width: 640px) 80vw, 92vw"
+          format="webp"
+          priority
+          class="mx-auto w-full max-w-2xl"
+        />
+      </div>
+    </div>
+  </section>
 </BaseLayout>
