@@ -1,0 +1,86 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import PageHeader from '@components/PageHeader.astro';
+
+interface Props {
+  title: string;
+  heading: string;
+  description: string;
+  path: string;
+  lead?: string;
+}
+const { title, heading, description, path, lead } = Astro.props;
+---
+
+<BaseLayout {title} {description} {path}>
+  <PageHeader title={heading} lead={lead} />
+  <div class="mx-auto max-w-3xl px-5 py-12">
+    <div class="legal-prose"><slot /></div>
+  </div>
+</BaseLayout>
+
+<style is:global>
+  /* These documents are generator output (App Privacy Policy Generator and
+     Termly). They are rendered verbatim via set:html and were never part of the
+     site's design system -- on the old site they shipped with no stylesheet at
+     all, no navigation and no footer, so they looked like a different website.
+     The rules below adopt them into the site's typography without touching a
+     single word of the text. */
+  .legal-prose {
+    line-height: 1.7;
+    color: var(--color-base);
+    overflow-wrap: break-word;
+  }
+  .legal-prose p { margin-block: 1rem; }
+  .legal-prose ul { list-style: disc; padding-left: 1.5rem; margin-block: 1rem; }
+  .legal-prose li { margin-block: 0.35rem; }
+  .legal-prose a {
+    color: var(--color-brand-500);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+  .legal-prose strong { color: var(--color-strong); font-weight: 600; }
+
+  /* The privacy policy has no headings at all -- it uses a bare <strong> as a
+     section title. Promote those to block-level so the document has visible
+     structure. */
+  .legal-prose > strong {
+    display: block;
+    margin-block: 2rem 0.75rem;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--color-strong);
+  }
+  .legal-prose > strong:first-child { margin-top: 0; }
+
+  /* Termly emits its structure as data-custom-class attributes rather than
+     heading elements. Its own <style> block was dropped with the extraction,
+     so map the classes onto the site's scale. */
+  .legal-prose [data-custom-class='title'] {
+    display: block;
+    font-size: 1.75rem;
+    font-weight: 800;
+    color: var(--color-strong);
+  }
+  .legal-prose [data-custom-class='subtitle'] {
+    display: block;
+    margin-top: 0.5rem;
+    color: var(--color-muted);
+  }
+  .legal-prose [data-custom-class='heading_1'] {
+    display: block;
+    margin-block: 2rem 0.5rem;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--color-strong);
+  }
+  .legal-prose [data-custom-class='heading_2'] {
+    display: block;
+    margin-block: 1.5rem 0.5rem;
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--color-strong);
+  }
+  .legal-prose [data-custom-class='body_text'] { color: var(--color-base); }
+  .legal-prose [data-custom-class='link'] { color: var(--color-brand-500); }
+</style>
