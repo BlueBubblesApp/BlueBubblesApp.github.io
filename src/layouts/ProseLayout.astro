@@ -81,6 +81,15 @@ const { title, heading, description, path, lead } = Astro.props;
     font-weight: 600;
     color: var(--color-strong);
   }
+  /* Termly used <br>-only divs as its spacing mechanism, sized by a stylesheet
+     that is dropped during extraction. Left alone they collapse into ~2400px
+     of dead vertical gap. Hiding them removes no text -- the source HTML stays
+     byte-faithful so the document can be re-exported and dropped straight in.
+     Degrades harmlessly to extra whitespace where :has() is unsupported. */
+  .legal-prose div:has(> br:only-child) { display: none; }
+  .legal-prose br:first-child,
+  .legal-prose br:last-child { display: none; }
+
   .legal-prose [data-custom-class='body_text'] { color: var(--color-base); }
   .legal-prose [data-custom-class='link'] { color: var(--color-brand-500); }
 </style>

@@ -23,6 +23,9 @@ const REQUIRED_PAGES = [
   'install/index.html',
   'faq/index.html',
   'donate/index.html',
+  // Exact casing matters: GitHub Pages is case-sensitive and this path is in
+  // the old sitemap.
+  'install/privateAPI/index.html',
   // These two keep their .html URLs. They only land at these exact paths
   // because astro.config.mjs sets build.format: 'preserve'.
   'privacy.html',

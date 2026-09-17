@@ -17,8 +17,8 @@ import devices from '@assets/devices.png';
     {/* Ambient brand wash -- the modern descendant of the old #bg-circle. */}
     <div
       aria-hidden="true"
-      class="pointer-events-none absolute -top-40 left-1/2 -z-10 h-[38rem] w-[70rem]
-             -translate-x-1/2 rounded-full bg-brand-500/15 blur-3xl dark:bg-brand-500/20"
+      class="pointer-events-none absolute -top-56 left-1/2 -z-10 h-[34rem] w-[64rem]
+             -translate-x-1/2 rounded-full bg-brand-500/8 blur-3xl dark:bg-brand-500/20"
     >
     </div>
 
@@ -65,7 +65,13 @@ import devices from '@assets/devices.png';
           </a>
         </div>
 
-        <ul class="mt-10 flex flex-wrap items-center justify-center gap-3 lg:justify-start">
+        {/* A deliberate 2x2 block. The badges have different intrinsic aspect
+            ratios, so a single flex row wraps to an accidental-looking 3 + 1 at
+            most realistic column widths. */}
+        <ul
+          class="mx-auto mt-10 grid max-w-sm grid-cols-2 items-center gap-x-5 gap-y-4
+                 justify-items-center lg:mx-0 lg:justify-items-start"
+        >
           {STORE_BADGES.map((badge) => <li><StoreBadge {...badge} /></li>)}
         </ul>
       </div>
