@@ -23,7 +23,11 @@ const { path } = Astro.props;
         class="grid size-7 place-items-center rounded-bubble rounded-bl-sm bg-accent-solid text-white"
         aria-hidden="true"
       >
-        <svg viewBox="0 0 24 24" class="size-4" fill="currentColor">
+        <!-- viewBox is shifted up by 1 so the glyph sits down by 1: the bubble
+           path's bounding box is centred at y=11 in a 24-unit box, so with a
+           plain "0 0 24 24" it rides high in the rounded square. Done here
+           rather than by editing the path, which ends on an absolute command. -->
+        <svg viewBox="0 -1 24 24" class="size-4" fill="currentColor">
           <path d="M12 3c-5 0-9 3.2-9 7.2 0 2.3 1.3 4.3 3.4 5.6-.2.9-.8 2.3-1.6 3.2 0 0 2.6-.4 4.5-1.8.9.2 1.8.3 2.7.3 5 0 9-3.2 9-7.3S17 3 12 3z" />
         </svg>
       </span>
