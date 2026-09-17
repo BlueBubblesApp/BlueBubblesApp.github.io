@@ -5,12 +5,18 @@ GitHub Pages.
 
 ## Requirements
 
-Node **>= 22.12** (Astro 7). The repo pins a version in `.nvmrc`:
+Node **>= 22.12** (Astro 7). The repo pins a version in `.nvmrc`, which both
+fnm and nvm read:
 
 ```bash
-nvm use
-npm install
+fnm use && npm install    # or: nvm use && npm install
 ```
+
+With `fnm env --use-on-cd` in your shell profile, `cd`-ing into the repo
+switches Node automatically and you can skip `fnm use` entirely.
+
+If Node is too old you get `Node.js vX is not supported by Astro!` rather than
+a running server.
 
 ## Commands
 
