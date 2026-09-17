@@ -1,0 +1,28 @@
+---
+import { Icon } from 'astro-icon/components';
+import type { StoreTarget } from '@data/stores';
+
+type Props = StoreTarget;
+const { href, kicker, name, icon, label } = Astro.props;
+---
+
+<a
+  href={href}
+  rel="noopener"
+  aria-label={label}
+  class="group flex items-center gap-3 rounded-card border border-line bg-raised px-4 py-2.5
+         transition hover:-translate-y-0.5 hover:border-accent hover:bg-sunken hover:shadow-md
+         focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+>
+  <Icon
+    name={icon}
+    class="size-7 shrink-0 text-strong transition-colors group-hover:text-accent"
+    aria-hidden="true"
+  />
+  <span class="min-w-0 text-left leading-tight">
+    <span class="block text-[0.625rem] font-medium uppercase tracking-wider text-muted"
+      >{kicker}</span
+    >
+    <span class="block truncate text-sm font-semibold text-strong">{name}</span>
+  </span>
+</a>
