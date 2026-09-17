@@ -75,3 +75,11 @@ export const SOCIAL_LINKS: readonly SocialLink[] = [
   { href: LINKS.discord, label: 'Discord', icon: 'simple-icons:discord' },
   { href: LINKS.reddit, label: 'Reddit', icon: 'simple-icons:reddit' },
 ] as const;
+
+/** Public, non-secret PayPal client id -- it is already published in the
+ *  current site's markup and is safe in client code by design. */
+export const PAYPAL_CLIENT_ID =
+  'Ad0ZQ_9WlFAQQ7KEYqX4IxuvLcp51X6MdINA7crdCGRYgesVQrefxQv0HdIZpXb_fwIzYYQPerRuELWq';
+
+export const DONATION_PRESETS = [1, 5, 10, 25] as const;
+export const DEFAULT_DONATION = 5;
