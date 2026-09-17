@@ -31,12 +31,12 @@ const groups = ['Client', 'Server'] as const;
                   href={`/downloads/${platform.slug}`}
                   class="group flex h-full flex-col items-center justify-center gap-4 rounded-card
                          border border-line bg-raised px-6 py-10 text-center transition
-                         hover:border-brand-500 hover:bg-sunken
-                         focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-500"
+                         hover:border-accent hover:bg-sunken
+                         focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
                 >
                   <Icon
                     name={platform.icon}
-                    class="size-12 text-muted transition-colors group-hover:text-brand-500"
+                    class="size-12 text-muted transition-colors group-hover:text-accent"
                   />
                   <span class="text-lg font-semibold text-strong">{platform.label}</span>
                 </a>
@@ -51,11 +51,11 @@ const groups = ['Client', 'Server'] as const;
       If you would like to build from source, you can find instructions <a
         href={BUILD_FROM_SOURCE.client}
         rel="noopener"
-        class="font-medium text-brand-500 underline underline-offset-2">here (client)</a
+        class="font-medium text-accent underline underline-offset-2">here (client)</a
       > or <a
         href={BUILD_FROM_SOURCE.server}
         rel="noopener"
-        class="font-medium text-brand-500 underline underline-offset-2">here (server)</a
+        class="font-medium text-accent underline underline-offset-2">here (server)</a
       >.
     </p>
   </div>

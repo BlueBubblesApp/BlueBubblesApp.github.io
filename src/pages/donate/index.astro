@@ -39,9 +39,9 @@ const paypalSdk =
               aria-checked={amount === DEFAULT_DONATION ? 'true' : 'false'}
               data-amount={amount}
               class="dono-button rounded-full border border-line bg-page px-4 py-2.5 text-sm font-semibold
-                     text-strong transition hover:border-brand-500
-                     aria-checked:border-brand-500 aria-checked:bg-brand-500 aria-checked:text-white
-                     focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-500"
+                     text-strong transition hover:border-accent
+                     aria-checked:border-accent aria-checked:bg-accent-solid aria-checked:text-white
+                     focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
             >
               ${amount}
             </button>
@@ -53,9 +53,9 @@ const paypalSdk =
           aria-checked="false"
           data-amount="custom"
           class="dono-button rounded-full border border-line bg-page px-4 py-2.5 text-sm font-semibold
-                 text-strong transition hover:border-brand-500
-                 aria-checked:border-brand-500 aria-checked:bg-brand-500 aria-checked:text-white
-                 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-500"
+                 text-strong transition hover:border-accent
+                 aria-checked:border-accent aria-checked:bg-accent-solid aria-checked:text-white
+                 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
         >Custom $</button>
       </div>
 
@@ -73,8 +73,8 @@ const paypalSdk =
             class="w-full rounded-full border border-line bg-page px-4 py-2.5 text-strong
                    [appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none
                    [&::-webkit-outer-spin-button]:appearance-none
-                   focus-visible:border-brand-500 focus-visible:outline-2
-                   focus-visible:outline-offset-2 focus-visible:outline-brand-500"
+                   focus-visible:border-accent focus-visible:outline-2
+                   focus-visible:outline-offset-2 focus-visible:outline-accent"
           />
         </div>
         <p id="customError" role="alert" class="mt-1.5 h-4 text-sm text-rose-500"></p>
@@ -85,7 +85,7 @@ const paypalSdk =
 
     <div id="loadingContainer" hidden class="flex flex-col items-center gap-4 py-16">
       <div
-        class="size-10 animate-spin rounded-full border-4 border-line border-t-brand-500"
+        class="size-10 animate-spin rounded-full border-4 border-line border-t-accent"
         role="status"
         aria-label="Processing your donation"
       >

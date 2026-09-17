@@ -24,17 +24,17 @@ const { id, question } = Astro.props;
   name="faq"
   data-faq-item
   class="group scroll-mt-28 overflow-hidden rounded-card border border-line bg-raised
-         transition-colors open:border-brand-500/40"
+         transition-colors open:border-accent/40"
 >
   <summary
     class="flex cursor-pointer list-none items-center justify-between gap-4 px-5 py-4
-           font-medium text-strong transition-colors hover:text-brand-500
+           font-medium text-strong transition-colors hover:text-accent
            [&::-webkit-details-marker]:hidden
-           focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-brand-500"
+           focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-accent"
   >
     <span data-faq-question>{question}</span>
     <svg
-      class="size-5 shrink-0 text-brand-500 transition-transform group-open:rotate-180"
+      class="size-5 shrink-0 text-accent transition-transform group-open:rotate-180"
       viewBox="0 0 20 20"
       fill="none"
       stroke="currentColor"
@@ -61,7 +61,7 @@ const { id, question } = Astro.props;
     margin-bottom: 0;
   }
   .faq-answer :global(a) {
-    color: var(--color-brand-500);
+    color: var(--color-accent);
     text-decoration: underline;
     text-underline-offset: 2px;
   }
@@ -88,7 +88,7 @@ const { id, question } = Astro.props;
     border-radius: var(--radius-card);
   }
   .faq-answer :global(.compat-table > div:focus-visible) {
-    outline: 2px solid var(--color-brand-500);
+    outline: 2px solid var(--color-accent);
     outline-offset: 2px;
   }
   .faq-answer :global(.compat-table table) {
@@ -98,7 +98,8 @@ const { id, question } = Astro.props;
     text-align: left;
   }
   .faq-answer :global(.compat-table thead) {
-    background-color: var(--color-brand-500);
+    /* The solid variant, not the text accent: white sits on this. */
+    background-color: var(--color-accent-solid);
     color: #fff;
   }
   .faq-answer :global(.compat-table th) {

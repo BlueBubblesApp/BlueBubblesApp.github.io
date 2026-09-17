@@ -18,8 +18,8 @@ const year = new Date().getFullYear();
               rel="noopener"
               aria-label={social.label}
               class="grid size-10 place-items-center rounded-full text-muted transition-colors
-                     hover:bg-sunken hover:text-brand-500
-                     focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-500"
+                     hover:bg-sunken hover:text-accent
+                     focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
             >
               <Icon name={social.icon} class="size-5" />
             </a>
@@ -36,8 +36,8 @@ const year = new Date().getFullYear();
               <a
                 href={link.href}
                 {...link.external ? { rel: 'noopener' } : {}}
-                class="text-muted transition-colors hover:text-brand-500
-                       focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-500"
+                class="text-muted transition-colors hover:text-accent
+                       focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
               >
                 {link.label}
               </a>

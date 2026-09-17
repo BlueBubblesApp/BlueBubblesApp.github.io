@@ -57,6 +57,18 @@
   --text-base:      #334155;
   --text-muted:     #64748b;
   --border-base:    #e2e8f0;
+
+  /* Accent tokens.
+     brand-500 (#147efb) is the BlueBubbles blue, but it only reaches 3.88:1
+     against white -- below WCAG AA for normal text, both as a link colour and
+     as a button background carrying white text. The old site had the same
+     problem. So: brand-600 for accent text on light surfaces and for any solid
+     that white text sits on (5.57:1), brand-400 for accent text on dark
+     (7.34:1). brand-500 itself stays for decorative fills, where contrast
+     requirements do not apply. */
+  --accent:              var(--color-brand-600);
+  --accent-solid:        var(--color-brand-600);
+  --accent-solid-hover:  var(--color-brand-700);
 }
 
 .dark {
@@ -67,6 +79,10 @@
   --text-base:      #cbd5e1;
   --text-muted:     #94a3b8;
   --border-base:    #253041;
+
+  --accent:              var(--color-brand-400);
+  --accent-solid:        var(--color-brand-600);
+  --accent-solid-hover:  var(--color-brand-500);
 }
 
 @theme inline {
@@ -77,6 +93,10 @@
   --color-base:   var(--text-base);
   --color-muted:  var(--text-muted);
   --color-line:   var(--border-base);
+
+  --color-accent:             var(--accent);
+  --color-accent-solid:       var(--accent-solid);
+  --color-accent-solid-hover: var(--accent-solid-hover);
 }
 
 /* The old stylesheet hid the scrollbar entirely

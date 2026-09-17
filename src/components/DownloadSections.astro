@@ -32,19 +32,19 @@ const { sections } = Astro.props;
                         href={link.href}
                         rel="noopener"
                         class="group flex items-center gap-3 rounded-card border border-line bg-raised
-                               px-4 py-3.5 transition hover:border-brand-500 hover:bg-sunken
-                               focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-500"
+                               px-4 py-3.5 transition hover:border-accent hover:bg-sunken
+                               focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
                       >
                         {link.icon && (
                           <Icon
                             name={link.icon}
-                            class="size-5 shrink-0 text-muted transition-colors group-hover:text-brand-500"
+                            class="size-5 shrink-0 text-muted transition-colors group-hover:text-accent"
                           />
                         )}
                         <span class="font-medium text-strong">{link.label}</span>
                         <Icon
                           name="lucide:arrow-up-right"
-                          class="ml-auto size-4 shrink-0 text-muted transition-colors group-hover:text-brand-500"
+                          class="ml-auto size-4 shrink-0 text-muted transition-colors group-hover:text-accent"
                         />
                       </a>
                       {link.secondary && (
@@ -52,7 +52,7 @@ const { sections } = Astro.props;
                           <a
                             href={link.secondary.href}
                             rel="noopener"
-                            class="underline underline-offset-2 transition-colors hover:text-brand-500"
+                            class="underline underline-offset-2 transition-colors hover:text-accent"
                           >
                             {link.secondary.label}
                           </a>
