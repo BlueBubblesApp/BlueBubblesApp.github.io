@@ -1,0 +1,130 @@
+---
+interface Props {
+  id: string;
+  question: string;
+}
+const { id, question } = Astro.props;
+---
+
+<!--
+  Native <details>/<summary>. `name="faq"` makes the browser close sibling
+  panels automatically, reproducing the old page's exclusive-accordion
+  behaviour with no JavaScript at all.
+
+  Three things this fixes over the old implementation, which animated a
+  max-height on a plain <div>:
+    - Ctrl+F finds text inside a closed panel and the browser opens it.
+    - A collapsed panel is no longer focusable-but-invisible, so keyboard
+      users can't Tab into links they can't see.
+    - location.hash pointing at a closed panel opens it, so every answer is
+      finally deep-linkable.
+-->
+<details
+  id={id}
+  name="faq"
+  data-faq-item
+  class="group scroll-mt-28 overflow-hidden rounded-card border border-line bg-raised
+         transition-colors open:border-brand-500/40"
+>
+  <summary
+    class="flex cursor-pointer list-none items-center justify-between gap-4 px-5 py-4
+           font-medium text-strong transition-colors hover:text-brand-500
+           [&::-webkit-details-marker]:hidden
+           focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-brand-500"
+  >
+    <span data-faq-question>{question}</span>
+    <svg
+      class="size-5 shrink-0 text-brand-500 transition-transform group-open:rotate-180"
+      viewBox="0 0 20 20"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      aria-hidden="true"
+    >
+      <path d="M5 7.5 10 12.5 15 7.5" stroke-linecap="round" stroke-linejoin="round"></path>
+    </svg>
+  </summary>
+
+  <div class="faq-answer border-t border-line px-5 py-4 text-base">
+    <slot />
+  </div>
+</details>
+
+<style>
+  .faq-answer :global(p) {
+    margin-block: 0.75rem;
+  }
+  .faq-answer :global(p:first-child) {
+    margin-top: 0;
+  }
+  .faq-answer :global(p:last-child) {
+    margin-bottom: 0;
+  }
+  .faq-answer :global(a) {
+    color: var(--color-brand-500);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+  .faq-answer :global(ul),
+  .faq-answer :global(ol) {
+    margin-block: 0.75rem;
+    padding-left: 1.5rem;
+  }
+  .faq-answer :global(ul) { list-style: disc; }
+  .faq-answer :global(ol) { list-style: decimal; }
+  .faq-answer :global(li) { margin-block: 0.25rem; }
+  .faq-answer :global(strong) { font-weight: 600; color: var(--color-strong); }
+
+  /* Compatibility matrices. The old page rendered these in a plain <div> with
+     no overflow handling, on a page whose CSS set `overflow-x: hidden` on both
+     html and body -- so on a phone the right-hand columns were unreachable.
+     The wrapper is focusable so it can also be scrolled from the keyboard. */
+  .faq-answer :global(.compat-table) {
+    margin-block: 1.25rem;
+  }
+  .faq-answer :global(.compat-table > div) {
+    overflow-x: auto;
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-card);
+  }
+  .faq-answer :global(.compat-table > div:focus-visible) {
+    outline: 2px solid var(--color-brand-500);
+    outline-offset: 2px;
+  }
+  .faq-answer :global(.compat-table table) {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.875rem;
+    text-align: left;
+  }
+  .faq-answer :global(.compat-table thead) {
+    background-color: var(--color-brand-500);
+    color: #fff;
+  }
+  .faq-answer :global(.compat-table th) {
+    padding: 0.75rem 1rem;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .faq-answer :global(.compat-table td) {
+    padding: 0.625rem 1rem;
+    border-top: 1px solid var(--color-line);
+    vertical-align: top;
+  }
+  .faq-answer :global(.compat-table td:first-child) {
+    min-width: 13rem;
+    font-weight: 500;
+    color: var(--color-strong);
+  }
+  .faq-answer :global(.compat-table tbody tr:nth-of-type(even)) {
+    background-color: var(--color-sunken);
+  }
+
+  /* Footnote markers. The old page hardcoded `color: red` / `color: green`,
+     which fails contrast against a dark background. */
+  .faq-answer :global(.fn-marker) { font-weight: 700; }
+  .faq-answer :global(.fn-ok)   { color: var(--color-emerald-600); }
+  .faq-answer :global(.fn-warn) { color: var(--color-rose-600); }
+  :global(.dark) .faq-answer :global(.fn-ok)   { color: var(--color-emerald-400); }
+  :global(.dark) .faq-answer :global(.fn-warn) { color: var(--color-rose-400); }
+</style>
