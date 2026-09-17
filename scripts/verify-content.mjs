@@ -29,11 +29,60 @@ const INTENTIONALLY_REMOVED = new Map([
   ['Click to copy', 'replaced by a real <button> labelled "Copy"'],
 ]);
 
+/**
+ * Whole sections deliberately removed from a document, with the reason. The
+ * section is cut out of the OLD text before comparing, so its removal is
+ * recorded here instead of silencing the check -- every other phrase in the
+ * file still has to match.
+ */
+const REMOVED_SECTIONS = {
+  'tos.html': [
+    {
+      heading: '14.',
+      until: '15.',
+      reason:
+        'Binding arbitration, the jury-trial waiver and the class-action waiver ' +
+        'were removed. BlueBubbles is an individual, not an incorporated entity, ' +
+        'and under AAA consumer rules most arbitration costs fall on the drafting ' +
+        'party, so the clause created cost exposure rather than protection. ' +
+        'Section 14 now states informal resolution followed by the Maryland courts, ' +
+        'matching the Governing Law clause in section 13.',
+    },
+  ],
+};
+
+/** Cut a Termly heading_1 section (and its body) out of raw HTML. */
+const cutSection = (html, heading, until) => {
+  const headings = [...html.matchAll(/<div[^>]*data-custom-class="heading_1"[^>]*>/g)];
+  const titleOf = (m) => {
+    const close = html.indexOf('</div>', m.index + m[0].length);
+    return html
+      .slice(m.index + m[0].length, close)
+      .replace(/<[^>]+>/g, '')
+      .replace(/\u00a0/g, ' ')
+      .trim();
+  };
+  const start = headings.find((m) => titleOf(m).startsWith(heading));
+  const end = headings.find((m) => titleOf(m).startsWith(until));
+  if (!start || !end) return html;
+  return html.slice(0, start.index) + html.slice(end.index);
+};
+
 /** Deliberate transformations applied to old copy before comparing.
  *  The old FAQ prefixed every question with "Q: " because the questions were
  *  plain <div>s with nothing to mark them as questions. They are <summary>
  *  elements now, so the prefix is redundant. */
-const TRANSFORMS = [(text) => text.replace(/^Q:\s*/, '')];
+const TRANSFORMS = [
+  (text) => text.replace(/^Q:\s*/, ''),
+  // The generator left the provider name blank ("provided by  at no cost").
+  // Filling it is an intentional edit, so apply the same fill to the old copy
+  // before comparing rather than exempting the sentence from the check.
+  (text) =>
+    text.replace(
+      'This SERVICE is provided by at no cost',
+      'This SERVICE is provided by the BlueBubbles Development Team at no cost'
+    ),
+];
 
 const applyTransforms = (text) => TRANSFORMS.reduce((acc, fn) => fn(acc), text);
 
@@ -59,8 +108,10 @@ const decode = (s) =>
  * instead would run the nav links straight into the first heading, because the
  * old markup has no punctuation between them.
  */
-const textNodes = (file) => {
-  const html = readFileSync(file, 'utf8')
+const textNodes = (file, removals = []) => {
+  let html = readFileSync(file, 'utf8');
+  for (const { heading, until } of removals) html = cutSection(html, heading, until);
+  html = html
     .replace(/<(script|style|head)[^>]*>[\s\S]*?<\/\1>/gi, ' ')
     .replace(/<!--[\s\S]*?-->/g, ' ');
   return html
@@ -88,7 +139,7 @@ for (const [oldPath, newPath] of PAGES) {
 
   const newSquashed = squash(textNodes(newPath).join(' '));
 
-  const phrases = textNodes(oldPath).filter(
+  const phrases = textNodes(oldPath, REMOVED_SECTIONS[oldPath] ?? []).filter(
     (p) => p.length > 6 && !CHROME.has(p.toLowerCase())
   );
 
@@ -99,7 +150,9 @@ for (const [oldPath, newPath] of PAGES) {
   });
 
   if (missing.length === 0) {
-    console.log(`       ok  ${oldPath}  (${phrases.length} phrases)`);
+    const cut = REMOVED_SECTIONS[oldPath];
+    const note = cut ? `, ${cut.length} section(s) deliberately removed` : '';
+    console.log(`       ok  ${oldPath}  (${phrases.length} phrases${note})`);
   } else {
     failures += missing.length;
     console.error(`::error::${missing.length} phrase(s) missing from ${newPath}`);
