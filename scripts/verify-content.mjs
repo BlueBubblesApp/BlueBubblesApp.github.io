@@ -27,6 +27,13 @@ const PAGES = [
 /** Copy that is intentionally gone, with the reason. */
 const INTENTIONALLY_REMOVED = new Map([
   ['Click to copy', 'replaced by a real <button> labelled "Copy"'],
+  [
+    'Company',
+    'The ToS defined BlueBubbles as "Company". There is no incorporated entity ' +
+      'behind the project, so the defined term is now "BlueBubbles" and the ' +
+      'sentence says plainly that it is run by an individual developer. Every ' +
+      'other use in the document was already "we"/"us"/"our".',
+  ],
 ]);
 
 /**
@@ -143,10 +150,24 @@ for (const [oldPath, newPath] of PAGES) {
     (p) => p.length > 6 && !CHROME.has(p.toLowerCase())
   );
 
+  // Count occurrences, not just presence. A short phrase can appear elsewhere
+  // on the page by coincidence -- "Company" as a defined term still matched
+  // because "company name" occurs in an unrelated clause -- so presence alone
+  // lets a real deletion pass. Requiring the new page to contain a phrase at
+  // least as many times as the old one closes that hole.
+  const occurrences = (haystack, needle) => {
+    let count = 0;
+    for (let i = haystack.indexOf(needle); i !== -1; i = haystack.indexOf(needle, i + 1)) count++;
+    return count;
+  };
+
+  const oldSquashed = squash(phrases.map(applyTransforms).join(' '));
+
   const missing = phrases.filter((p) => {
     if (INTENTIONALLY_REMOVED.has(p)) return false;
     const wanted = squash(applyTransforms(p));
-    return wanted && !newSquashed.includes(wanted);
+    if (!wanted) return false;
+    return occurrences(newSquashed, wanted) < occurrences(oldSquashed, wanted);
   });
 
   if (missing.length === 0) {
