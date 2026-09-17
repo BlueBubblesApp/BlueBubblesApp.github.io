@@ -44,7 +44,9 @@ export default defineConfig({
       provider: fontProviders.fontsource(),
       name: 'Inter',
       cssVariable: '--font-inter',
-      weights: [400, 500, 600, 700, 800],
+      // A variable-font range: one file covering 400-800, instead of five
+      // static weights (which cost ~122kB together).
+      weights: ['400 800'],
       styles: ['normal'],
       subsets: ['latin'],
       fallbacks: ['ui-sans-serif', 'system-ui', 'sans-serif'],
