@@ -24,4 +24,13 @@ const faq = defineCollection({
   }),
 });
 
-export const collections = { faq };
+const install = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/install' }),
+  schema: z.object({
+    title: z.string(),
+    /** Section order within the guide. */
+    order: z.number().int().positive(),
+  }),
+});
+
+export const collections = { faq, install };

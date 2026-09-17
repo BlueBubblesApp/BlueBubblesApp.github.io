@@ -24,6 +24,13 @@ export default defineConfig({
   // Matches GitHub Pages, which already 301s /downloads -> /downloads/.
   trailingSlash: 'ignore',
 
+  markdown: {
+    // Off for fidelity and consistency: the FAQ answers are raw HTML blocks,
+    // which remark passes through untouched, so smart quotes would apply to the
+    // install guide only and the site's punctuation would not match itself.
+    smartypants: false,
+  },
+
   image: {
     layout: 'constrained',
     responsiveStyles: true,
