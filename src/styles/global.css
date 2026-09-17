@@ -1,0 +1,98 @@
+@import "tailwindcss";
+
+/* Class-based dark mode. The toggle sets `.dark` on <html>; the inline script
+   in BaseLayout applies it before first paint so there is no flash. */
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  /* ---- Brand ------------------------------------------------------------
+     --color-brand-500 is #147efb, the original BlueBubbles blue. It is the
+     one thing carried over verbatim from the old stylesheet. */
+  --color-brand-50:  #eff6ff;
+  --color-brand-100: #dbeafe;
+  --color-brand-200: #bfdbfe;
+  --color-brand-300: #93c5fd;
+  --color-brand-400: #4ea3fc;
+  --color-brand-500: #147efb;
+  --color-brand-600: #0a63d6;
+  --color-brand-700: #0a4ead;
+  --color-brand-800: #0e428c;
+  --color-brand-900: #123a74;
+  --color-brand-950: #0c2449;
+
+  /* The grey "received message" bubble, light and dark. */
+  --color-bubble-light: #e9e9eb;
+  --color-bubble-dark:  #26262a;
+
+  /* ---- Type -------------------------------------------------------------
+     --font-inter is injected by Astro's fonts API (see astro.config.mjs).
+     The fallback stack is a complete design in its own right: if the webfont
+     is ever dropped, only astro.config.mjs changes. */
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system,
+               "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas,
+               "Liberation Mono", monospace;
+
+  /* ---- Shape ------------------------------------------------------------ */
+  --radius-card: 0.875rem;
+  --radius-bubble: 1.25rem;
+
+  --animate-fade-up: fade-up 0.5s cubic-bezier(0.19, 1, 0.22, 1) both;
+}
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(0.75rem); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* ---- Semantic surface tokens -------------------------------------------
+   Defined as plain custom properties so `.dark` can override them, then
+   exposed to Tailwind via `@theme inline` (which keeps the var reference
+   rather than resolving it at build time). */
+:root {
+  --surface-page:   #ffffff;
+  --surface-raised: #f8fafc;
+  --surface-sunken: #f1f5f9;
+  --text-strong:    #0f172a;
+  --text-base:      #334155;
+  --text-muted:     #64748b;
+  --border-base:    #e2e8f0;
+}
+
+.dark {
+  --surface-page:   #0a0e14;
+  --surface-raised: #121821;
+  --surface-sunken: #161d28;
+  --text-strong:    #f1f5f9;
+  --text-base:      #cbd5e1;
+  --text-muted:     #94a3b8;
+  --border-base:    #253041;
+}
+
+@theme inline {
+  --color-page:   var(--surface-page);
+  --color-raised: var(--surface-raised);
+  --color-sunken: var(--surface-sunken);
+  --color-strong: var(--text-strong);
+  --color-base:   var(--text-base);
+  --color-muted:  var(--text-muted);
+  --color-line:   var(--border-base);
+}
+
+/* The old stylesheet hid the scrollbar entirely
+   (`::-webkit-scrollbar { width: 0 }`). That is an accessibility regression
+   and is deliberately not carried over. */
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Anchored headings must clear the sticky header. */
+:target {
+  scroll-margin-top: 6rem;
+}

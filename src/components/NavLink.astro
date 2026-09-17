@@ -1,0 +1,33 @@
+---
+interface Props {
+  href: string;
+  label: string;
+  currentPath: string;
+  external?: boolean;
+  class?: string;
+}
+
+const { href, label, currentPath, external = false, class: className = '' } = Astro.props;
+
+const norm = (p: string) => (p !== '/' && p.endsWith('/') ? p.slice(0, -1) : p);
+
+// The startsWith branch is what highlights "Downloads" while on
+// /downloads/android -- matching the `is-open` class the old subpages set.
+const isCurrent =
+  !external &&
+  (norm(currentPath) === norm(href) ||
+    (href !== '/' && norm(currentPath).startsWith(norm(href) + '/')));
+---
+
+<a
+  href={href}
+  aria-current={isCurrent ? 'page' : undefined}
+  {...external ? { rel: 'noopener' } : {}}
+  class:list={[
+    'rounded-md px-3 py-2 text-sm font-medium text-base transition-colors',
+    'hover:text-brand-500',
+    'focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-500',
+    'aria-[current=page]:text-brand-500 aria-[current=page]:font-semibold',
+    className,
+  ]}
+>{label}</a>
