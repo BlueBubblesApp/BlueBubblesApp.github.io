@@ -18,3 +18,4 @@ jobs:
       - run: npx astro check
       - run: npx astro build
       - run: node scripts/verify-build.mjs
+      - run: node scripts/verify-content.mjs

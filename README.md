@@ -20,7 +20,7 @@ npm install
 | `npm run build` | Type check, then build to `dist/` |
 | `npm run preview` | Serve the built `dist/` |
 | `npm run check` | Type check only |
-| `npm run verify` | Assert the build output is deployable (also runs in CI) |
+| `npm run verify` | Assert the build output is deployable and that no original copy was lost (also runs in CI) |
 
 ## Where things live
 
@@ -69,6 +69,18 @@ platform download pages are three explicit files rather than one `[platform]`
 route.
 
 `npm run verify` fails the build if any known URL stops resolving.
+
+## Content fidelity
+
+`scripts/verify-content.mjs` compares the visible text of every page of the old
+hand-written site against its rebuilt counterpart, phrase by phrase (646 of
+them), and fails if anything went missing. It runs in CI and skips
+automatically once the legacy `.html` files are deleted.
+
+Two deliberate differences are declared in the script rather than hidden:
+the FAQ's old `"Q: "` question prefix (redundant now that questions are
+`<summary>` elements) and `"Click to copy"` (replaced by a real button labelled
+`Copy`).
 
 **2. Never create a `/web` path here.**
 

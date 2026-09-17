@@ -40,6 +40,10 @@ jobs:
       - name: Verify critical files and URL preservation
         run: node scripts/verify-build.mjs
 
+      # Skips automatically once the legacy .html files are removed.
+      - name: Verify original copy survived
+        run: node scripts/verify-content.mjs
+
       - uses: actions/upload-pages-artifact@v5
         with:
           path: ./dist
