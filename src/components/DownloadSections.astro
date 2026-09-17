@@ -1,0 +1,71 @@
+---
+import { Icon } from 'astro-icon/components';
+import CopyCommand from './CopyCommand.astro';
+import type { DownloadSection } from '@data/downloads';
+
+interface Props {
+  sections: readonly DownloadSection[];
+}
+const { sections } = Astro.props;
+---
+
+<div class="space-y-12">
+  {
+    sections.map((section) => (
+      <section>
+        <h2 class="text-xl font-bold text-strong">{section.heading}</h2>
+
+        <div class="mt-4 space-y-6">
+          {section.blocks.map((block) => (
+            <div>
+              {block.heading && (
+                <h3 class="mb-2 text-base font-semibold text-strong">{block.heading}</h3>
+              )}
+
+              {block.kind === 'command' ? (
+                <CopyCommand display={block.command.display} copy={block.command.copy} />
+              ) : (
+                <ul class="grid gap-3 sm:grid-cols-2">
+                  {block.links.map((link) => (
+                    <li>
+                      <a
+                        href={link.href}
+                        rel="noopener"
+                        class="group flex items-center gap-3 rounded-card border border-line bg-raised
+                               px-4 py-3.5 transition hover:border-brand-500 hover:bg-sunken
+                               focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-500"
+                      >
+                        {link.icon && (
+                          <Icon
+                            name={link.icon}
+                            class="size-5 shrink-0 text-muted transition-colors group-hover:text-brand-500"
+                          />
+                        )}
+                        <span class="font-medium text-strong">{link.label}</span>
+                        <Icon
+                          name="lucide:arrow-up-right"
+                          class="ml-auto size-4 shrink-0 text-muted transition-colors group-hover:text-brand-500"
+                        />
+                      </a>
+                      {link.secondary && (
+                        <p class="mt-1.5 px-1 text-sm text-muted">
+                          <a
+                            href={link.secondary.href}
+                            rel="noopener"
+                            class="underline underline-offset-2 transition-colors hover:text-brand-500"
+                          >
+                            {link.secondary.label}
+                          </a>
+                        </p>
+                      )}
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+          ))}
+        </div>
+      </section>
+    ))
+  }
+</div>

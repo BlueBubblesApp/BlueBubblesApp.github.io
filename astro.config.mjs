@@ -59,7 +59,6 @@ export default defineConfig({
           url.pathname += '/';
           item.url = url.href;
         }
-        item.changefreq = 'monthly';
         return item;
       },
     }),

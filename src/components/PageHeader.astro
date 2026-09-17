@@ -1,0 +1,15 @@
+---
+interface Props {
+  title: string;
+  lead?: string;
+}
+const { title, lead } = Astro.props;
+---
+
+<div class="border-b border-line bg-raised">
+  <div class="mx-auto max-w-5xl px-5 py-12 sm:py-16">
+    <h1 class="text-4xl font-extrabold tracking-tight text-strong sm:text-5xl">{title}</h1>
+    {lead && <p class="mt-4 max-w-2xl text-lg text-muted">{lead}</p>}
+    <slot />
+  </div>
+</div>

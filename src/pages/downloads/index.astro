@@ -1,0 +1,62 @@
+---
+import { Icon } from 'astro-icon/components';
+import BaseLayout from '@layouts/BaseLayout.astro';
+import PageHeader from '@components/PageHeader.astro';
+import { PLATFORMS, BUILD_FROM_SOURCE } from '@data/downloads';
+import { SITE } from '@data/site';
+
+const groups = ['Client', 'Server'] as const;
+---
+
+<BaseLayout
+  title="BlueBubbles - Downloads"
+  description="Download BlueBubbles for Android, Windows, Linux and macOS."
+  keywords={SITE.keywords}
+  path="/downloads/"
+>
+  <PageHeader
+    title="Downloads"
+    lead="Grab the client for the device you want to read your messages on, and the server for the Mac that hosts them."
+  />
+
+  <div class="mx-auto max-w-5xl px-5 py-12">
+    {
+      groups.map((group) => (
+        <section class="mb-12">
+          <h2 class="text-xl font-bold text-strong">{group}</h2>
+          <ul class="mt-4 grid gap-4 sm:grid-cols-2">
+            {PLATFORMS.filter((platform) => platform.group === group).map((platform) => (
+              <li>
+                <a
+                  href={`/downloads/${platform.slug}`}
+                  class="group flex h-full flex-col items-center justify-center gap-4 rounded-card
+                         border border-line bg-raised px-6 py-10 text-center transition
+                         hover:border-brand-500 hover:bg-sunken
+                         focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-500"
+                >
+                  <Icon
+                    name={platform.icon}
+                    class="size-12 text-muted transition-colors group-hover:text-brand-500"
+                  />
+                  <span class="text-lg font-semibold text-strong">{platform.label}</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </section>
+      ))
+    }
+
+    <p class="max-w-2xl text-muted">
+      If you would like to build from source, you can find instructions <a
+        href={BUILD_FROM_SOURCE.client}
+        rel="noopener"
+        class="font-medium text-brand-500 underline underline-offset-2">here (client)</a
+      > or <a
+        href={BUILD_FROM_SOURCE.server}
+        rel="noopener"
+        class="font-medium text-brand-500 underline underline-offset-2">here (server)</a
+      >.
+    </p>
+  </div>
+</BaseLayout>

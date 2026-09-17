@@ -1,0 +1,70 @@
+---
+interface Props {
+  /** Text shown to the user. */
+  display: string;
+  /** Text placed on the clipboard. Defaults to `display`. */
+  copy?: string;
+  /** Show the leading shell prompt. */
+  prompt?: boolean;
+}
+const { display, copy = display, prompt = true } = Astro.props;
+---
+
+<div
+  class="flex items-center gap-3 overflow-x-auto rounded-card border border-line
+         bg-sunken px-4 py-3 font-mono text-sm"
+>
+  {prompt && <span aria-hidden="true" class="select-none text-brand-500">$</span>}
+  <code class="flex-1 whitespace-pre text-strong">{display}</code>
+  <button
+    type="button"
+    class="js-copy shrink-0 rounded-md border border-line bg-page px-2.5 py-1 font-sans
+           text-xs font-medium text-muted transition
+           hover:border-brand-500 hover:text-brand-500
+           focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-500"
+    data-copy={copy}
+  >Copy</button>
+  <span class="js-copy-status sr-only" role="status" aria-live="polite"></span>
+</div>
+
+<script>
+  // The old implementation was an onclick on a <div> using document.execCommand:
+  // not focusable, not keyboard-operable, not announced, and no success
+  // feedback. This is a real <button> with a live region, and one delegated
+  // listener serves every command block on the page.
+  async function writeClipboard(text: string) {
+    if (navigator.clipboard?.writeText && window.isSecureContext) {
+      await navigator.clipboard.writeText(text);
+      return;
+    }
+    // Fallback for non-secure contexts and older browsers.
+    const ta = document.createElement('textarea');
+    ta.value = text;
+    ta.setAttribute('readonly', '');
+    ta.style.cssText = 'position:fixed;top:-9999px;opacity:0';
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand('copy');
+    ta.remove();
+  }
+
+  document.addEventListener('click', async (event) => {
+    const target = event.target as HTMLElement | null;
+    const button = target?.closest<HTMLButtonElement>('button.js-copy');
+    if (!button) return;
+
+    const status = button.parentElement?.querySelector('.js-copy-status');
+    try {
+      await writeClipboard(button.dataset.copy ?? '');
+      button.textContent = 'Copied!';
+      if (status) status.textContent = 'Copied to clipboard';
+    } catch {
+      button.textContent = 'Press ⌘C';
+      if (status) status.textContent = 'Copy failed — press Control or Command + C';
+    }
+    window.setTimeout(() => {
+      button.textContent = 'Copy';
+      if (status) status.textContent = '';
+    }, 2000);
+  });
+</script>
