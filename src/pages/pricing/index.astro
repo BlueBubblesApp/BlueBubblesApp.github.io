@@ -16,6 +16,7 @@
  */
 import BaseLayout from '@layouts/BaseLayout.astro';
 import PageHeader from '@components/PageHeader.astro';
+import ShimmerBorder from '@components/ShimmerBorder.astro';
 import { PLANS, PRO_FEATURES, FREE_FEATURES, MACOS_RELEASES } from '@data/pricing';
 import { LINKS } from '@data/site';
 
@@ -46,8 +47,9 @@ const newestMacOS = MACOS_RELEASES.reduce((a, b) => (b.version > a.version ? b :
               plan.featured ? 'border-accent shadow-lg' : 'border-line',
             ]}
           >
+            {plan.featured && <ShimmerBorder />}
             {plan.featured && (
-              <span class="absolute -top-3 left-6 rounded-full bg-accent-solid px-3 py-1 text-xs font-semibold text-white">
+              <span class="absolute -top-3 left-6 z-10 rounded-full bg-accent-solid px-3 py-1 text-xs font-semibold text-white">
                 Best value
               </span>
             )}
