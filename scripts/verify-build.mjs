@@ -30,6 +30,7 @@ const REQUIRED_PAGES = [
   'install/index.html',
   'faq/index.html',
   'compatibility/index.html',
+  'is-it-for-me/index.html',
   'donate/index.html',
   // Not linked from anywhere, but Creem validates this URL -- so a build
   // that stops emitting it should fail rather than pass quietly.

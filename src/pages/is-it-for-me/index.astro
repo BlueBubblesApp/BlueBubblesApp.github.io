@@ -1,0 +1,352 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import PageHeader from '@components/PageHeader.astro';
+import { QUESTIONS } from '@data/fit';
+import { LINKS, SITE } from '@data/site';
+---
+
+<BaseLayout
+  title="Is BlueBubbles a good fit for me? - BlueBubbles"
+  description="A short questionnaire that tells you honestly whether BlueBubbles will work for your situation."
+  keywords={SITE.keywords}
+  path="/is-it-for-me/"
+>
+  <PageHeader
+    title="Is BlueBubbles a good fit for me?"
+    lead={`${QUESTIONS.length} questions. No email address, nothing sent anywhere — it all runs in your browser. We'll tell you if the answer is no.`}
+  />
+
+  <div class="mx-auto max-w-2xl px-5 py-12">
+    <!-- Every question is in the HTML; the script shows one at a time. Without
+         JavaScript they simply all appear, which is still readable. -->
+    {/* Progress indicator. Decorative: each question card already announces
+        "Question N of M" for assistive tech, so this would only repeat it. */}
+    <ol id="fit-steps" class="mb-8 flex items-center" aria-hidden="true">
+      {
+        QUESTIONS.map((_, index) => (
+          <li class="flex flex-1 items-center last:flex-none">
+            <span
+              data-node={index}
+              data-state={index === 0 ? 'current' : 'todo'}
+              class="fit-node grid size-8 shrink-0 place-items-center rounded-full border text-xs font-semibold"
+            >
+              <span class="fit-node-number">{index + 1}</span>
+              <svg
+                class="fit-node-check size-4"
+                viewBox="0 0 20 20"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.5"
+              >
+                <path d="M5 10.5 8.5 14 15 6.5" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            </span>
+            {index < QUESTIONS.length - 1 && (
+              <span data-connector={index} data-state="todo" class="fit-connector mx-2 h-0.5 flex-1" />
+            )}
+          </li>
+        ))
+      }
+    </ol>
+
+    <form id="fit-quiz" class="space-y-8">
+      {
+        QUESTIONS.map((question, index) => (
+          <fieldset data-step={index} class="fit-step rounded-card border border-line bg-raised p-6">
+            <p class="text-xs font-semibold uppercase tracking-wider text-muted">
+              Question {index + 1} of {QUESTIONS.length}
+            </p>
+            <legend class="sr-only">{question.question}</legend>
+            <h2 class="mt-2 text-xl font-bold text-strong">{question.question}</h2>
+            {question.help && <p class="mt-2 text-sm text-muted">{question.help}</p>}
+
+            <div class="mt-5 space-y-2">
+              {question.choices.map((choice) => (
+                <button
+                  type="button"
+                  data-choice={choice.id}
+                  data-question={question.id}
+                  class="block w-full rounded-card border border-line bg-page px-4 py-3 text-left
+                         text-sm font-medium text-strong transition
+                         hover:-translate-y-0.5 hover:border-accent hover:shadow-md
+                         focus-visible:outline-2 focus-visible:outline-offset-2
+                         focus-visible:outline-accent
+                         aria-pressed:border-accent aria-pressed:bg-accent-solid/5"
+                  aria-pressed="false"
+                >
+                  {choice.label}
+                </button>
+              ))}
+            </div>
+
+            <button
+              type="button"
+              data-back
+              hidden
+              class="mt-5 text-sm font-medium text-muted underline underline-offset-4
+                     transition-colors hover:text-accent"
+            >
+              &larr; Back
+            </button>
+          </fieldset>
+        ))
+      }
+    </form>
+
+    <section id="fit-result" hidden aria-live="polite" class="rounded-card border border-line bg-raised p-6">
+      <p id="fit-verdict-kicker" class="text-xs font-semibold uppercase tracking-wider"></p>
+      <h2 id="fit-verdict-title" class="mt-2 text-2xl font-bold tracking-tight text-strong"></h2>
+      <p id="fit-verdict-blurb" class="mt-3 text-muted"></p>
+
+      <ul id="fit-notes" class="mt-6 space-y-3"></ul>
+
+      <div id="fit-actions" class="mt-8 flex flex-wrap gap-3"></div>
+
+      <button
+        type="button"
+        id="fit-restart"
+        class="mt-6 text-sm font-medium text-muted underline underline-offset-4
+               transition-colors hover:text-accent"
+      >
+        Start again
+      </button>
+    </section>
+
+    <noscript>
+      <p class="mt-6 rounded-card border border-line bg-raised p-5 text-sm text-muted">
+        This questionnaire needs JavaScript. The short version: you need a Mac signed in to
+        iMessage that can stay awake, it should not be a school or work machine, and
+        BlueBubbles carries iMessage but not SMS. If that describes you, you are good to go.
+      </p>
+    </noscript>
+  </div>
+</BaseLayout>
+
+<script>
+  import { QUESTIONS, VERDICTS, type Tone } from '../../data/fit';
+
+  const form = document.getElementById('fit-quiz');
+  const result = document.getElementById('fit-result');
+  const steps = [...document.querySelectorAll<HTMLElement>('.fit-step')];
+
+  if (form && result && steps.length) {
+    type Answer = {
+      question: string; choice: string; note?: string; tone?: Tone;
+      fatal?: boolean; blocks?: boolean; reason?: string;
+    };
+
+    /** "a", "a and b", "a, b and c" */
+    const list = (parts: string[]) =>
+      parts.length <= 1
+        ? (parts[0] ?? '')
+        : `${parts.slice(0, -1).join(', ')} and ${parts[parts.length - 1]}`;
+
+    let current = 0;
+    const answers: Answer[] = [];
+
+    const nodes = [...document.querySelectorAll<HTMLElement>('[data-node]')];
+    const connectors = [...document.querySelectorAll<HTMLElement>('[data-connector]')];
+
+    /** answered = how many questions are behind us; active = the one on screen,
+     *  or -1 once the result is up and nothing is current. */
+    const paintIndicator = (answered: number, active: number) => {
+      nodes.forEach((node, i) => {
+        node.dataset.state = i < answered ? 'done' : i === active ? 'current' : 'todo';
+      });
+      connectors.forEach((connector, i) => {
+        connector.dataset.state = i < answered ? 'done' : 'todo';
+      });
+    };
+
+    const show = (index: number) => {
+      paintIndicator(index, index);
+      steps.forEach((step, i) => (step.hidden = i !== index));
+      const back = steps[index]?.querySelector<HTMLElement>('[data-back]');
+      if (back) back.hidden = index === 0;
+      result.hidden = true;
+      steps[index]?.querySelector('button')?.focus();
+    };
+
+    const finish = () => {
+      const fatal = answers.some((a) => a.fatal);
+      // A blocking answer is not fatal, but it still means "probably not" --
+      // the verdict has to agree with the note sitting underneath it.
+      const blocked = answers.some((a) => a.blocks);
+      const negative = fatal || blocked;
+      const warned = answers.some((a) => a.tone === 'warn');
+      const verdict = VERDICTS[negative ? 'no' : warned ? 'maybe' : 'yes'];
+
+      // Only the questions actually answered are ticked -- a disqualifying
+      // answer ends things early, and pretending otherwise would be a lie.
+      paintIndicator(answers.filter(Boolean).length, -1);
+      steps.forEach((step) => (step.hidden = true));
+      result.hidden = false;
+
+      const kicker = document.getElementById('fit-verdict-kicker')!;
+      kicker.textContent = negative ? 'Not a match' : warned ? 'Worth knowing' : 'Good news';
+      kicker.className =
+        'text-xs font-semibold uppercase tracking-wider ' +
+        (negative ? 'text-rose-500' : warned ? 'text-amber-500' : 'text-accent');
+
+
+      // Say which answers decided it, rather than "something in your answers".
+      const deciding = answers
+        .filter((a) => (negative ? a.fatal || a.blocks : a.tone === 'warn'))
+        .map((a) => a.reason)
+        .filter((r): r is string => Boolean(r));
+
+      // The title has to agree with the sentence under it: "a couple of
+      // caveats" above "One thing worth knowing first" reads as a bug.
+      const titleEl = document.getElementById('fit-verdict-title')!;
+      titleEl.textContent =
+        verdict.id === 'maybe' && deciding.length === 1 ? 'Yes, with one caveat' : verdict.title;
+
+      let blurb = verdict.blurb;
+      if (deciding.length === 1) {
+        blurb = negative
+          ? `The sticking point is that ${deciding[0]}. ${verdict.blurb}`
+          : `${verdict.blurb} One thing worth knowing first: ${deciding[0]}.`;
+      } else if (deciding.length > 1) {
+        // Count-aware in both directions: there can be more than two, and the
+        // singular case above must not say "a few things".
+        const many = deciding.length === 2 ? 'Two things' : 'A few things';
+        blurb = negative
+          ? `${many} get in the way: ${list(deciding)}. ${verdict.blurb}`
+          : `${verdict.blurb} ${many} worth knowing first: ${list(deciding)}.`;
+      }
+      document.getElementById('fit-verdict-blurb')!.textContent = blurb;
+
+      const notes = document.getElementById('fit-notes')!;
+      notes.innerHTML = '';
+      for (const answer of answers) {
+        if (!answer.note) continue;
+        const li = document.createElement('li');
+        li.className =
+          'rounded-card border-l-2 bg-page px-4 py-3 text-sm ' +
+          (answer.fatal || answer.blocks
+            ? 'border-rose-500 text-strong'
+            : answer.tone === 'warn'
+              ? 'border-amber-500 text-strong'
+              : 'border-line text-muted');
+        li.textContent = answer.note;
+        notes.append(li);
+      }
+
+      // Send people somewhere useful, matched to the verdict.
+      const actions = document.getElementById('fit-actions')!;
+      actions.innerHTML = '';
+      const link = (href: string, label: string, primary = false) => {
+        const a = document.createElement('a');
+        a.href = href;
+        a.textContent = label;
+        a.className = primary
+          ? 'rounded-full bg-accent-solid px-6 py-3 text-sm font-semibold text-white transition hover:bg-accent-solid-hover'
+          : 'rounded-full border border-line px-6 py-3 text-sm font-semibold text-strong transition hover:border-accent hover:text-accent';
+        return a;
+      };
+      if (negative) {
+        actions.append(link('/faq/', 'Read the FAQ', true));
+        const discord = link(LINKS_DISCORD, 'Ask us on Discord');
+        discord.rel = 'noopener';
+        actions.append(discord);
+      } else {
+        actions.append(link('/install/', 'Start the install guide', true));
+        actions.append(link('/downloads/', 'Downloads'));
+      }
+
+      result.scrollIntoView({ block: 'start', behavior: 'smooth' });
+    };
+
+    const LINKS_DISCORD = 'https://discord.gg/6nrGRHT';
+
+    form.addEventListener('click', (event) => {
+      const target = event.target as HTMLElement;
+
+      const back = target.closest<HTMLElement>('[data-back]');
+      if (back) {
+        answers.pop();
+        current = Math.max(0, current - 1);
+        steps[current]
+          ?.querySelectorAll('[data-choice]')
+          .forEach((b) => b.setAttribute('aria-pressed', 'false'));
+        show(current);
+        return;
+      }
+
+      const button = target.closest<HTMLElement>('[data-choice]');
+      if (!button) return;
+
+      const question = QUESTIONS.find((q) => q.id === button.dataset.question);
+      const choice = question?.choices.find((c) => c.id === button.dataset.choice);
+      if (!question || !choice) return;
+
+      steps[current]
+        ?.querySelectorAll('[data-choice]')
+        .forEach((b) => b.setAttribute('aria-pressed', String(b === button)));
+
+      answers[current] = {
+        question: question.id,
+        choice: choice.id,
+        note: choice.note,
+        tone: choice.tone,
+        fatal: choice.disqualifies,
+        blocks: choice.blocks,
+        reason: choice.reason,
+      };
+
+      // A disqualifying answer ends it there; no point asking the rest.
+      if (choice.disqualifies || current === QUESTIONS.length - 1) {
+        finish();
+        return;
+      }
+
+      current += 1;
+      show(current);
+    });
+
+    document.getElementById('fit-restart')?.addEventListener('click', () => {
+      answers.length = 0;
+      current = 0;
+      steps.forEach((step) =>
+        step.querySelectorAll('[data-choice]').forEach((b) => b.setAttribute('aria-pressed', 'false'))
+      );
+      show(0);
+      form.scrollIntoView({ block: 'start', behavior: 'smooth' });
+    });
+
+    show(0);
+  }
+</script>
+
+<style>
+  .fit-node {
+    border-color: var(--color-line);
+    color: var(--color-muted);
+    background: var(--color-page);
+    transition: background-color 200ms ease, border-color 200ms ease, color 200ms ease;
+  }
+  .fit-node-check { display: none; }
+
+  .fit-node[data-state='current'] {
+    border-color: var(--color-accent);
+    color: var(--color-accent);
+    /* A ring, so "where I am" reads differently from "done". */
+    box-shadow: 0 0 0 3px color-mix(in oklab, var(--color-accent) 20%, transparent);
+  }
+
+  .fit-node[data-state='done'] {
+    border-color: var(--color-accent-solid);
+    background: var(--color-accent-solid);
+    color: #fff;
+  }
+  .fit-node[data-state='done'] .fit-node-number { display: none; }
+  .fit-node[data-state='done'] .fit-node-check { display: block; }
+
+  .fit-connector {
+    background: var(--color-line);
+    transition: background-color 220ms ease;
+  }
+  .fit-connector[data-state='done'] {
+    background: var(--color-accent-solid);
+  }
+</style>
