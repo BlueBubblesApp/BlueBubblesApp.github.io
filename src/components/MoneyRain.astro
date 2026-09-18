@@ -1,0 +1,122 @@
+---
+/*
+ * The "make it rain" celebration, drawn on a canvas instead of played from a
+ * video file.
+ *
+ * It replaces a 12MB WebM. That file was already deferred with preload="none",
+ * which fixed the page weight but moved the cost somewhere worse: the download
+ * began at the moment of celebration, so a donor on a slow connection got their
+ * confetti late, or not at all. This starts instantly and weighs nothing.
+ *
+ * Exposes window.makeItRain() for the donation flow to call.
+ */
+---
+
+<canvas
+  id="money-rain"
+  aria-hidden="true"
+  hidden
+  class="pointer-events-none fixed inset-0 z-50 size-full"></canvas>
+
+<script>
+  const canvas = document.getElementById('money-rain') as HTMLCanvasElement | null;
+  const ctx = canvas?.getContext('2d') ?? null;
+
+  if (canvas && ctx) {
+    type Note = {
+      x: number; y: number; vy: number; vx: number;
+      rot: number; vrot: number; size: number; sway: number; phase: number;
+    };
+
+    const DURATION = 6000;
+    // Dollars only: the donation is priced in USD, so raining yen and euros
+    // alongside it just reads as noise.
+    const GLYPHS = ['💵', '💸'];
+
+    let notes: Note[] = [];
+    let start = 0;
+    let raf = 0;
+
+    const size = () => {
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      canvas.width = Math.round(window.innerWidth * dpr);
+      canvas.height = Math.round(window.innerHeight * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    };
+
+    const spawn = () => {
+      const width = window.innerWidth;
+      // Enough to feel like rain, scaled to the viewport so a phone is not
+      // covered and a desktop does not look sparse.
+      const count = Math.round(Math.min(90, Math.max(35, width / 16)));
+      notes = Array.from({ length: count }, () => ({
+        x: Math.random() * width,
+        // Spread across and above the viewport, so it is already raining the
+        // instant it starts rather than after a beat of empty screen.
+        y: Math.random() * window.innerHeight * 1.6 - window.innerHeight,
+        vy: 90 + Math.random() * 140,
+        vx: -20 + Math.random() * 40,
+        rot: Math.random() * Math.PI * 2,
+        vrot: -1.6 + Math.random() * 3.2,
+        size: 22 + Math.random() * 24,
+        sway: 14 + Math.random() * 26,
+        phase: Math.random() * Math.PI * 2,
+      }));
+    };
+
+    const frame = (now: number) => {
+      if (!start) start = now;
+      const elapsed = now - start;
+      const dt = 1 / 60;
+
+      ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+
+      // Fade out over the last second rather than cutting to nothing.
+      ctx.globalAlpha = elapsed > DURATION - 1000
+        ? Math.max(0, (DURATION - elapsed) / 1000)
+        : 1;
+
+      for (const note of notes) {
+        note.y += note.vy * dt;
+        note.x += note.vx * dt + Math.sin(elapsed / 600 + note.phase) * note.sway * dt;
+        note.rot += note.vrot * dt;
+
+        ctx.save();
+        ctx.translate(note.x, note.y);
+        ctx.rotate(note.rot);
+        ctx.font = `${note.size}px serif`;
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText(GLYPHS[Math.floor(note.phase * 10) % GLYPHS.length]!, 0, 0);
+        ctx.restore();
+      }
+
+      if (elapsed < DURATION) {
+        raf = requestAnimationFrame(frame);
+      } else {
+        stop();
+      }
+    };
+
+    const stop = () => {
+      cancelAnimationFrame(raf);
+      ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+      canvas.hidden = true;
+      notes = [];
+      start = 0;
+    };
+
+    (window as unknown as { makeItRain: () => void }).makeItRain = () => {
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      stop();
+      size();
+      spawn();
+      canvas.hidden = false;
+      raf = requestAnimationFrame(frame);
+    };
+
+    window.addEventListener('resize', () => {
+      if (!canvas.hidden) size();
+    });
+  }
+</script>

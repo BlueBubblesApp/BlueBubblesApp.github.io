@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '@layouts/BaseLayout.astro';
 import PageHeader from '@components/PageHeader.astro';
+import MoneyRain from '@components/MoneyRain.astro';
 import { SITE, LINKS, PAYPAL_CLIENT_ID, DONATION_PRESETS, DEFAULT_DONATION } from '@data/site';
 
 const description =
@@ -111,23 +112,7 @@ const paypalSdk =
     </div>
   </div>
 
-  <!--
-    preload="none" is the point: the old page marked this autoplay with no
-    preload hint, so every visitor to /donate downloaded ~12 MB whether or not
-    they ever donated. It is only ever shown from onApprove.
-    muted + playsinline are required for programmatic playback once the
-    element is no longer primed by autoplay.
-  -->
-  <video
-    id="makeItRain"
-    preload="none"
-    muted
-    playsinline
-    hidden
-    class="pointer-events-none fixed inset-0 z-50 size-full object-cover"
-  >
-    <source src="/media/money.webm" type="video/webm" />
-  </video>
+  <MoneyRain />
 </BaseLayout>
 
 <!--
@@ -146,7 +131,6 @@ const paypalSdk =
     const donationContainer = document.getElementById('donationContainer');
     const loadingContainer = document.getElementById('loadingContainer');
     const thankYouContainer = document.getElementById('thankYouContainer');
-    const makeItRain = document.getElementById('makeItRain');
 
     let donationAmount = DEFAULT_DONATION;
     let custom = false;
@@ -222,16 +206,9 @@ const paypalSdk =
 
           onApprove(_data, actions) {
             return actions.order.capture().then(() => {
-              const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-              if (!reduceMotion) {
-                makeItRain.hidden = false;
-                makeItRain.load();
-                makeItRain.currentTime = 0;
-                const hide = () => (makeItRain.hidden = true);
-                makeItRain.addEventListener('ended', hide, { once: true });
-                // Never let a failed play leave the overlay covering the page.
-                makeItRain.play().catch(hide);
-              }
+              // Canvas, not a video file: starts instantly, and handles
+              // prefers-reduced-motion itself.
+              window.makeItRain?.();
 
               loadingContainer.hidden = true;
               donationContainer.hidden = true;
