@@ -38,6 +38,80 @@ export interface Question {
   choices: Choice[];
 }
 
+/**
+ * Whether the 2.x Swift server has shipped.
+ *
+ * Until it has, the questionnaire must not talk about it: there is no "current
+ * 2.x server" for a reader to be on, and telling someone their Mac is too old
+ * for a release that does not exist is worse than not asking at all. Flip this
+ * to true on release day and the macOS question swaps to the 2.x framing --
+ * Sonoma floor, OpenCore Legacy Patcher, the lot.
+ *
+ * The rest of the quiz is unaffected; this is the only question that differs.
+ */
+export const V2_RELEASED = false;
+
+/** Asked while 1.x is the only server. macOS version changes which Private API
+ *  features are available, but does not decide whether BlueBubbles runs. */
+const MACOS_QUESTION_TODAY: Question = {
+  id: 'macos',
+  question: 'What macOS version is that Mac on?',
+  help: 'BlueBubbles runs on a wide range of macOS versions. Newer ones simply expose more of what iMessage can do.',
+  choices: [
+    { id: 'ventura-plus', label: 'Ventura (13) or newer', tone: 'good' },
+    {
+      id: 'bigsur-monterey',
+      label: 'Big Sur (11) or Monterey (12)',
+      tone: 'info',
+      note: 'Everything central works. A few of the newer Private API features -- editing and unsending among them -- want Ventura or later.',
+    },
+    {
+      id: 'catalina-older',
+      label: 'Catalina (10.15) or older',
+      tone: 'info',
+      note: 'BlueBubbles works here, but noticeably less of it: several Private API features need Big Sur or later. The compatibility tables in the FAQ spell out which.',
+    },
+    {
+      id: 'unsure',
+      label: 'I am not sure',
+      tone: 'info',
+      note: 'Check the Apple menu, then About This Mac. Any reasonably recent macOS is fine; newer ones just unlock more features.',
+    },
+  ],
+};
+
+/** Asked once 2.x has shipped, when the version decides which server you run. */
+const MACOS_QUESTION_V2: Question = {
+  id: 'macos',
+  question: 'What macOS version is that Mac on?',
+  help: 'The current server needs Sonoma or newer. Older Macs are not shut out, but they are on an older server.',
+  choices: [
+    { id: 'tahoe', label: 'Tahoe (26)', tone: 'good' },
+    { id: 'sequoia', label: 'Sequoia (15)', tone: 'good' },
+    {
+      id: 'sonoma',
+      label: 'Sonoma (14)',
+      tone: 'good',
+      note: 'Sonoma runs the current server. A handful of the newer Private API features need Sequoia or Tahoe, but the core of BlueBubbles is all there.',
+    },
+    {
+      id: 'older',
+      label: 'Ventura (13) or older',
+      reason: 'the Mac is on a macOS too old for the current server',
+      tone: 'warn',
+      note: 'BlueBubbles still works, but on the 1.x server rather than the current 2.x one, and 1.x is in maintenance rather than active development. If that Mac can take a newer macOS, upgrading is the simplest fix. If Apple has dropped it, OpenCore Legacy Patcher will often get an older Mac onto Sonoma or later. Failing both, a newer second-hand Mac is the other way out.',
+    },
+    {
+      id: 'unsure',
+      label: 'I am not sure',
+      tone: 'info',
+      note: 'Check the Apple menu, then About This Mac. Sonoma or newer runs the current server; Ventura or older runs the 1.x server, which is no longer actively developed.',
+    },
+  ],
+};
+
+const MACOS_QUESTION: Question = V2_RELEASED ? MACOS_QUESTION_V2 : MACOS_QUESTION_TODAY;
+
 export const QUESTIONS: readonly Question[] = [
   {
     id: 'mac',
@@ -66,34 +140,7 @@ export const QUESTIONS: readonly Question[] = [
       },
     ],
   },
-  {
-    id: 'macos',
-    question: 'What macOS version is that Mac on?',
-    help: 'The current server needs Sonoma or newer. Older Macs are not shut out, but they are on an older server.',
-    choices: [
-      { id: 'tahoe', label: 'Tahoe (26)', tone: 'good' },
-      { id: 'sequoia', label: 'Sequoia (15)', tone: 'good' },
-      {
-        id: 'sonoma',
-        label: 'Sonoma (14)',
-        tone: 'good',
-        note: 'Sonoma runs the current server. A handful of the newer Private API features need Sequoia or Tahoe, but the core of BlueBubbles is all there.',
-      },
-      {
-        id: 'older',
-        label: 'Ventura (13) or older',
-        reason: 'the Mac is on a macOS too old for the current server',
-        tone: 'warn',
-        note: 'BlueBubbles still works, but on the 1.x server rather than the current 2.x one, and 1.x is in maintenance rather than active development. If that Mac can take a newer macOS, upgrading is the simplest fix. If Apple has dropped it, OpenCore Legacy Patcher will often get an older Mac onto Sonoma or later. Failing both, a newer second-hand Mac is the other way out.',
-      },
-      {
-        id: 'unsure',
-        label: 'I am not sure',
-        tone: 'info',
-        note: 'Check the Apple menu, then About This Mac. Sonoma or newer runs the current server; Ventura or older runs the 1.x server, which is no longer actively developed.',
-      },
-    ],
-  },
+  MACOS_QUESTION,
   {
     id: 'uptime',
     question: 'Can that Mac stay awake and online?',
