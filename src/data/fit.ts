@@ -21,6 +21,12 @@ export interface Choice {
   blocks?: boolean;
   /** Carried through to the result. */
   note?: string;
+  /**
+   * A clause naming why this answer counts, used to compose the result
+   * sentence. Written to read after "the sticking point:" or in a list, so it
+   * starts lowercase and carries no full stop.
+   */
+  reason?: string;
   tone?: Tone;
 }
 
@@ -54,6 +60,7 @@ export const QUESTIONS: readonly Question[] = [
       {
         id: 'none',
         label: 'No, and I have no plans to',
+        reason: "you do not have a Mac",
         disqualifies: true,
         note: 'Without a Mac there is nothing to connect to. This is the one requirement with no workaround.',
       },
@@ -74,6 +81,7 @@ export const QUESTIONS: readonly Question[] = [
       {
         id: 'sometimes',
         label: 'Only when I happen to be using it',
+        reason: 'your Mac will not be awake much',
         tone: 'warn',
         note: 'BlueBubbles will still work, but only while that Mac is awake. If it spends most of the day shut, you will miss notifications until you open it. Worth setting the Mac to stay awake and to restart after a power cut.',
       },
@@ -89,6 +97,7 @@ export const QUESTIONS: readonly Question[] = [
       {
         id: 'managed',
         label: 'Yes, it belongs to a school or employer',
+        reason: 'the Mac belongs to a school or employer',
         tone: 'warn',
         blocks: true,
         note: 'Probably not for you. BlueBubbles needs Full Disk Access and, for the extra features, a helper installed into Messages. Managed Macs usually block both — and doing it anyway may well breach the device policy you agreed to. Use a personal Mac instead.',
@@ -106,6 +115,7 @@ export const QUESTIONS: readonly Question[] = [
       {
         id: 'apple',
         label: 'Only on an iPhone or iPad',
+        reason: 'you only read messages on Apple devices',
         tone: 'warn',
         blocks: true,
         note: 'You already have iMessage on those. BlueBubbles exists to get iMessage onto things Apple does not cover, so there is not much here for you.',
@@ -120,6 +130,7 @@ export const QUESTIONS: readonly Question[] = [
       {
         id: 'yes',
         label: 'Yes, I want all my texts in one place',
+        reason: 'you want SMS as well as iMessage',
         tone: 'warn',
         note: 'BlueBubbles does not support SMS at this time. It carries iMessage only, so your SMS will stay wherever they are now.',
       },
@@ -135,6 +146,7 @@ export const QUESTIONS: readonly Question[] = [
       {
         id: 'none',
         label: 'I want it to just work with no configuration',
+        reason: 'you would rather not configure anything',
         tone: 'warn',
         note: 'Then set expectations accordingly. This is self-hosted software: you run the server, so there is some assembly. Nothing hard, but it is not nothing.',
       },
@@ -157,11 +169,11 @@ export const VERDICTS: Record<Verdict['id'], Verdict> = {
   maybe: {
     id: 'maybe',
     title: 'Yes, with a couple of caveats',
-    blurb: 'BlueBubbles will work for you, but a few things are worth knowing before you start. None of them are dealbreakers on their own.',
+    blurb: 'BlueBubbles will work for you.',
   },
   no: {
     id: 'no',
     title: 'Honestly? Probably not',
-    blurb: 'Something in your answers is a genuine blocker rather than an inconvenience. We would rather tell you now than after an hour of setup.',
+    blurb: 'We would rather tell you now than after an hour of setup.',
   },
 };

@@ -132,8 +132,14 @@ import { LINKS, SITE } from '@data/site';
   if (form && result && steps.length) {
     type Answer = {
       question: string; choice: string; note?: string; tone?: Tone;
-      fatal?: boolean; blocks?: boolean;
+      fatal?: boolean; blocks?: boolean; reason?: string;
     };
+
+    /** "a", "a and b", "a, b and c" */
+    const list = (parts: string[]) =>
+      parts.length <= 1
+        ? (parts[0] ?? '')
+        : `${parts.slice(0, -1).join(', ')} and ${parts[parts.length - 1]}`;
 
     let current = 0;
     const answers: Answer[] = [];
@@ -183,7 +189,27 @@ import { LINKS, SITE } from '@data/site';
         (negative ? 'text-rose-500' : warned ? 'text-amber-500' : 'text-accent');
 
       document.getElementById('fit-verdict-title')!.textContent = verdict.title;
-      document.getElementById('fit-verdict-blurb')!.textContent = verdict.blurb;
+
+      // Say which answers decided it, rather than "something in your answers".
+      const deciding = answers
+        .filter((a) => (negative ? a.fatal || a.blocks : a.tone === 'warn'))
+        .map((a) => a.reason)
+        .filter((r): r is string => Boolean(r));
+
+      let blurb = verdict.blurb;
+      if (deciding.length === 1) {
+        blurb = negative
+          ? `The sticking point is that ${deciding[0]}. ${verdict.blurb}`
+          : `${verdict.blurb} One thing worth knowing first: ${deciding[0]}.`;
+      } else if (deciding.length > 1) {
+        // Count-aware in both directions: there can be more than two, and the
+        // singular case above must not say "a few things".
+        const many = deciding.length === 2 ? 'Two things' : 'A few things';
+        blurb = negative
+          ? `${many} get in the way: ${list(deciding)}. ${verdict.blurb}`
+          : `${verdict.blurb} ${many} worth knowing first: ${list(deciding)}.`;
+      }
+      document.getElementById('fit-verdict-blurb')!.textContent = blurb;
 
       const notes = document.getElementById('fit-notes')!;
       notes.innerHTML = '';
@@ -260,6 +286,7 @@ import { LINKS, SITE } from '@data/site';
         tone: choice.tone,
         fatal: choice.disqualifies,
         blocks: choice.blocks,
+        reason: choice.reason,
       };
 
       // A disqualifying answer ends it there; no point asking the rest.
