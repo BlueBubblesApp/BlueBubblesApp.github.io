@@ -44,9 +44,27 @@ jobs:
       - name: Verify original copy survived
         run: node scripts/verify-content.mjs
 
-      - uses: actions/upload-pages-artifact@v5
+      # NOT actions/upload-pages-artifact: it tars with `--exclude=.[^/]*`,
+      # which silently drops every dot-entry -- including
+      # .well-known/org.flathub.VerifiedApps.txt, the file Flathub reads to keep
+      # the app verified. Building the tar here keeps hidden files. The layout
+      # (an artifact named `github-pages` containing `artifact.tar`) is what
+      # actions/deploy-pages expects.
+      - name: Package the site, hidden files included
+        run: tar --dereference --hard-dereference -cf "$RUNNER_TEMP/artifact.tar" -C ./dist .
+
+      - name: Verify the packaged artifact still carries the dot-entries
+        run: |
+          set -euo pipefail
+          tar -tf "$RUNNER_TEMP/artifact.tar" | grep -q './.well-known/org.flathub.VerifiedApps.txt' \
+            || { echo "::error::Flathub verification file missing from the deploy artifact"; exit 1; }
+          echo "✓ .well-known present in the artifact"
+
+      - uses: actions/upload-artifact@v4
         with:
-          path: ./dist
+          name: github-pages
+          path: ${{ runner.temp }}/artifact.tar
+          retention-days: 1
 
   deploy:
     name: Deploy
