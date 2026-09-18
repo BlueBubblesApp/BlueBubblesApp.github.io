@@ -57,7 +57,9 @@ export default defineConfig({
     icon({ iconDir: 'src/icons' }),
     mdx(),
     sitemap({
-      filter: (page) => !page.includes('/404'),
+      // /pricing is not public yet -- it exists only so the URL resolves for
+      // Creem's validation. Drop this exclusion when Pro launches.
+      filter: (page) => !page.includes('/404') && !page.includes('/pricing'),
       serialize(item) {
         // Under build.format 'preserve', @astrojs/sitemap does not append a
         // trailing slash to directory-index routes. Normalize so canonical URLs
