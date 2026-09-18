@@ -106,22 +106,27 @@ and what the footer links to. To check them as they will really be served, use
 
 Pushes to `master` build and deploy via `.github/workflows/deploy.yml`.
 
-**One-time setup:** in Settings → Pages, set *Build and deployment → Source* to
-**GitHub Actions**. Until that is done, deploys fail and the old branch-based
-site keeps being served.
+**One-time setup**, in order. This repository had no workflows before, so
+Actions is disabled and must be switched on before anything else works:
 
-Cutover order matters, because branch-based Pages is currently serving the old
+1. **Settings → Actions → General → Allow all actions and reusable workflows.**
+   Until this is done no workflow runs at all, including CI on pull requests.
+2. **Settings → Pages → Build and deployment → Source → GitHub Actions.** Until
+   this is done, deploys fail and the old branch-based site keeps being served.
+
+Cutover order matters too, because branch-based Pages serves the old
 hand-written files from the repository root:
 
-1. Merge this work to `master`. The old files are still present, so the live
+1. Enable Actions, as above.
+2. Merge this work to `master`. The old files are still present, so the live
    site is unchanged.
-2. Switch Settings → Pages → Source to **GitHub Actions**.
-3. Run the *Deploy to GitHub Pages* workflow (`workflow_dispatch`).
-4. Confirm: the site loads, Settings → Pages still shows `bluebubbles.app` with
+3. Switch Settings → Pages → Source to **GitHub Actions**.
+4. Run the *Deploy to GitHub Pages* workflow (`workflow_dispatch`).
+5. Confirm: the site loads, Settings → Pages still shows `bluebubbles.app` with
    Enforce HTTPS on, `/privacy.html` and `/tos.html` resolve,
    `/.well-known/org.flathub.VerifiedApps.txt` returns 200, and
    `https://bluebubbles.app/web/` still loads.
-5. Only then run `scripts/remove-legacy-site.sh` and commit, to delete the old
+6. Only then run `scripts/remove-legacy-site.sh` and commit, to delete the old
    site.
 
 To roll back at any point, switch Source back to *Deploy from a branch → master*.
