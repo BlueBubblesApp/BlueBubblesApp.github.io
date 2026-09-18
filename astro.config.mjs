@@ -59,7 +59,12 @@ export default defineConfig({
     sitemap({
       // /pricing is not public yet -- it exists only so the URL resolves for
       // Creem's validation. Drop this exclusion when Pro launches.
-      filter: (page) => !page.includes('/404') && !page.includes('/pricing'),
+      // /pricing and /compatibility are not public yet. Drop each exclusion
+      // when it launches -- /compatibility waits on the v2 server.
+      filter: (page) =>
+        !page.includes('/404') &&
+        !page.includes('/pricing') &&
+        !page.includes('/compatibility'),
       serialize(item) {
         // Under build.format 'preserve', @astrojs/sitemap does not append a
         // trailing slash to directory-index routes. Normalize so canonical URLs

@@ -16,6 +16,7 @@
  */
 import BaseLayout from '@layouts/BaseLayout.astro';
 import PageHeader from '@components/PageHeader.astro';
+import MacOSPicker from '@components/MacOSPicker.astro';
 import { PLANS, PRO_FEATURES, FREE_FEATURES, MACOS_RELEASES } from '@data/pricing';
 import { LINKS } from '@data/site';
 
@@ -74,49 +75,14 @@ const newestMacOS = MACOS_RELEASES.reduce((a, b) => (b.version > a.version ? b :
         minimum macOS version, shown alongside it.
       </p>
 
-      <div class="mt-6 flex flex-wrap items-center gap-3">
-        <label for="macos-filter" class="text-sm font-medium text-strong">
-          Your server Mac runs
-        </label>
-        {/*
-          appearance-none plus our own chevron. The native arrow sits inside the
-          right padding, and on a rounded-full pill the 18.5px corner radius
-          curves in over it, so it reads as crammed against the edge. Drawing it
-          ourselves also makes it match the FAQ accordion's chevron and follow
-          the theme, which the native control does not.
-        */}
-        <div class="relative inline-flex">
-          <select
-            id="macos-filter"
-            class="appearance-none rounded-full border border-line bg-page py-2 pl-4 pr-10
-                   text-sm font-medium text-strong
-                   focus-visible:border-accent focus-visible:outline-2
-                   focus-visible:outline-offset-2 focus-visible:outline-accent"
-          >
-            {
-              MACOS_RELEASES.map((release) => (
-                <option value={release.version} selected={release.version === newestMacOS.version}>
-                  {release.name} ({release.version})
-                </option>
-              ))
-            }
-          </select>
-          <svg
-            class="pointer-events-none absolute right-3.5 top-1/2 size-4 -translate-y-1/2 text-muted"
-            viewBox="0 0 20 20"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            aria-hidden="true"
-          >
-            <path d="M5 7.5 10 12.5 15 7.5" stroke-linecap="round" stroke-linejoin="round"></path>
-          </svg>
-        </div>
-        <p id="macos-summary" role="status" aria-live="polite" class="text-sm text-muted">
-          {PRO_FEATURES.filter((f) => f.macos <= newestMacOS.version).length} of {
-            PRO_FEATURES.length
-          } Pro features run on {newestMacOS.name} ({newestMacOS.version}).
-        </p>
+      <div class="mt-6">
+        <MacOSPicker label="Your server Mac runs" noun="Pro features">
+          <Fragment slot="summary">
+            {PRO_FEATURES.filter((f) => f.macos <= newestMacOS.version).length} of {
+              PRO_FEATURES.length
+            } Pro features run on {newestMacOS.name} ({newestMacOS.version}).
+          </Fragment>
+        </MacOSPicker>
       </div>
 
       <ul class="mt-6 grid gap-4 sm:grid-cols-2">
@@ -147,7 +113,7 @@ const newestMacOS = MACOS_RELEASES.reduce((a, b) => (b.version > a.version ? b :
                   feature.macos <= newestMacOS.version ? 'text-accent' : 'text-muted',
                 ]}
               >
-                {feature.macos <= newestMacOS.version ? '✓ Included' : `Needs macOS ${feature.macos}`}
+                {feature.macos <= newestMacOS.version ? '✓ Supported' : `Needs macOS ${feature.macos}`}
               </p>
             </li>
           ))
@@ -192,53 +158,3 @@ const newestMacOS = MACOS_RELEASES.reduce((a, b) => (b.version > a.version ? b :
     </div>
   </div>
 </BaseLayout>
-
-<script>
-  // Highlights which Pro features a given macOS release can actually run.
-  //
-  // The rule is cumulative: a release includes everything introduced at or below
-  // its own version, so Tahoe (26) gets the Sequoia and Sonoma features too.
-  // That is a `<=` on the major version and nothing more -- the catalogue's
-  // minimums are the only input.
-  const select = document.getElementById('macos-filter') as HTMLSelectElement | null;
-  const summary = document.getElementById('macos-summary');
-  const cards = [...document.querySelectorAll<HTMLElement>('[data-feature]')];
-
-  if (select && cards.length) {
-    const names = new Map<number, string>(
-      [...select.options]
-        .filter((option) => option.value !== '0')
-        .map((option) => [Number(option.value), option.textContent?.trim() ?? ''])
-    );
-
-    const apply = () => {
-      const chosen = Number(select.value);
-      if (!chosen) return;
-
-      let included = 0;
-      for (const card of cards) {
-        const needs = Number(card.dataset.macos);
-        const ok = needs <= chosen;
-        if (ok) included += 1;
-        card.dataset.state = ok ? 'included' : 'excluded';
-
-        const verdict = card.querySelector<HTMLElement>('[data-verdict]');
-        if (verdict) {
-          verdict.textContent = ok ? '✓ Included' : `Needs macOS ${needs}`;
-          verdict.className = ok
-            ? 'mt-3 text-xs font-semibold text-accent'
-            : 'mt-3 text-xs font-semibold text-muted';
-        }
-      }
-
-      if (summary) {
-        const label = names.get(chosen) ?? String(chosen);
-        summary.textContent = `${included} of ${cards.length} Pro features run on ${label}.`;
-      }
-    };
-
-    select.addEventListener('change', apply);
-    // Browsers restore a previous selection on reload; reflect it immediately.
-    apply();
-  }
-</script>
