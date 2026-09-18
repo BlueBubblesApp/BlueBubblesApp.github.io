@@ -55,7 +55,7 @@ export const QUESTIONS: readonly Question[] = [
         id: 'vm',
         label: "I'd run macOS in a virtual machine",
         tone: 'info',
-        note: 'That works, and there are guides for it in the docs and on the subreddit. Expect a fiddlier setup than real Apple hardware, and be aware it is a grey area under macOS licensing.',
+        note: 'Running macOS in a VM works, and there are guides for it in the docs and on the subreddit. Expect a fiddlier setup than real Apple hardware, and be aware it is a grey area under macOS licensing.',
       },
       {
         id: 'none',
@@ -76,7 +76,7 @@ export const QUESTIONS: readonly Question[] = [
         id: 'mostly',
         label: 'Most of the time',
         tone: 'info',
-        note: 'Fine. Messages sent while it is asleep will arrive once it wakes, rather than being lost.',
+        note: 'Messages sent while the Mac is asleep arrive once it wakes, rather than being lost.',
       },
       {
         id: 'sometimes',
@@ -132,7 +132,7 @@ export const QUESTIONS: readonly Question[] = [
         id: 'iphone',
         label: 'Yes, and I have an iPhone with a SIM in it',
         tone: 'good',
-        note: 'Turn on Text Message Forwarding on that iPhone and point it at your server Mac. SMS and RCS then land in Messages alongside iMessage, and BlueBubbles picks them up with everything else.',
+        note: 'With the iPhone and the Mac signed in to the same Apple ID, texts forward to the Mac on their own. If they do not show up, check Text Message Forwarding under Settings then Messages on the iPhone. Once they land in Messages, BlueBubbles picks them up alongside iMessage.',
       },
       {
         id: 'no-iphone',
@@ -149,13 +149,13 @@ export const QUESTIONS: readonly Question[] = [
     help: 'Installing a server app, granting permissions, connecting a Google account for notifications. Roughly twenty minutes.',
     choices: [
       { id: 'fine', label: 'Happy to tinker', tone: 'good' },
-      { id: 'guided', label: "I'll manage if there are instructions", tone: 'good', note: 'There are. The install guide walks through every step with screenshots.' },
+      { id: 'guided', label: "I'll manage if there are instructions", tone: 'good', note: 'The install guide walks through every step, with screenshots.' },
       {
         id: 'none',
         label: 'I want it to just work with no configuration',
         reason: 'you would rather not configure anything',
         tone: 'warn',
-        note: 'Then set expectations accordingly. This is self-hosted software: you run the server, so there is some assembly. Nothing hard, but it is not nothing.',
+        note: 'This is self-hosted software: you run the server yourself, so there is some assembly. Nothing hard, but it is not nothing.',
       },
     ],
   },
