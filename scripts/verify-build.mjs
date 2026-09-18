@@ -30,6 +30,9 @@ const REQUIRED_PAGES = [
   'install/index.html',
   'faq/index.html',
   'donate/index.html',
+  // Not linked from anywhere, but Creem validates this URL -- so a build
+  // that stops emitting it should fail rather than pass quietly.
+  'pricing/index.html',
   // Exact casing matters: GitHub Pages is case-sensitive and this path is in
   // the old sitemap.
   'install/privateAPI/index.html',
