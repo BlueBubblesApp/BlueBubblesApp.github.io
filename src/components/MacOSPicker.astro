@@ -1,0 +1,110 @@
+---
+import { MACOS_RELEASES } from '@data/pricing';
+
+/*
+ * A macOS release picker that highlights which features a given release can
+ * run. Shared by the pricing and compatibility pages so the two cannot drift.
+ *
+ * It operates on any `[data-feature][data-macos]` elements on the page: it sets
+ * data-state="included"/"excluded" on each and fills its `[data-verdict]` line.
+ * Styling lives with the cards, not here.
+ *
+ * Releases are cumulative -- a release runs everything introduced at or below
+ * its version -- which is a `<=` on the major version and nothing more.
+ */
+interface Props {
+  /** Text before the select. */
+  label: string;
+  /** Noun for the count line, e.g. "Pro features" or "features". */
+  noun: string;
+}
+const { label, noun } = Astro.props;
+
+// Default to the newest release. Derived from the data, so adding macOS 27
+// moves the default automatically.
+const newest = MACOS_RELEASES.reduce((a, b) => (b.version > a.version ? b : a));
+---
+
+<div class="flex flex-wrap items-center gap-3" data-macos-picker data-noun={noun}>
+  <label for="macos-filter" class="text-sm font-medium text-strong">{label}</label>
+
+  {/*
+    appearance-none plus our own chevron: the native arrow sits inside the right
+    padding, and a rounded-full pill's corner radius curves in over it.
+  */}
+  <div class="relative inline-flex">
+    <select
+      id="macos-filter"
+      class="appearance-none rounded-full border border-line bg-page py-2 pl-4 pr-10
+             text-sm font-medium text-strong
+             focus-visible:border-accent focus-visible:outline-2
+             focus-visible:outline-offset-2 focus-visible:outline-accent"
+    >
+      {
+        MACOS_RELEASES.map((release) => (
+          <option value={release.version} selected={release.version === newest.version}>
+            {release.name} ({release.version})
+          </option>
+        ))
+      }
+    </select>
+    <svg
+      class="pointer-events-none absolute right-3.5 top-1/2 size-4 -translate-y-1/2 text-muted"
+      viewBox="0 0 20 20"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      aria-hidden="true"
+    >
+      <path d="M5 7.5 10 12.5 15 7.5" stroke-linecap="round" stroke-linejoin="round"></path>
+    </svg>
+  </div>
+
+  <p id="macos-summary" role="status" aria-live="polite" class="text-sm text-muted">
+    <slot name="summary" />
+  </p>
+</div>
+
+<script>
+  const picker = document.querySelector<HTMLElement>('[data-macos-picker]');
+  const select = document.getElementById('macos-filter') as HTMLSelectElement | null;
+  const summary = document.getElementById('macos-summary');
+  const cards = [...document.querySelectorAll<HTMLElement>('[data-feature]')];
+
+  if (picker && select && cards.length) {
+    const noun = picker.dataset.noun ?? 'features';
+    const names = new Map<number, string>(
+      [...select.options].map((option) => [Number(option.value), option.textContent?.trim() ?? ''])
+    );
+
+    const apply = () => {
+      const chosen = Number(select.value);
+      if (!chosen) return;
+
+      let included = 0;
+      for (const card of cards) {
+        const needs = Number(card.dataset.macos);
+        const ok = needs <= chosen;
+        if (ok) included += 1;
+        card.dataset.state = ok ? 'included' : 'excluded';
+
+        const verdict = card.querySelector<HTMLElement>('[data-verdict]');
+        if (verdict) {
+          verdict.textContent = ok ? '✓ Supported' : `Needs macOS ${needs}`;
+          verdict.className = ok
+            ? 'mt-3 text-xs font-semibold text-accent'
+            : 'mt-3 text-xs font-semibold text-muted';
+        }
+      }
+
+      if (summary) {
+        summary.textContent =
+          `${included} of ${cards.length} ${noun} run on ${names.get(chosen) ?? chosen}.`;
+      }
+    };
+
+    select.addEventListener('change', apply);
+    // Browsers restore a previous selection on reload; reflect it immediately.
+    apply();
+  }
+</script>
