@@ -78,20 +78,40 @@ const newestMacOS = MACOS_RELEASES.reduce((a, b) => (b.version > a.version ? b :
         <label for="macos-filter" class="text-sm font-medium text-strong">
           Your server Mac runs
         </label>
-        <select
-          id="macos-filter"
-          class="rounded-full border border-line bg-page px-4 py-2 text-sm font-medium text-strong
-                 focus-visible:border-accent focus-visible:outline-2
-                 focus-visible:outline-offset-2 focus-visible:outline-accent"
-        >
-          {
-            MACOS_RELEASES.map((release) => (
-              <option value={release.version} selected={release.version === newestMacOS.version}>
-                {release.name} ({release.version})
-              </option>
-            ))
-          }
-        </select>
+        {/*
+          appearance-none plus our own chevron. The native arrow sits inside the
+          right padding, and on a rounded-full pill the 18.5px corner radius
+          curves in over it, so it reads as crammed against the edge. Drawing it
+          ourselves also makes it match the FAQ accordion's chevron and follow
+          the theme, which the native control does not.
+        */}
+        <div class="relative inline-flex">
+          <select
+            id="macos-filter"
+            class="appearance-none rounded-full border border-line bg-page py-2 pl-4 pr-10
+                   text-sm font-medium text-strong
+                   focus-visible:border-accent focus-visible:outline-2
+                   focus-visible:outline-offset-2 focus-visible:outline-accent"
+          >
+            {
+              MACOS_RELEASES.map((release) => (
+                <option value={release.version} selected={release.version === newestMacOS.version}>
+                  {release.name} ({release.version})
+                </option>
+              ))
+            }
+          </select>
+          <svg
+            class="pointer-events-none absolute right-3.5 top-1/2 size-4 -translate-y-1/2 text-muted"
+            viewBox="0 0 20 20"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            aria-hidden="true"
+          >
+            <path d="M5 7.5 10 12.5 15 7.5" stroke-linecap="round" stroke-linejoin="round"></path>
+          </svg>
+        </div>
         <p id="macos-summary" role="status" aria-live="polite" class="text-sm text-muted">
           {PRO_FEATURES.filter((f) => f.macos <= newestMacOS.version).length} of {
             PRO_FEATURES.length
