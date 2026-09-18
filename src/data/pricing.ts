@@ -154,3 +154,21 @@ export const FREE_FEATURES: readonly string[] = [
   'Managing groups',
   'Find My',
 ] as const;
+
+/** macOS releases the Swift server runs on.
+ *
+ *  Names and numbers come from the server's own `docs/MACOS_COMPATIBILITY.md`.
+ *  The floor is 14: `Package.swift` declares `.macOS(.v14)`, so there is nothing
+ *  below it to offer. Note the numbering jumps 15 -> 26; Apple moved to
+ *  year-based versions, and 16 through 25 do not exist.
+ */
+export interface MacOSRelease {
+  version: number;
+  name: string;
+}
+
+export const MACOS_RELEASES: readonly MacOSRelease[] = [
+  { version: 14, name: 'Sonoma' },
+  { version: 15, name: 'Sequoia' },
+  { version: 26, name: 'Tahoe' },
+] as const;
