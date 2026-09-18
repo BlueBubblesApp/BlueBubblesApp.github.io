@@ -67,6 +67,34 @@ export const QUESTIONS: readonly Question[] = [
     ],
   },
   {
+    id: 'macos',
+    question: 'What macOS version is that Mac on?',
+    help: 'The current server needs Sonoma or newer. Older Macs are not shut out, but they are on an older server.',
+    choices: [
+      { id: 'tahoe', label: 'Tahoe (26)', tone: 'good' },
+      { id: 'sequoia', label: 'Sequoia (15)', tone: 'good' },
+      {
+        id: 'sonoma',
+        label: 'Sonoma (14)',
+        tone: 'good',
+        note: 'Sonoma runs the current server. A handful of the newer Private API features need Sequoia or Tahoe, but the core of BlueBubbles is all there.',
+      },
+      {
+        id: 'older',
+        label: 'Ventura (13) or older',
+        reason: 'the Mac is on a macOS too old for the current server',
+        tone: 'warn',
+        note: 'BlueBubbles still works, but on the 1.x server rather than the current 2.x one, and 1.x is in maintenance rather than active development. If that Mac can take a newer macOS, upgrading is the simplest fix. If Apple has dropped it, OpenCore Legacy Patcher will often get an older Mac onto Sonoma or later. Failing both, a newer second-hand Mac is the other way out.',
+      },
+      {
+        id: 'unsure',
+        label: 'I am not sure',
+        tone: 'info',
+        note: 'Check the Apple menu, then About This Mac. Sonoma or newer runs the current server; Ventura or older runs the 1.x server, which is no longer actively developed.',
+      },
+    ],
+  },
+  {
     id: 'uptime',
     question: 'Can that Mac stay awake and online?',
     help: 'Your Mac is the bridge. When it sleeps, the bridge is out.',

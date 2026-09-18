@@ -13,7 +13,7 @@ import { LINKS, SITE } from '@data/site';
 >
   <PageHeader
     title="Is BlueBubbles a good fit for me?"
-    lead="Six questions. No email address, nothing sent anywhere — it all runs in your browser. We will tell you if the answer is no."
+    lead={`${QUESTIONS.length} questions. No email address, nothing sent anywhere — it all runs in your browser. We'll tell you if the answer is no.`}
   />
 
   <div class="mx-auto max-w-2xl px-5 py-12">
@@ -188,13 +188,18 @@ import { LINKS, SITE } from '@data/site';
         'text-xs font-semibold uppercase tracking-wider ' +
         (negative ? 'text-rose-500' : warned ? 'text-amber-500' : 'text-accent');
 
-      document.getElementById('fit-verdict-title')!.textContent = verdict.title;
 
       // Say which answers decided it, rather than "something in your answers".
       const deciding = answers
         .filter((a) => (negative ? a.fatal || a.blocks : a.tone === 'warn'))
         .map((a) => a.reason)
         .filter((r): r is string => Boolean(r));
+
+      // The title has to agree with the sentence under it: "a couple of
+      // caveats" above "One thing worth knowing first" reads as a bug.
+      const titleEl = document.getElementById('fit-verdict-title')!;
+      titleEl.textContent =
+        verdict.id === 'maybe' && deciding.length === 1 ? 'Yes, with one caveat' : verdict.title;
 
       let blurb = verdict.blurb;
       if (deciding.length === 1) {
