@@ -124,15 +124,22 @@ export const QUESTIONS: readonly Question[] = [
   },
   {
     id: 'sms',
-    question: 'Do you need green-bubble SMS and RCS as well?',
+    question: 'Do you want green-bubble SMS and RCS as well?',
+    help: 'BlueBubbles carries these too, but they reach your Mac by way of an iPhone, so a phone number is involved.',
     choices: [
-      { id: 'no', label: 'No, iMessage is what I am after', tone: 'good' },
+      { id: 'no', label: 'No, iMessage is all I need', tone: 'good' },
       {
-        id: 'yes',
-        label: 'Yes, I want all my texts in one place',
-        reason: 'you want SMS as well as iMessage',
+        id: 'iphone',
+        label: 'Yes, and I have an iPhone with a SIM in it',
+        tone: 'good',
+        note: 'Turn on Text Message Forwarding on that iPhone and point it at your server Mac. SMS and RCS then land in Messages alongside iMessage, and BlueBubbles picks them up with everything else.',
+      },
+      {
+        id: 'no-iphone',
+        label: 'Yes, but I have no iPhone with a number',
+        reason: 'SMS and RCS need an iPhone with a phone number',
         tone: 'warn',
-        note: 'BlueBubbles does not support SMS at this time. It carries iMessage only, so your SMS will stay wherever they are now.',
+        note: 'SMS and RCS arrive by Text Message Forwarding from an iPhone, so a phone number is required. The usual workaround is a cheap prepaid SIM in an old iPhone, kept on the same Apple ID purely to relay texts. Without one you still get iMessage -- just not the green bubbles.',
       },
     ],
   },
