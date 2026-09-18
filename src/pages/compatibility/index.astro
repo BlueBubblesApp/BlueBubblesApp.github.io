@@ -1,0 +1,119 @@
+---
+/*
+ * NOT PUBLIC YET. This page describes the **v2 Swift server**, which supports
+ * macOS 14 and newer. The server shipping today is v1.x (Node.js), which runs
+ * on Mojave through Ventura and has a different capability set entirely.
+ *
+ * Publishing this before v2 ships would tell a Ventura user they are
+ * unsupported when v1 supports them. So it is hidden the same way /pricing is:
+ * no nav or footer link, noindex, excluded from the sitemap.
+ *
+ * To launch, once v2 is out: add it back to NAV_LINKS and FOOTER_LINKS in
+ * src/data/site.ts, drop the `noindex` below, and remove the sitemap exclusion
+ * in astro.config.mjs. Decide then what the FAQ's existing v1 tables should say,
+ * since both servers will be in use.
+ */
+import BaseLayout from '@layouts/BaseLayout.astro';
+import PageHeader from '@components/PageHeader.astro';
+import MacOSPicker from '@components/MacOSPicker.astro';
+import { CAPABILITIES, CAPABILITY_CATEGORIES } from '@data/capabilities';
+import { MACOS_RELEASES } from '@data/pricing';
+import { LINKS, SITE } from '@data/site';
+
+const newest = MACOS_RELEASES.reduce((a, b) => (b.version > a.version ? b : a));
+const supportedByNewest = CAPABILITIES.filter((c) => c.macos <= newest.version).length;
+const oldest = MACOS_RELEASES.reduce((a, b) => (b.version < a.version ? b : a));
+---
+
+<BaseLayout
+  title="BlueBubbles - Feature compatibility by macOS version"
+  description="Which BlueBubbles Private API features work on your Mac, by macOS version."
+  keywords={SITE.keywords}
+  path="/compatibility/"
+  noindex
+>
+  <PageHeader
+    title="Compatibility"
+    lead="What the Private API can do depends on the macOS version running on your server Mac. Pick yours to see what is supported."
+  >
+    <div class="mt-6">
+      <MacOSPicker label="My server Mac runs" noun="features">
+        <Fragment slot="summary">
+          {supportedByNewest} of {CAPABILITIES.length} features run on {newest.name} ({
+            newest.version
+          }).
+        </Fragment>
+      </MacOSPicker>
+    </div>
+  </PageHeader>
+
+  <div class="mx-auto max-w-5xl px-5 py-12">
+    {
+      CAPABILITY_CATEGORIES.map((category) => {
+        const items = CAPABILITIES.filter((c) => c.category === category.id);
+        if (items.length === 0) return null;
+        return (
+          <section class="mb-12">
+            <h2 class="text-2xl font-bold tracking-tight text-strong">{category.label}</h2>
+            <ul class="mt-4 grid gap-4 sm:grid-cols-2">
+              {items.map((capability) => (
+                <li
+                  data-feature
+                  data-macos={capability.macos}
+                  data-state={capability.macos <= newest.version ? 'included' : 'excluded'}
+                  class="rounded-card border border-line bg-raised p-5 transition
+                         data-[state=included]:border-accent data-[state=included]:bg-accent-solid/5
+                         data-[state=excluded]:opacity-55"
+                >
+                  <div class="flex items-start justify-between gap-3">
+                    <h3 class="font-semibold text-strong">{capability.title}</h3>
+                    <span class="shrink-0 rounded-full border border-line px-2 py-0.5 text-xs font-medium text-muted">
+                      macOS {capability.macos}+
+                    </span>
+                  </div>
+                  <p class="mt-2 text-sm text-muted">{capability.summary}</p>
+                  {/* Text, not just colour, and rendered server-side so it is
+                      correct before the script runs and without it. */}
+                  <p
+                    data-verdict
+                    class:list={[
+                      'mt-3 text-xs font-semibold',
+                      capability.macos <= newest.version ? 'text-accent' : 'text-muted',
+                    ]}
+                  >
+                    {capability.macos <= newest.version
+                      ? '✓ Supported'
+                      : `Needs macOS ${capability.macos}`}
+                  </p>
+                </li>
+              ))}
+            </ul>
+          </section>
+        );
+      })
+    }
+
+    <div class="rounded-card border border-line bg-raised p-6">
+      <h2 class="text-base font-semibold text-strong">About these features</h2>
+      <p class="mt-2 text-sm text-muted">
+        These are Private API features, which need the helper bundle installed on your server
+        Mac. Sending and receiving messages, attachments and the rest of the core experience
+        work without it. Setup is covered in the <a
+          href="/install/"
+          class="font-medium text-accent underline underline-offset-2">install guide</a
+        >.
+      </p>
+      <p class="mt-3 text-sm text-muted">
+        This page describes BlueBubbles Server 2.0 and newer, which runs on macOS {
+          oldest.version
+        } and newer. Earlier macOS releases are supported by the 1.x server, which has a
+        different feature set.
+        Questions? Ask us on <a
+          href={LINKS.discord}
+          rel="noopener"
+          class="font-medium text-accent underline underline-offset-2">Discord</a
+        >.
+      </p>
+    </div>
+  </div>
+</BaseLayout>
