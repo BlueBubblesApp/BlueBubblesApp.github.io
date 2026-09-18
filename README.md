@@ -131,6 +131,12 @@ hand-written files from the repository root:
 
 To roll back at any point, switch Source back to *Deploy from a branch → master*.
 
+**Hidden files need care.** `actions/upload-pages-artifact` excludes every
+dot-entry from the artifact it uploads, so anything under `public/.well-known/`
+would be built correctly and then 404 in production. The deploy workflow
+packages the tar itself for this reason and asserts the Flathub token survived.
+Do not swap that back for the stock action.
+
 **`public/CNAME` is load-bearing.** If it is missing from `dist/`, the custom
 domain unbinds and the site goes down. Same for
 `public/.well-known/org.flathub.VerifiedApps.txt`, which Flathub reads to keep

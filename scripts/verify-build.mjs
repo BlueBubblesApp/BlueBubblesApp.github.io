@@ -7,6 +7,13 @@
  *      CNAME (the custom domain unbinds and the site goes down) or the
  *      Flathub verification token (the app quietly loses its verified badge
  *      weeks later, with no signal).
+ *
+ * SCOPE: this checks dist/, which is the build output, NOT what finally reaches
+ * GitHub Pages. Those differ. actions/upload-pages-artifact tars with
+ * `--exclude=.[^/]*` and drops every dot-entry, so .well-known/ passed this
+ * check and still 404'd in production. The deploy workflow therefore packages
+ * the tar itself and asserts the dot-entries survived into the artifact. If you
+ * add anything else hidden to public/, assert it in both places.
  */
 import { existsSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
