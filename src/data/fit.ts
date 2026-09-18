@@ -171,7 +171,7 @@ export const VERDICTS: Record<Verdict['id'], Verdict> = {
   yes: {
     id: 'yes',
     title: 'Yes — this is built for you',
-    blurb: 'You have what BlueBubbles needs and none of the usual blockers. Grab the server for your Mac and a client for whatever you actually carry around.',
+    blurb: 'You have what BlueBubbles needs, and none of the usual blockers. Install the server on your Mac, then the app wherever you want to read your messages.',
   },
   maybe: {
     id: 'maybe',
