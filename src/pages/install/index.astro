@@ -1,0 +1,103 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '@layouts/BaseLayout.astro';
+import PageHeader from '@components/PageHeader.astro';
+import { SITE } from '@data/site';
+
+const sections = (await getCollection('install')).sort(
+  (a, b) => a.data.order - b.data.order
+);
+
+const rendered = await Promise.all(
+  sections.map(async (section) => ({
+    id: section.id.replace(/^\d+-/, ''),
+    title: section.data.title,
+    Content: (await render(section)).Content,
+  }))
+);
+---
+
+<BaseLayout
+  title="BlueBubbles - Installation"
+  description="Get BlueBubbles running in just a few short steps."
+  keywords={SITE.keywords}
+  path="/install/"
+>
+  <PageHeader
+    title="Standard Installation Guide"
+    lead="Get BlueBubbles running in just a few short steps!"
+  />
+
+  <div class="mx-auto max-w-5xl gap-12 px-5 py-12 lg:grid lg:grid-cols-[14rem_minmax(0,1fr)]">
+    <!-- Section navigation. The old page was one flat run of <h2>s used as body
+         text, with no way to jump or link to a section. -->
+    <nav aria-label="On this page" class="mb-10 lg:sticky lg:top-24 lg:mb-0 lg:self-start">
+      <p class="mb-3 text-xs font-semibold uppercase tracking-wider text-muted">On this page</p>
+      <ul class="space-y-1 border-l border-line">
+        {
+          rendered.map((section) => (
+            <li>
+              <a
+                href={`#${section.id}`}
+                class="-ml-px block border-l-2 border-transparent py-1.5 pl-4 text-sm text-muted
+                       transition-colors hover:border-accent hover:text-accent
+                       focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+              >
+                {section.title}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+
+    <div class="min-w-0">
+      {
+        rendered.map(({ id, title, Content }) => (
+          <section id={id} class="install-section mb-14 scroll-mt-28">
+            <h2 class="mb-5 text-2xl font-bold tracking-tight text-strong">{title}</h2>
+            <Content />
+          </section>
+        ))
+      }
+    </div>
+  </div>
+</BaseLayout>
+
+<style is:global>
+  /* Steps are a real <ol>, so assistive tech announces "step 3 of 13". The old
+     page used a flat sequence of <h2 class="stepText"> elements as body copy,
+     which announced thirteen unrelated headings instead. */
+  .install-section ol {
+    list-style: decimal;
+    padding-left: 1.5rem;
+    counter-reset: none;
+  }
+  .install-section ol > li {
+    margin-block: 1.25rem;
+    padding-left: 0.375rem;
+  }
+  .install-section ol > li::marker {
+    color: var(--color-accent);
+    font-weight: 700;
+  }
+  .install-section p {
+    margin-block: 0.75rem;
+  }
+  .install-section a {
+    color: var(--color-accent);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+  .install-section strong {
+    font-weight: 600;
+    color: var(--color-strong);
+  }
+  .install-section img {
+    margin-block: 1rem;
+    border-radius: var(--radius-card);
+    border: 1px solid var(--color-line);
+    width: 100%;
+    height: auto;
+  }
+</style>

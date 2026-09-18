@@ -1,0 +1,15 @@
+---
+// build.format is 'preserve', so this file emits dist/privacy.html --
+// the exact URL the old site used and every footer still links to.
+import ProseLayout from '@layouts/ProseLayout.astro';
+import privacyHtml from '../content/legal/privacy.html?raw';
+---
+
+<ProseLayout
+  title="Privacy Policy - BlueBubbles"
+  heading="Privacy Policy"
+  description="How BlueBubbles handles your data."
+  path="/privacy.html"
+>
+  <Fragment set:html={privacyHtml} />
+</ProseLayout>

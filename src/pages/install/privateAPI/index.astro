@@ -1,0 +1,48 @@
+---
+// The capital "API" is load-bearing: GitHub Pages is case-sensitive, this exact
+// path is in the old sitemap, and it has years of inbound links. Do not
+// "normalise" this directory to private-api.
+//
+// The old page here was a nine-step MacForge/ngrok-era carousel whose step 3
+// was empty and whose six videos were all missing from the repository. Rather
+// than port content that is wrong, this keeps the URL alive and points at the
+// maintained docs. It is noindex so it stops competing with them in search.
+import BaseLayout from '@layouts/BaseLayout.astro';
+import { LINKS } from '@data/site';
+
+const docsUrl = `${LINKS.docs}/private-api/installation`;
+---
+
+<BaseLayout
+  title="Private API Installation - BlueBubbles"
+  description="The Private API installation guide has moved to the BlueBubbles documentation."
+  path="/install/privateAPI"
+  noindex
+>
+  <div class="mx-auto max-w-2xl px-5 py-24 text-center">
+    <h1 class="text-3xl font-extrabold tracking-tight text-strong sm:text-4xl">
+      Private API Installation
+    </h1>
+    <p class="mt-4 text-lg text-muted">
+      This guide has moved. The current, maintained instructions live in the
+      BlueBubbles documentation.
+    </p>
+
+    <div class="mt-8 flex flex-wrap items-center justify-center gap-3">
+      <a
+        href={docsUrl}
+        rel="noopener"
+        class="rounded-full bg-accent-solid px-6 py-3 text-sm font-semibold text-white transition
+               hover:bg-accent-solid-hover focus-visible:outline-2 focus-visible:outline-offset-2
+               focus-visible:outline-accent">Open the Private API guide</a
+      >
+      <a
+        href="/install/"
+        class="rounded-full border border-line px-6 py-3 text-sm font-semibold text-strong transition
+               hover:border-accent hover:text-accent focus-visible:outline-2
+               focus-visible:outline-offset-2 focus-visible:outline-accent"
+        >Back to the install guide</a
+      >
+    </div>
+  </div>
+</BaseLayout>

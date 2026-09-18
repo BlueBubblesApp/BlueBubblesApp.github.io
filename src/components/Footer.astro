@@ -1,0 +1,54 @@
+---
+import { FOOTER_LINKS, SOCIAL_LINKS } from '@data/site';
+import { Icon } from 'astro-icon/components';
+
+const year = new Date().getFullYear();
+---
+
+<footer class="mt-24 border-t border-line bg-raised">
+  <div class="mx-auto max-w-6xl px-5 py-10">
+    <!-- Social icons. The old site shipped these as five raster JPG/PNG logos,
+         and three pages were each missing a different one. -->
+    <ul class="flex flex-wrap items-center justify-center gap-2">
+      {
+        SOCIAL_LINKS.map((social) => (
+          <li>
+            <a
+              href={social.href}
+              rel="noopener"
+              aria-label={social.label}
+              class="grid size-10 place-items-center rounded-full text-muted transition-colors
+                     hover:bg-sunken hover:text-accent
+                     focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+            >
+              <Icon name={social.icon} class="size-5" />
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+
+    <nav aria-label="Footer" class="mt-8">
+      <ul class="flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-sm">
+        {
+          FOOTER_LINKS.map((link) => (
+            <li>
+              <a
+                href={link.href}
+                {...link.external ? { rel: 'noopener' } : {}}
+                class="text-muted transition-colors hover:text-accent
+                       focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+              >
+                {link.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+
+    <p class="mt-8 text-center text-sm text-muted">
+      &copy; {year} BlueBubbles
+    </p>
+  </div>
+</footer>

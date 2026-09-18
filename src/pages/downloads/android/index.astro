@@ -1,0 +1,8 @@
+---
+// NOTE: build.format is 'preserve', so this must stay <dir>/index.astro.
+// A dynamic [platform] route would emit downloads/android.html and break
+// the trailing-slash form of the URL.
+import PlatformDownloadPage from '@components/PlatformDownloadPage.astro';
+---
+
+<PlatformDownloadPage slug="android" path="/downloads/android" />

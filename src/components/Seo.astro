@@ -1,0 +1,47 @@
+---
+/** Consolidates the <head> metadata that was hand-duplicated across nine pages
+ *  -- and had drifted: the server downloads page carried the Android page's
+ *  title and og:url, the privateAPI page carried the homepage's, and every page
+ *  emitted `<meta name="description" ... name="description">` with the
+ *  attribute written twice. canonical / og:image / twitter tags are new. */
+interface Props {
+  title: string;
+  description: string;
+  keywords?: string;
+  path: string;
+  ogImage?: string;
+  ogType?: 'website' | 'article';
+  noindex?: boolean;
+}
+
+const {
+  title,
+  description,
+  keywords,
+  path,
+  ogImage = '/og-default.png',
+  ogType = 'website',
+  noindex = false,
+} = Astro.props;
+
+const canonical = new URL(path, Astro.site).href;
+const ogImageUrl = new URL(ogImage, Astro.site).href;
+---
+
+<title>{title}</title>
+<meta name="description" content={description} />
+{keywords && <meta name="keywords" content={keywords} />}
+{noindex && <meta name="robots" content="noindex,follow" />}
+<link rel="canonical" href={canonical} />
+
+<meta property="og:site_name" content="BlueBubbles" />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:type" content={ogType} />
+<meta property="og:url" content={canonical} />
+<meta property="og:image" content={ogImageUrl} />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={ogImageUrl} />

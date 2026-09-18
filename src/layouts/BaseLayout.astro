@@ -1,0 +1,64 @@
+---
+import '../styles/global.css';
+import { Font } from 'astro:assets';
+import Nav from '@components/Nav.astro';
+import Footer from '@components/Footer.astro';
+import Seo from '@components/Seo.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  keywords?: string;
+  /** Used for canonical, og:url and nav current-page detection. */
+  path: string;
+  ogImage?: string;
+  ogType?: 'website' | 'article';
+  noindex?: boolean;
+}
+
+const { title, description, keywords, path, ogImage, ogType, noindex } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    {/* Applies the stored theme before first paint so there is no flash. */}
+    <script is:inline>
+      (() => {
+        try {
+          const stored = localStorage.getItem('theme');
+          const dark =
+            stored === 'dark' ||
+            (!stored && window.matchMedia('(prefers-color-scheme: dark)').matches);
+          if (dark) document.documentElement.classList.add('dark');
+        } catch {
+          /* storage unavailable -- fall through to the light default */
+        }
+      })();
+    </script>
+
+    <Font cssVariable="--font-inter" preload />
+    <Seo {title} {description} {keywords} {path} {ogImage} {ogType} {noindex} />
+
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <slot name="head" />
+  </head>
+
+  <body
+    class="flex min-h-dvh flex-col bg-page font-sans text-base antialiased selection:bg-brand-500/25"
+  >
+    <a
+      href="#main"
+      class="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:m-3 focus:rounded-md
+             focus:bg-accent-solid focus:px-4 focus:py-2 focus:text-white"
+    >Skip to content</a>
+
+    <Nav {path} />
+    <main id="main" class="flex-1"><slot /></main>
+    <Footer />
+  </body>
+</html>

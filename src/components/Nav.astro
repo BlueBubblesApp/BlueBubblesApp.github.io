@@ -1,0 +1,98 @@
+---
+import { NAV_LINKS } from '@data/site';
+import NavLink from './NavLink.astro';
+import ThemeToggle from './ThemeToggle.astro';
+import { Icon } from 'astro-icon/components';
+
+interface Props {
+  path: string;
+}
+const { path } = Astro.props;
+---
+
+<header
+  class="sticky top-0 z-40 border-b border-line bg-page/85 backdrop-blur-md supports-[backdrop-filter]:bg-page/70"
+>
+  <div class="mx-auto flex max-w-6xl items-center justify-between gap-4 px-5 py-3">
+    <a
+      href="/"
+      class="flex items-center gap-2 text-lg font-extrabold tracking-tight text-strong
+             focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
+    >
+      <span
+        class="grid size-7 place-items-center rounded-bubble rounded-bl-sm bg-accent-solid text-white"
+        aria-hidden="true"
+      >
+        <!-- The bubble path's bounding box is centred at y=11 in a 24-unit box,
+           so a plain "0 0 24 24" makes the glyph ride high. Shifting the
+           viewBox up moves the glyph down: -1 would centre it geometrically,
+           and -1.5 goes slightly further so the round body optically straddles
+           the centre rather than the tail dragging it upward. Done on the
+           viewBox because the path ends on an absolute command (S17 3 12 3z)
+           and so cannot be moved by changing the opening moveto. -->
+        <svg viewBox="0 -1.5 24 24" class="size-4" fill="currentColor">
+          <path d="M12 3c-5 0-9 3.2-9 7.2 0 2.3 1.3 4.3 3.4 5.6-.2.9-.8 2.3-1.6 3.2 0 0 2.6-.4 4.5-1.8.9.2 1.8.3 2.7.3 5 0 9-3.2 9-7.3S17 3 12 3z" />
+        </svg>
+      </span>
+      BlueBubbles
+    </a>
+
+    <div class="flex items-center gap-1">
+      <!-- Desktop -->
+      <nav aria-label="Main" class="hidden md:flex md:items-center md:gap-1">
+        {NAV_LINKS.map((link) => <NavLink {...link} currentPath={path} />)}
+      </nav>
+
+      <ThemeToggle />
+
+      <!-- Mobile: a native disclosure widget.
+           <details>/<summary> gives real semantics, keyboard activation and
+           aria-expanded for free, and works with JS disabled. The old site
+           used a div with onclick and no semantics at all. -->
+      <details
+        class="relative md:hidden [&[open]_.i-closed]:hidden [&:not([open])_.i-open]:hidden"
+      >
+        <summary
+          class="grid cursor-pointer list-none place-items-center rounded-md p-2 text-base
+                 [&::-webkit-details-marker]:hidden
+                 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+          aria-label="Toggle navigation menu"
+        >
+          <Icon name="lucide:menu" class="i-closed size-6" />
+          <Icon name="lucide:x" class="i-open size-6" />
+        </summary>
+        <nav
+          aria-label="Main"
+          class="absolute right-0 top-full z-50 mt-2 w-56 rounded-card border border-line
+                 bg-page p-2 shadow-xl"
+        >
+          <ul class="flex flex-col">
+            {
+              NAV_LINKS.map((link) => (
+                <li>
+                  <NavLink {...link} currentPath={path} class="block" />
+                </li>
+              ))
+            }
+          </ul>
+        </nav>
+      </details>
+    </div>
+  </div>
+</header>
+
+<script>
+  // Progressive enhancement only -- open/close already works natively.
+  const menu = document.querySelector<HTMLDetailsElement>('header details');
+  if (menu) {
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && menu.open) {
+        menu.open = false;
+        menu.querySelector('summary')?.focus();
+      }
+    });
+    document.addEventListener('click', (e) => {
+      if (menu.open && !menu.contains(e.target as Node)) menu.open = false;
+    });
+  }
+</script>

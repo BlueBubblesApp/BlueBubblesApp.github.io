@@ -1,0 +1,34 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import PageHeader from '@components/PageHeader.astro';
+import DownloadSections from '@components/DownloadSections.astro';
+import { getPlatform, type PlatformSlug } from '@data/downloads';
+import { SITE } from '@data/site';
+
+interface Props {
+  slug: PlatformSlug;
+  path: string;
+}
+const { slug, path } = Astro.props;
+const platform = getPlatform(slug);
+---
+
+<BaseLayout
+  title={platform.seoTitle}
+  description={platform.seoDescription}
+  keywords={SITE.keywords}
+  {path}
+>
+  <PageHeader title={platform.title} />
+  <div class="mx-auto max-w-5xl px-5 py-12">
+    <DownloadSections sections={platform.sections} />
+
+    <p class="mt-14">
+      <a
+        href="/downloads/"
+        class="text-sm font-medium text-muted underline underline-offset-4 transition-colors hover:text-accent"
+        >&larr; All downloads</a
+      >
+    </p>
+  </div>
+</BaseLayout>

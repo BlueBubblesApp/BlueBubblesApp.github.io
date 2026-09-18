@@ -1,0 +1,181 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '@layouts/BaseLayout.astro';
+import PageHeader from '@components/PageHeader.astro';
+import FaqAccordion from '@components/FaqAccordion.astro';
+import { FAQ_CATEGORIES, FAQ_CATEGORY_LABELS } from '../../content.config';
+import { SITE } from '@data/site';
+
+const all = await getCollection('faq');
+
+const grouped = FAQ_CATEGORIES.map((category) => ({
+  category,
+  label: FAQ_CATEGORY_LABELS[category],
+  entries: all
+    .filter((entry) => entry.data.category === category)
+    .sort((a, b) => a.data.order - b.data.order),
+})).filter((group) => group.entries.length > 0);
+
+// Content components must be resolved before the template renders.
+const rendered = new Map(
+  await Promise.all(
+    all.map(async (entry) => [entry.id, (await render(entry)).Content] as const)
+  )
+);
+
+// Structured data -- the old page had none, and this is the one page on the
+// site where it plainly pays off in search.
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: all.map((entry) => ({
+    '@type': 'Question',
+    name: entry.data.question,
+    acceptedAnswer: { '@type': 'Answer', url: `${SITE.url}/faq/#${entry.id}` },
+  })),
+};
+---
+
+<BaseLayout
+  title="BlueBubbles - FAQ"
+  description="Frequently asked questions about setting up, securing and troubleshooting BlueBubbles."
+  keywords={SITE.keywords}
+  path="/faq/"
+>
+  <script
+    slot="head"
+    type="application/ld+json"
+    is:inline
+    set:html={JSON.stringify(faqSchema)}
+  />
+
+  <PageHeader title="FAQ">
+    <div class="mt-6 max-w-md">
+      <label for="faq-search" class="sr-only">Search the FAQ</label>
+      <div class="relative">
+        <svg
+          class="pointer-events-none absolute left-3.5 top-1/2 size-4 -translate-y-1/2 text-muted"
+          viewBox="0 0 20 20"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          aria-hidden="true"
+        >
+          <circle cx="9" cy="9" r="6"></circle>
+          <path d="m13.5 13.5 3 3" stroke-linecap="round"></path>
+        </svg>
+        <input
+          id="faq-search"
+          type="search"
+          autocomplete="off"
+          placeholder="Search questions and answers…"
+          class="w-full rounded-full border border-line bg-page py-2.5 pl-10 pr-4 text-sm
+                 text-strong placeholder:text-muted
+                 focus-visible:border-accent focus-visible:outline-2
+                 focus-visible:outline-offset-2 focus-visible:outline-accent"
+        />
+      </div>
+      <p id="faq-search-status" role="status" aria-live="polite" class="mt-2 h-5 text-sm text-muted"></p>
+    </div>
+  </PageHeader>
+
+  <div class="mx-auto max-w-4xl px-5 py-12">
+    {
+      grouped.map((group) => (
+        <section aria-labelledby={`faq-cat-${group.category}`} class="mb-10" data-faq-group>
+          <h2
+            id={`faq-cat-${group.category}`}
+            class="mb-4 text-2xl font-bold tracking-tight text-strong"
+          >
+            {group.label}
+          </h2>
+          <div class="space-y-3">
+            {group.entries.map((entry) => {
+              const Content = rendered.get(entry.id)!;
+              return (
+                <FaqAccordion id={entry.id} question={entry.data.question}>
+                  <Content />
+                </FaqAccordion>
+              );
+            })}
+          </div>
+        </section>
+      ))
+    }
+
+    <p id="faq-no-results" hidden class="py-10 text-center text-muted">
+      No questions match that search.
+    </p>
+  </div>
+</BaseLayout>
+
+<script>
+  // Client-side filter over the rendered answers. ~30 lines, no dependency,
+  // no index to keep in sync -- the text being searched is the text on screen.
+  const input = document.getElementById('faq-search') as HTMLInputElement | null;
+  const status = document.getElementById('faq-search-status');
+  const empty = document.getElementById('faq-no-results');
+  const items = [...document.querySelectorAll<HTMLDetailsElement>('[data-faq-item]')];
+  const groups = [...document.querySelectorAll<HTMLElement>('[data-faq-group]')];
+
+  if (input && items.length) {
+    const haystacks = new Map(items.map((el) => [el, (el.textContent ?? '').toLowerCase()]));
+
+    const apply = () => {
+      const query = input.value.trim().toLowerCase();
+
+      if (!query) {
+        items.forEach((el) => (el.hidden = false));
+        groups.forEach((el) => (el.hidden = false));
+        if (empty) empty.hidden = true;
+        if (status) status.textContent = '';
+        return;
+      }
+
+      let matches = 0;
+      for (const item of items) {
+        const hit = haystacks.get(item)!.includes(query);
+        item.hidden = !hit;
+        if (hit) matches += 1;
+      }
+
+      // Hide category headings that have nothing left under them.
+      for (const group of groups) {
+        group.hidden = !group.querySelector('[data-faq-item]:not([hidden])');
+      }
+
+      if (empty) empty.hidden = matches > 0;
+      if (status) {
+        status.textContent = matches
+          ? `${matches} question${matches === 1 ? '' : 's'} match`
+          : 'No matches';
+      }
+    };
+
+    input.addEventListener('input', apply);
+    // Restore the full list when the search input's clear button is used.
+    input.addEventListener('search', apply);
+  }
+
+  // Deep links. Browsers only auto-expand a <details> for a fragment in some
+  // navigation paths, so open the target explicitly -- every answer is meant to
+  // be linkable straight from a support conversation.
+  const openFromHash = () => {
+    const id = decodeURIComponent(location.hash.slice(1));
+    if (!id) return;
+    const target = document.getElementById(id);
+    if (target instanceof HTMLDetailsElement) {
+      target.open = true;
+      target.scrollIntoView({ block: 'start', behavior: 'instant' });
+    }
+  };
+  openFromHash();
+  window.addEventListener('hashchange', openFromHash);
+
+  // Clicking a question updates the URL so it can be copied and shared.
+  for (const item of items) {
+    item.addEventListener('toggle', () => {
+      if (item.open && item.id) history.replaceState(null, '', `#${item.id}`);
+    });
+  }
+</script>

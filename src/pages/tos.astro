@@ -1,0 +1,14 @@
+---
+// build.format is 'preserve', so this file emits dist/tos.html at the root.
+import ProseLayout from '@layouts/ProseLayout.astro';
+import tosHtml from '../content/legal/tos.html?raw';
+---
+
+<ProseLayout
+  title="Terms of Service - BlueBubbles"
+  heading="Terms of Service"
+  description="The terms governing use of BlueBubbles."
+  path="/tos.html"
+>
+  <Fragment set:html={tosHtml} />
+</ProseLayout>

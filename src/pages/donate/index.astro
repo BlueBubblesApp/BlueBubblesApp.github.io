@@ -1,0 +1,270 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import PageHeader from '@components/PageHeader.astro';
+import { SITE, LINKS, PAYPAL_CLIENT_ID, DONATION_PRESETS, DEFAULT_DONATION } from '@data/site';
+
+const description =
+  'Support the developers of BlueBubbles by making a donation to them. This app was created in their free time during the pandemic.';
+
+const paypalSdk =
+  `https://www.paypal.com/sdk/js?client-id=${PAYPAL_CLIENT_ID}` +
+  '&enable-funding=venmo&currency=USD';
+---
+
+<BaseLayout
+  title="BlueBubbles - Donate"
+  {description}
+  keywords="iMessage, Windows, Linux, PC, Android, BlueBubbles, Blue Bubbles, Donate, Support"
+  path="/donate/"
+>
+  <PageHeader title="Donate" lead={description} />
+
+  <div class="mx-auto max-w-xl px-5 py-12">
+    <div id="donationContainer" class="rounded-card border border-line bg-raised p-6 sm:p-8">
+      <p class="text-sm font-medium text-muted">Donation Amount:</p>
+      <p id="currentDonationAmount" class="mt-1 text-4xl font-extrabold text-strong">
+        ${DEFAULT_DONATION}
+      </p>
+
+      <div
+        role="radiogroup"
+        aria-label="Donation amount"
+        class="mt-6 grid grid-cols-2 gap-2 sm:grid-cols-5"
+      >
+        {
+          DONATION_PRESETS.map((amount) => (
+            <button
+              type="button"
+              role="radio"
+              aria-checked={amount === DEFAULT_DONATION ? 'true' : 'false'}
+              data-amount={amount}
+              class="dono-button rounded-full border border-line bg-page px-4 py-2.5 text-sm font-semibold
+                     text-strong transition hover:border-accent
+                     aria-checked:border-accent aria-checked:bg-accent-solid aria-checked:text-white
+                     focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+            >
+              ${amount}
+            </button>
+          ))
+        }
+        <button
+          type="button"
+          role="radio"
+          aria-checked="false"
+          data-amount="custom"
+          class="dono-button rounded-full border border-line bg-page px-4 py-2.5 text-sm font-semibold
+                 text-strong transition hover:border-accent
+                 aria-checked:border-accent aria-checked:bg-accent-solid aria-checked:text-white
+                 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+        >Custom $</button>
+      </div>
+
+      <div id="customAmountWrap" hidden class="mt-4">
+        <label for="customDonoInput" class="sr-only">Custom donation amount in US dollars</label>
+        <div class="flex items-center gap-2">
+          <span aria-hidden="true" class="text-lg font-semibold text-muted">$</span>
+          <input
+            id="customDonoInput"
+            type="number"
+            inputmode="decimal"
+            min="1"
+            step="0.01"
+            value={DEFAULT_DONATION}
+            class="w-full rounded-full border border-line bg-page px-4 py-2.5 text-strong
+                   [appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none
+                   [&::-webkit-outer-spin-button]:appearance-none
+                   focus-visible:border-accent focus-visible:outline-2
+                   focus-visible:outline-offset-2 focus-visible:outline-accent"
+          />
+        </div>
+        <p id="customError" role="alert" class="mt-1.5 h-4 text-sm text-rose-500"></p>
+      </div>
+
+      <div id="paypalButtonsContainer" class="mt-7 min-h-[9rem]"></div>
+    </div>
+
+    <div id="loadingContainer" hidden class="flex flex-col items-center gap-4 py-16">
+      <div
+        class="size-10 animate-spin rounded-full border-4 border-line border-t-accent"
+        role="status"
+        aria-label="Processing your donation"
+      >
+      </div>
+    </div>
+
+    <div id="thankYouContainer" hidden class="py-16 text-center">
+      <h2 class="text-3xl font-extrabold text-strong">Thank you for your support!</h2>
+      <p class="mt-3 text-muted">Redirecting after 5 seconds...</p>
+    </div>
+
+    <div class="mt-10 rounded-card border border-line bg-raised p-6 text-center">
+      <p class="font-semibold text-strong">For Recurring Donations, Sponsor Us via GitHub!</p>
+      <iframe
+        src={`${LINKS.sponsors}/button`}
+        title="Sponsor BlueBubblesApp on GitHub"
+        height="32"
+        width="114"
+        style="border:0;border-radius:6px"
+        loading="lazy"
+        class="mx-auto mt-4">
+      </iframe>
+    </div>
+  </div>
+
+  <!--
+    preload="none" is the point: the old page marked this autoplay with no
+    preload hint, so every visitor to /donate downloaded ~12 MB whether or not
+    they ever donated. It is only ever shown from onApprove.
+    muted + playsinline are required for programmatic playback once the
+    element is no longer primed by autoplay.
+  -->
+  <video
+    id="makeItRain"
+    preload="none"
+    muted
+    playsinline
+    hidden
+    class="pointer-events-none fixed inset-0 z-50 size-full object-cover"
+  >
+    <source src="/media/money.webm" type="video/webm" />
+  </video>
+</BaseLayout>
+
+<!--
+  is:inline is mandatory here. The PayPal SDK is a global-scope script that
+  defines window.paypal; if Astro bundled this as an ES module, `paypal` would
+  not be in scope. This is the single most common mistake when porting a PayPal
+  integration to Astro.
+-->
+<script is:inline define:vars={{ paypalSdk, DEFAULT_DONATION }}>
+  (() => {
+    const amountLabel = document.getElementById('currentDonationAmount');
+    const buttons = [...document.querySelectorAll('.dono-button')];
+    const customWrap = document.getElementById('customAmountWrap');
+    const customInput = document.getElementById('customDonoInput');
+    const customError = document.getElementById('customError');
+    const donationContainer = document.getElementById('donationContainer');
+    const loadingContainer = document.getElementById('loadingContainer');
+    const thankYouContainer = document.getElementById('thankYouContainer');
+    const makeItRain = document.getElementById('makeItRain');
+
+    let donationAmount = DEFAULT_DONATION;
+    let custom = false;
+
+    const format = (value) =>
+      Number.isInteger(value) ? String(value) : value.toFixed(2);
+
+    const render = () => {
+      amountLabel.textContent = `$${format(donationAmount)}`;
+      customWrap.hidden = !custom;
+    };
+
+    const select = (button) => {
+      buttons.forEach((b) => b.setAttribute('aria-checked', String(b === button)));
+      custom = button.dataset.amount === 'custom';
+      if (!custom) donationAmount = Number(button.dataset.amount);
+      else donationAmount = Math.max(1, Number(customInput.value) || DEFAULT_DONATION);
+      customError.textContent = '';
+      render();
+      if (custom) customInput.focus();
+    };
+
+    buttons.forEach((button) => button.addEventListener('click', () => select(button)));
+
+    customInput.addEventListener('input', () => {
+      const value = Number(customInput.value);
+      // The old input had no min, so a zero or negative amount could be sent
+      // to PayPal and fail server-side with an opaque error.
+      if (!Number.isFinite(value) || value < 1) {
+        customError.textContent = 'Enter an amount of $1 or more.';
+        return;
+      }
+      customError.textContent = '';
+      donationAmount = Math.round(value * 100) / 100;
+      render();
+    });
+
+    const showForm = () => {
+      loadingContainer.hidden = true;
+      donationContainer.hidden = false;
+    };
+
+    function initPayPalButton() {
+      if (!window.paypal) return;
+      window.paypal
+        .Buttons({
+          style: { color: 'blue', shape: 'pill', label: 'donate', layout: 'vertical' },
+
+          createOrder(_data, actions) {
+            donationContainer.hidden = true;
+            loadingContainer.hidden = false;
+            const value = donationAmount.toFixed(2);
+            return actions.order.create({
+              purchase_units: [
+                {
+                  items: [
+                    {
+                      name: 'BlueBubbles Donation',
+                      unit_amount: { currency_code: 'USD', value },
+                      quantity: '1',
+                      category: 'DONATION',
+                    },
+                  ],
+                  amount: {
+                    currency_code: 'USD',
+                    value,
+                    breakdown: { item_total: { currency_code: 'USD', value } },
+                  },
+                },
+              ],
+            });
+          },
+
+          onApprove(_data, actions) {
+            return actions.order.capture().then(() => {
+              const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+              if (!reduceMotion) {
+                makeItRain.hidden = false;
+                makeItRain.load();
+                makeItRain.currentTime = 0;
+                const hide = () => (makeItRain.hidden = true);
+                makeItRain.addEventListener('ended', hide, { once: true });
+                // Never let a failed play leave the overlay covering the page.
+                makeItRain.play().catch(hide);
+              }
+
+              loadingContainer.hidden = true;
+              donationContainer.hidden = true;
+              thankYouContainer.hidden = false;
+              setTimeout(() => (window.location.href = '/'), 5000);
+            });
+          },
+
+          onCancel: showForm,
+          onError: showForm,
+        })
+        .render('#paypalButtonsContainer');
+    }
+
+    // Load the SDK when the browser is idle rather than blocking first paint,
+    // so the buttons are ready by the time anyone scrolls to them.
+    const loadSdk = () => {
+      const script = document.createElement('script');
+      script.src = paypalSdk;
+      script.setAttribute('data-sdk-integration-source', 'button-factory');
+      script.onload = initPayPalButton;
+      document.head.appendChild(script);
+    };
+
+    // NB: requestIdleCallback's second argument is an options object, not a
+    // number, and it must be called on `window` -- the common
+    // `(window.requestIdleCallback || setTimeout)(fn, 1)` shorthand throws.
+    if (typeof window.requestIdleCallback === 'function') {
+      window.requestIdleCallback(loadSdk, { timeout: 2000 });
+    } else {
+      window.setTimeout(loadSdk, 1);
+    }
+
+    render();
+  })();
+</script>
