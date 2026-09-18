@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '@layouts/BaseLayout.astro';
+import HeroStrands from '@components/HeroStrands.astro';
 import { LINKS } from '@data/site';
 
 // NOTE: this is the org site's 404, so GitHub Pages serves it for any
@@ -13,7 +14,9 @@ import { LINKS } from '@data/site';
   path="/404"
   noindex
 >
-  <div class="mx-auto flex max-w-2xl flex-col items-center px-5 py-24 text-center">
+  <div class="relative overflow-hidden">
+    <HeroStrands />
+    <div class="relative z-10 mx-auto flex max-w-2xl flex-col items-center px-5 py-24 text-center">
     <p class="text-7xl font-extrabold tracking-tight text-accent">404</p>
     <h1 class="mt-4 text-3xl font-extrabold tracking-tight text-strong sm:text-4xl">
       We couldn't find that page.
@@ -50,5 +53,6 @@ import { LINKS } from '@data/site';
         class="font-medium text-accent underline underline-offset-2">Discord</a
       >.
     </p>
+  </div>
   </div>
 </BaseLayout>

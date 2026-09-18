@@ -1,0 +1,129 @@
+---
+/*
+ * A slow, luminous ribbon field behind the hero.
+ *
+ * Inspired by React Bits' "Strands", but written from scratch on a 2D canvas
+ * rather than pulling in ogl and a WebGL shader. That library is ~25kB gzipped;
+ * this is a couple of hundred bytes, on a page whose entire JS budget is about
+ * 2kB. The look is the point, not the implementation.
+ *
+ * Deliberately restrained: brand blues only, low alpha, and slow enough that it
+ * reads as ambient rather than as something demanding attention.
+ */
+---
+
+<canvas
+  data-hero-strands
+  aria-hidden="true"
+  class="pointer-events-none absolute inset-0 size-full opacity-70 dark:opacity-100"
+></canvas>
+
+<script>
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+  // One per hero; a page may have more than one instance.
+  for (const canvas of document.querySelectorAll<HTMLCanvasElement>('[data-hero-strands]')) {
+    const ctx = canvas.getContext('2d');
+
+    if (ctx) {
+      // Brand ramp, lightest to deepest. Kept in sync with --color-brand-* by eye;
+      // exact values matter less than staying in the blue family.
+      const RIBBONS = [
+        { colour: '147, 197, 253', phase: 0.0, amp: 0.10, freq: 1.1, width: 90, y: 0.46 },
+        { colour: '78, 163, 252', phase: 2.1, amp: 0.13, freq: 0.8, width: 70, y: 0.52 },
+        { colour: '20, 126, 251', phase: 4.2, amp: 0.08, freq: 1.4, width: 55, y: 0.58 },
+      ];
+
+      let width = 0;
+      let height = 0;
+      let frame = 0;
+      let running = false;
+
+      const resize = () => {
+        const dpr = Math.min(window.devicePixelRatio || 1, 2);
+        const rect = canvas.getBoundingClientRect();
+        width = rect.width;
+        height = rect.height;
+        canvas.width = Math.round(width * dpr);
+        canvas.height = Math.round(height * dpr);
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      };
+
+      const draw = (t: number) => {
+        ctx.clearRect(0, 0, width, height);
+        // Additive blending is what gives the strands their glow where they cross.
+        ctx.globalCompositeOperation = 'lighter';
+
+        for (const ribbon of RIBBONS) {
+          const gradient = ctx.createLinearGradient(0, 0, width, 0);
+          gradient.addColorStop(0, `rgba(${ribbon.colour}, 0)`);
+          gradient.addColorStop(0.5, `rgba(${ribbon.colour}, 0.22)`);
+          gradient.addColorStop(1, `rgba(${ribbon.colour}, 0)`);
+
+          ctx.strokeStyle = gradient;
+          ctx.lineWidth = ribbon.width;
+          ctx.lineCap = 'round';
+          ctx.filter = 'blur(28px)';
+
+          ctx.beginPath();
+          for (let x = 0; x <= width; x += 12) {
+            const p = x / width;
+            const y =
+              height * ribbon.y +
+              Math.sin(p * Math.PI * 2 * ribbon.freq + t + ribbon.phase) * height * ribbon.amp +
+              Math.sin(p * Math.PI * 4 + t * 0.6 + ribbon.phase) * height * ribbon.amp * 0.3;
+            if (x === 0) ctx.moveTo(x, y);
+            else ctx.lineTo(x, y);
+          }
+          ctx.stroke();
+        }
+
+        ctx.filter = 'none';
+        ctx.globalCompositeOperation = 'source-over';
+      };
+
+      const loop = () => {
+        if (!running) return;
+        frame += 1;
+        draw(frame * 0.004);
+        requestAnimationFrame(loop);
+      };
+
+      const start = () => {
+        if (running || reduceMotion.matches) return;
+        running = true;
+        requestAnimationFrame(loop);
+      };
+      const stop = () => {
+        running = false;
+      };
+
+      resize();
+      draw(0); // a still frame, so it is never blank
+
+      // Only animate while it is actually on screen and the tab is focused.
+      new IntersectionObserver((entries) => {
+        for (const entry of entries) (entry.isIntersecting ? start : stop)();
+      }).observe(canvas);
+
+      document.addEventListener('visibilitychange', () =>
+        document.hidden ? stop() : start()
+      );
+
+      window.addEventListener('resize', () => {
+        resize();
+        draw(frame * 0.004);
+      });
+
+      // Honour a change of preference without a reload.
+      reduceMotion.addEventListener('change', () => {
+        if (reduceMotion.matches) {
+          stop();
+          draw(0);
+        } else {
+          start();
+        }
+      });
+    }
+  }
+</script>
