@@ -8,6 +8,7 @@
 // than port content that is wrong, this keeps the URL alive and points at the
 // maintained docs. It is noindex so it stops competing with them in search.
 import BaseLayout from '@layouts/BaseLayout.astro';
+import HeroStrands from '@components/HeroStrands.astro';
 import { LINKS } from '@data/site';
 
 const docsUrl = `${LINKS.docs}/private-api/installation`;
@@ -19,7 +20,9 @@ const docsUrl = `${LINKS.docs}/private-api/installation`;
   path="/install/privateAPI"
   noindex
 >
-  <div class="mx-auto max-w-2xl px-5 py-24 text-center">
+  <div class="relative overflow-hidden">
+    <HeroStrands />
+    <div class="relative z-10 mx-auto max-w-2xl px-5 py-24 text-center">
     <h1 class="text-3xl font-extrabold tracking-tight text-strong sm:text-4xl">
       Private API Installation
     </h1>
@@ -44,5 +47,6 @@ const docsUrl = `${LINKS.docs}/private-api/installation`;
         >Back to the install guide</a
       >
     </div>
+  </div>
   </div>
 </BaseLayout>

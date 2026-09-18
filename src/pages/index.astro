@@ -2,6 +2,7 @@
 import { Image } from 'astro:assets';
 import BaseLayout from '@layouts/BaseLayout.astro';
 import StoreButton from '@components/StoreButton.astro';
+import HeroStrands from '@components/HeroStrands.astro';
 import { SITE, LINKS } from '@data/site';
 import { STORES } from '@data/stores';
 import devices from '@assets/devices.png';
@@ -14,6 +15,8 @@ import devices from '@assets/devices.png';
   path="/"
 >
   <section class="relative overflow-hidden">
+    <HeroStrands />
+
     {/* Ambient brand wash -- the modern descendant of the old #bg-circle. */}
     <div
       aria-hidden="true"

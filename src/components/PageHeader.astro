@@ -1,4 +1,6 @@
 ---
+import HeroStrands from './HeroStrands.astro';
+
 interface Props {
   title: string;
   lead?: string;
@@ -6,8 +8,10 @@ interface Props {
 const { title, lead } = Astro.props;
 ---
 
-<div class="border-b border-line bg-raised">
-  <div class="mx-auto max-w-5xl px-5 py-12 sm:py-16">
+<div class="relative overflow-hidden border-b border-line bg-raised">
+  <HeroStrands />
+  {/* Above the canvas, which is absolutely positioned across this container. */}
+  <div class="relative z-10 mx-auto max-w-5xl px-5 py-12 sm:py-16">
     <h1 class="text-4xl font-extrabold tracking-tight text-strong sm:text-5xl">{title}</h1>
     {lead && <p class="mt-4 max-w-2xl text-lg text-muted">{lead}</p>}
     <slot />

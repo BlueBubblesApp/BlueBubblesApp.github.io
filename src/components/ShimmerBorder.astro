@@ -1,0 +1,84 @@
+---
+/*
+ * A shimmer that travels around the edge of its parent.
+ *
+ * A conic gradient is rotated behind the card and masked down to just the
+ * border ring, so a single highlight runs continuously around the whole
+ * perimeter -- corners included.
+ *
+ * This is not React Bits' "Star Border", which slides two radial gradients
+ * along the top and bottom edges. That reads as two streaks passing by rather
+ * than one shimmer going around, which is the wrong feel for a card.
+ *
+ * Drop it inside a `position: relative` element. Decorative, so aria-hidden and
+ * no pointer events. It masks itself rather than clipping the parent, so
+ * anything overhanging the card -- a badge, say -- is unaffected.
+ */
+interface Props {
+  /** One full lap. */
+  speed?: string;
+  /** Ring thickness. */
+  thickness?: string;
+}
+const { speed = '5s', thickness = '1.5px' } = Astro.props;
+---
+
+<span
+  class="shimmer-border"
+  aria-hidden="true"
+  style={`--shimmer-speed:${speed}; --shimmer-thickness:${thickness}`}
+></span>
+
+<style>
+  /* Registered so the angle can be animated; a bare custom property cannot be
+     interpolated. Without @property the ring simply sits still, which is a
+     fine degradation. */
+  @property --shimmer-angle {
+    syntax: '<angle>';
+    initial-value: 0deg;
+    inherits: false;
+  }
+
+  .shimmer-border {
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: var(--shimmer-thickness);
+    pointer-events: none;
+
+    background: conic-gradient(
+      from var(--shimmer-angle),
+      transparent 0deg,
+      transparent 300deg,
+      color-mix(in oklab, var(--color-accent) 85%, white) 340deg,
+      transparent 360deg
+    );
+
+    /* Keep only the ring: paint the padding box, punch out the content box. */
+    -webkit-mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    mask-composite: exclude;
+
+    animation: shimmer-spin var(--shimmer-speed) linear infinite;
+  }
+
+  @keyframes shimmer-spin {
+    to {
+      --shimmer-angle: 360deg;
+    }
+  }
+
+  /* Hold it still rather than letting the global reduced-motion rule squash the
+     duration to nothing and strobe it. */
+  @media (prefers-reduced-motion: reduce) {
+    .shimmer-border {
+      animation: none;
+      opacity: 0.5;
+    }
+  }
+</style>
