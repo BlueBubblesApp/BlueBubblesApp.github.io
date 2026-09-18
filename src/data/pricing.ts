@@ -48,12 +48,18 @@ export const PLANS: readonly Plan[] = [
 
 /** What Pro unlocks.
  *
- *  Sourced from the server's capability catalogue -- every entry below is a
- *  capability carrying `minimumTier: .pro` in
- *  `swift/Sources/BBPrivateAPICatalog/CapabilityCatalog.swift`. Titles,
- *  summaries and macOS minimums are copied from it rather than written here, so
- *  this page and the server agree. If a capability's tier changes there, change
- *  it here too.
+ *  Every entry is a capability carrying `minimumTier: .pro` in
+ *  `swift/Sources/BBPrivateAPICatalog/CapabilityCatalog.swift`. The `id` and
+ *  `macos` fields are copied from it verbatim and are the link back to the
+ *  server -- if a capability's tier or macOS floor changes there, change it
+ *  here too.
+ *
+ *  `title` and `summary` are deliberately NOT copied. The catalogue's strings
+ *  are UI labels for the server's own features card; these are the marketing
+ *  line for someone deciding whether to pay, and they lead with what the tier
+ *  actually buys. Pinning and muting are the clearest case: the capability is
+ *  not pinning a chat, which the apps already do, but having that state sync
+ *  across every device.
  */
 export interface ProFeature {
   /** Catalogue id, for cross-referencing the server. */
@@ -65,6 +71,27 @@ export interface ProFeature {
 }
 
 export const PRO_FEATURES: readonly ProFeature[] = [
+  {
+    id: 'facetime',
+    title: 'FaceTime Calling',
+    summary:
+      "Answer, end and start FaceTime calls from a client, and create a link someone can join from anywhere.",
+    macos: 14,
+  },
+  {
+    id: 'pinning',
+    title: 'Pinned Chat Syncing',
+    summary:
+      "Pin conversations from a client and have them stay in sync across all your devices, in the same order everywhere.",
+    macos: 14,
+  },
+  {
+    id: 'muting',
+    title: 'Mute & Snooze Syncing',
+    summary:
+      "Silence a conversation permanently or snooze it until a time you choose, kept in sync across your devices.",
+    macos: 14,
+  },
   {
     id: 'stickers',
     title: 'Stickers',
@@ -78,18 +105,6 @@ export const PRO_FEATURES: readonly ProFeature[] = [
     macos: 15,
   },
   {
-    id: 'pinning',
-    title: 'Pinning conversations',
-    summary: 'Pin a conversation to the top, in the same order as your other devices.',
-    macos: 14,
-  },
-  {
-    id: 'muting',
-    title: 'Muting conversations',
-    summary: 'Silence a conversation, permanently or until a time you choose.',
-    macos: 14,
-  },
-  {
     id: 'junk-reporting',
     title: 'Spam and junk',
     summary:
@@ -101,12 +116,6 @@ export const PRO_FEATURES: readonly ProFeature[] = [
     title: 'Screen unknown senders',
     summary: 'See whether a sender is known, and accept one into your contacts.',
     macos: 26,
-  },
-  {
-    id: 'facetime',
-    title: 'FaceTime from a client',
-    summary: 'Answer or end a call, and create a link someone can join from anywhere.',
-    macos: 14,
   },
   {
     id: 'send-later',
