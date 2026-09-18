@@ -54,6 +54,7 @@ export const FOOTER_LINKS: readonly NavItem[] = [
   { href: '/', label: 'Home' },
   { href: '/downloads/', label: 'Downloads' },
   { href: '/install/', label: 'Install' },
+  { href: '/is-it-for-me/', label: 'Is it for me?' },
   { href: '/faq/', label: 'FAQ' },
   { href: LINKS.webApp, label: 'Web App', external: true },
   { href: '/donate/', label: 'Donate' },
