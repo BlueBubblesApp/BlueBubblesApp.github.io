@@ -19,6 +19,36 @@ import { LINKS, SITE } from '@data/site';
   <div class="mx-auto max-w-2xl px-5 py-12">
     <!-- Every question is in the HTML; the script shows one at a time. Without
          JavaScript they simply all appear, which is still readable. -->
+    {/* Progress indicator. Decorative: each question card already announces
+        "Question N of M" for assistive tech, so this would only repeat it. */}
+    <ol id="fit-steps" class="mb-8 flex items-center" aria-hidden="true">
+      {
+        QUESTIONS.map((_, index) => (
+          <li class="flex flex-1 items-center last:flex-none">
+            <span
+              data-node={index}
+              data-state={index === 0 ? 'current' : 'todo'}
+              class="fit-node grid size-8 shrink-0 place-items-center rounded-full border text-xs font-semibold"
+            >
+              <span class="fit-node-number">{index + 1}</span>
+              <svg
+                class="fit-node-check size-4"
+                viewBox="0 0 20 20"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.5"
+              >
+                <path d="M5 10.5 8.5 14 15 6.5" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            </span>
+            {index < QUESTIONS.length - 1 && (
+              <span data-connector={index} data-state="todo" class="fit-connector mx-2 h-0.5 flex-1" />
+            )}
+          </li>
+        ))
+      }
+    </ol>
+
     <form id="fit-quiz" class="space-y-8">
       {
         QUESTIONS.map((question, index) => (
@@ -108,7 +138,22 @@ import { LINKS, SITE } from '@data/site';
     let current = 0;
     const answers: Answer[] = [];
 
+    const nodes = [...document.querySelectorAll<HTMLElement>('[data-node]')];
+    const connectors = [...document.querySelectorAll<HTMLElement>('[data-connector]')];
+
+    /** answered = how many questions are behind us; active = the one on screen,
+     *  or -1 once the result is up and nothing is current. */
+    const paintIndicator = (answered: number, active: number) => {
+      nodes.forEach((node, i) => {
+        node.dataset.state = i < answered ? 'done' : i === active ? 'current' : 'todo';
+      });
+      connectors.forEach((connector, i) => {
+        connector.dataset.state = i < answered ? 'done' : 'todo';
+      });
+    };
+
     const show = (index: number) => {
+      paintIndicator(index, index);
       steps.forEach((step, i) => (step.hidden = i !== index));
       const back = steps[index]?.querySelector<HTMLElement>('[data-back]');
       if (back) back.hidden = index === 0;
@@ -125,6 +170,9 @@ import { LINKS, SITE } from '@data/site';
       const warned = answers.some((a) => a.tone === 'warn');
       const verdict = VERDICTS[negative ? 'no' : warned ? 'maybe' : 'yes'];
 
+      // Only the questions actually answered are ticked -- a disqualifying
+      // answer ends things early, and pretending otherwise would be a lie.
+      paintIndicator(answers.filter(Boolean).length, -1);
       steps.forEach((step) => (step.hidden = true));
       result.hidden = false;
 
@@ -237,3 +285,36 @@ import { LINKS, SITE } from '@data/site';
     show(0);
   }
 </script>
+
+<style>
+  .fit-node {
+    border-color: var(--color-line);
+    color: var(--color-muted);
+    background: var(--color-page);
+    transition: background-color 200ms ease, border-color 200ms ease, color 200ms ease;
+  }
+  .fit-node-check { display: none; }
+
+  .fit-node[data-state='current'] {
+    border-color: var(--color-accent);
+    color: var(--color-accent);
+    /* A ring, so "where I am" reads differently from "done". */
+    box-shadow: 0 0 0 3px color-mix(in oklab, var(--color-accent) 20%, transparent);
+  }
+
+  .fit-node[data-state='done'] {
+    border-color: var(--color-accent-solid);
+    background: var(--color-accent-solid);
+    color: #fff;
+  }
+  .fit-node[data-state='done'] .fit-node-number { display: none; }
+  .fit-node[data-state='done'] .fit-node-check { display: block; }
+
+  .fit-connector {
+    background: var(--color-line);
+    transition: background-color 220ms ease;
+  }
+  .fit-connector[data-state='done'] {
+    background: var(--color-accent-solid);
+  }
+</style>
