@@ -109,12 +109,6 @@ export const PRO_FEATURES: readonly ProFeature[] = [
     macos: 14,
   },
   {
-    id: 'find-my',
-    title: 'Find My',
-    summary: 'See where your friends and devices are, and share your own location.',
-    macos: 14,
-  },
-  {
     id: 'send-later',
     title: 'Send Later',
     summary:
@@ -149,4 +143,5 @@ export const FREE_FEATURES: readonly string[] = [
   'Emoji reactions',
   'Text formatting',
   'Managing groups',
+  'Find My',
 ] as const;
