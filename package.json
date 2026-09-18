@@ -18,6 +18,7 @@
   "dependencies": {
     "@astrojs/mdx": "^8.0.1",
     "@astrojs/sitemap": "^3.7.4",
+    "@iconify-json/logos": "^1.2.14",
     "@iconify-json/lucide": "^1.2.72",
     "@iconify-json/simple-icons": "^1.2.96",
     "@tailwindcss/vite": "^4.3.3",

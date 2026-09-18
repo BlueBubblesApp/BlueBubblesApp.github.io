@@ -1,6 +1,8 @@
 import { LINKS } from './site';
 
 export interface StoreTarget {
+  /** True when the icon carries its own brand colours and must not be tinted. */
+  colorIcon?: boolean;
   href: string;
   /** Small line above the name, matching each vendor's own badge wording. */
   kicker: string;
@@ -16,7 +18,8 @@ export const STORES: readonly StoreTarget[] = [
     href: LINKS.playStore,
     kicker: 'Get it on',
     name: 'Google Play',
-    icon: 'simple-icons:googleplay',
+    icon: 'logos:google-play-icon',
+    colorIcon: true,
     label: 'Get it on Google Play',
   },
   {

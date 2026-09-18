@@ -3,7 +3,14 @@ import { Icon } from 'astro-icon/components';
 import type { StoreTarget } from '@data/stores';
 
 type Props = StoreTarget;
-const { href, kicker, name, icon, label } = Astro.props;
+const { href, kicker, name, icon, label, colorIcon = false } = Astro.props;
+
+// Google's mark keeps its own brand colours; recolouring it is the specific
+// thing their brand guidelines prohibit. The other marks are monochrome and
+// inherit the button's text colour.
+const iconClass = colorIcon
+  ? 'size-7 shrink-0'
+  : 'size-7 shrink-0 text-strong transition-colors group-hover:text-accent';
 ---
 
 <a
@@ -16,7 +23,7 @@ const { href, kicker, name, icon, label } = Astro.props;
 >
   <Icon
     name={icon}
-    class="size-7 shrink-0 text-strong transition-colors group-hover:text-accent"
+    class={iconClass}
     aria-hidden="true"
   />
   <span class="min-w-0 text-left leading-tight">
