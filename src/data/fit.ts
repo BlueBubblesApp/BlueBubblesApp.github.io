@@ -116,14 +116,14 @@ export const QUESTIONS: readonly Question[] = [
   {
     id: 'mac',
     question: 'Do you have a Mac, or a way to get one?',
-    help: "This is the big one. BlueBubbles needs a Mac signed in to iMessage to do the actual talking — there's no way around it.",
+    help: "This is the big one. BlueBubbles needs a Mac signed in to iMessage to do the actual talking, and there is no way around it.",
     choices: [
       { id: 'have', label: 'Yes, I have a Mac', tone: 'good' },
       {
         id: 'buy',
         label: 'I could pick up a cheap old one',
         tone: 'good',
-        note: 'A second-hand Mac mini is the usual route. It does not need to be fast — it only relays messages.',
+        note: 'A second-hand Mac mini is the usual route. It only relays messages, so it does not need to be fast.',
       },
       {
         id: 'vm',
@@ -175,7 +175,7 @@ export const QUESTIONS: readonly Question[] = [
         reason: 'the Mac belongs to a school or employer',
         tone: 'warn',
         blocks: true,
-        note: 'Probably not for you. BlueBubbles needs Full Disk Access and, for the extra features, a helper installed into Messages. Managed Macs usually block both — and doing it anyway may well breach the device policy you agreed to. Use a personal Mac instead.',
+        note: 'Probably not for you. BlueBubbles needs Full Disk Access and, for the extra features, a helper installed into Messages. Managed Macs usually block both, and doing it anyway may well breach the device policy you agreed to. Use a personal Mac instead.',
       },
     ],
   },
@@ -245,7 +245,7 @@ export interface Verdict {
 export const VERDICTS: Record<Verdict['id'], Verdict> = {
   yes: {
     id: 'yes',
-    title: 'Yes — this is built for you',
+    title: 'Yes, this is built for you',
     blurb: 'You have what BlueBubbles needs, and none of the usual blockers. Install the server on your Mac, then the app wherever you want to read your messages.',
   },
   maybe: {
