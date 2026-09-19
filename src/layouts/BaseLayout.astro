@@ -43,7 +43,12 @@ const { title, description, keywords, path, ogImage, ogType, noindex } = Astro.p
     <Font cssVariable="--font-inter" preload />
     <Seo {title} {description} {keywords} {path} {ogImage} {ogType} {noindex} />
 
-    <link rel="icon" href="/favicon.ico" sizes="48x48" />
+    {/* sizes="any" on the .ico: it holds 16, 24, 32 and 48px entries, and the
+        old markup claimed 48x48, which stopped browsers choosing the right one
+        for a tab. The PNGs are crisper where a browser prefers them. */}
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <slot name="head" />
   </head>

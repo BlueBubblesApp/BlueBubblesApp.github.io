@@ -60,7 +60,7 @@ const { display, copy = display, prompt = true } = Astro.props;
       if (status) status.textContent = 'Copied to clipboard';
     } catch {
       button.textContent = 'Press ⌘C';
-      if (status) status.textContent = 'Copy failed — press Control or Command + C';
+      if (status) status.textContent = 'Copy failed. Press Control or Command + C instead.';
     }
     window.setTimeout(() => {
       button.textContent = 'Copy';

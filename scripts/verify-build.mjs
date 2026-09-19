@@ -52,6 +52,8 @@ const REQUIRED_STATIC = [
   'robots.txt',
   'og-default.png',
   'favicon.ico',
+  'favicon-16.png',
+  'favicon-32.png',
   'sitemap-index.xml',
 ];
 
