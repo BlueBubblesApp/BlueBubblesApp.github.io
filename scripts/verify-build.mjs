@@ -32,7 +32,7 @@ const REQUIRED_PAGES = [
   'compatibility/index.html',
   'is-it-for-me/index.html',
   'donate/index.html',
-  // Not linked from anywhere, but Creem validates this URL -- so a build
+  // Only linked from the footer, but Creem validates this URL -- so a build
   // that stops emitting it should fail rather than pass quietly.
   'pricing/index.html',
   // Exact casing matters: GitHub Pages is case-sensitive and this path is in

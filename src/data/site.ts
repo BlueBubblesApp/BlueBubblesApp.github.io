@@ -58,6 +58,7 @@ export const FOOTER_LINKS: readonly NavItem[] = [
   { href: '/faq/', label: 'FAQ' },
   { href: LINKS.webApp, label: 'Web App', external: true },
   { href: '/donate/', label: 'Donate' },
+  { href: '/pricing/', label: 'Pricing' },
   { href: '/privacy.html', label: 'Privacy Policy' },
   // Previously orphaned -- the document existed but nothing linked to it.
   { href: '/tos.html', label: 'Terms of Service' },

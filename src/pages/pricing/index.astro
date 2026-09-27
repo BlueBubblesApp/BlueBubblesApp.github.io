@@ -2,16 +2,16 @@
 /*
  * BlueBubbles Pro pricing.
  *
- * NOT PUBLIC YET. This route exists so that https://bluebubbles.app/pricing
- * resolves for Creem's validation. It is deliberately undiscoverable:
- *   - not in NAV_LINKS or FOOTER_LINKS, so nothing on the site links to it;
- *   - noindex, so it stays out of search results if the URL leaks;
+ * NOT FULLY PUBLIC YET. Creem requires pricing to be reachable from the site,
+ * so it is linked from the footer (FOOTER_LINKS), but it is kept low-profile:
+ *   - not in NAV_LINKS, so it is absent from the header;
+ *   - noindex, so it stays out of search results;
  *   - excluded from the sitemap in astro.config.mjs.
  *
  * It is not listed in robots.txt on purpose -- a Disallow rule would publish
  * the path to anyone who reads the file, which is the opposite of hiding it.
  *
- * To launch: add it to NAV_LINKS and/or FOOTER_LINKS in src/data/site.ts, drop
+ * To launch: add it to NAV_LINKS in src/data/site.ts, drop
  * the `noindex` below, and remove the sitemap exclusion.
  */
 import BaseLayout from '@layouts/BaseLayout.astro';
